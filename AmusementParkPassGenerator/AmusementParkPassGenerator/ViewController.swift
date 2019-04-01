@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         let classicGuest = Classic()
         let freeChild = FreeChild()
         let vipGuest = Vip()
-        let employee = Employee(employeeType: .hourly, department: .foodServices)
+        let employee = Employee()
         classicGuest.printSelfToConsole()
         vipGuest.printSelfToConsole()
         freeChild.printSelfToConsole()

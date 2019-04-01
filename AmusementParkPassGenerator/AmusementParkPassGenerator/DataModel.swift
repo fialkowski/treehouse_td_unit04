@@ -27,12 +27,12 @@ enum Good: String {
     case mercandise
 }
 
-enum PaymentTerms: String {
+enum PaymentTerms: String, CaseIterable {
     case hourly
     case payroll
 }
 
-enum Department: String {
+enum Department: String, CaseIterable {
     case foodServices
     case rideServices
     case parkMaintenance
@@ -137,6 +137,22 @@ extension Worker {
     
     func fullAddress() -> String {
         return "\(self.streetNumber) \(self.streetName), \(self.city), \(self.state) \(self.zip)"
+    }
+    
+    var employeeType: PaymentTerms {
+        return PaymentTerms.allCases.randomElement()!
+    }
+    
+    // TODO: MAKE IT WORK!!!
+    var department: Department {
+        if self.employeeType == .payroll {
+            return Department.office
+        } else {
+            var randomizedValues: [Department]
+            randomizedValues = Department.allCases
+            randomizedValues.remove(at: randomizedValues.firstIndex(of: Department.office)!)
+            return randomizedValues.randomElement()!
+        }
     }
     
     var firstName: String { // Randomly assigning the first name from file
@@ -283,8 +299,6 @@ struct FreeChild: ParkAdmissable, Child, RideAdmissable {
 }
 
 struct Employee: ParkAdmissable, Worker, RideAdmissable, Discountable {
-    var employeeType: PaymentTerms
-    var department: Department
     
     func printSelfToConsole() {
         var outputString = String()
