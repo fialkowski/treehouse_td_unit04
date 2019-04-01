@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum FileReadError: Error {
+    case invalidResource
+    case conversionFailure
+    case wrongElementType
+}
+
 class RandomGenerator {
     static func randomDate(daysBack: Int)-> Date?{
         let day = Int(arc4random_uniform(UInt32(daysBack) + 1)) * -1
@@ -31,3 +37,25 @@ class RandomGenerator {
     }
 }
 
+class NamesRetriever {
+    static func randomElement(fromFile name: String, ofType type: String) throws -> String {
+        guard let path = Bundle.main.path(forResource: name, ofType: type) else {
+            throw FileReadError.invalidResource
+        }
+        guard let dictionary = NSDictionary(contentsOfFile: path) as? [String : AnyObject] else { //A TYPE CASTING HAPPENS HERE
+            throw FileReadError.conversionFailure
+        }
+        guard let randomElement = dictionary.randomElement() else {
+            throw FileReadError.wrongElementType
+        }
+        if let output = randomElement.value as? [String] {
+            if !output.isEmpty {
+                return output.first!
+            } else {
+                return randomElement.key
+            }
+        } else {
+            return randomElement.key
+        }
+    }
+}

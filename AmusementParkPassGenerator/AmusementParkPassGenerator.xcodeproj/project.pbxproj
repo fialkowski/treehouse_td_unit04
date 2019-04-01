@@ -14,6 +14,12 @@
 		8A2325B3222E30270055F1B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A2325B2222E30270055F1B6 /* Assets.xcassets */; };
 		8A2325B6222E30270055F1B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A2325B4222E30270055F1B6 /* LaunchScreen.storyboard */; };
 		8A2325BE222E30C70055F1B6 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2325BD222E30C70055F1B6 /* DataModel.swift */; };
+		8A75262822513830000FC3A6 /* firstNames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A75262722513830000FC3A6 /* firstNames.plist */; };
+		8A75262A22513845000FC3A6 /* lastNames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A75262922513845000FC3A6 /* lastNames.plist */; };
+		8A75262C22514694000FC3A6 /* states.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A75262B22514694000FC3A6 /* states.plist */; };
+		8A75262E22514E72000FC3A6 /* streetTypes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A75262D22514E72000FC3A6 /* streetTypes.plist */; };
+		8A75263022514F8A000FC3A6 /* streetNames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A75262F22514F89000FC3A6 /* streetNames.plist */; };
+		8A7526322251C1F4000FC3A6 /* cities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A7526312251C1F4000FC3A6 /* cities.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,12 @@
 		8A2325B5222E30270055F1B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A2325B7222E30270055F1B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A2325BD222E30C70055F1B6 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		8A75262722513830000FC3A6 /* firstNames.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = firstNames.plist; sourceTree = "<group>"; };
+		8A75262922513845000FC3A6 /* lastNames.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = lastNames.plist; sourceTree = "<group>"; };
+		8A75262B22514694000FC3A6 /* states.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = states.plist; sourceTree = "<group>"; };
+		8A75262D22514E72000FC3A6 /* streetTypes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = streetTypes.plist; sourceTree = "<group>"; };
+		8A75262F22514F89000FC3A6 /* streetNames.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = streetNames.plist; sourceTree = "<group>"; };
+		8A7526312251C1F4000FC3A6 /* cities.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = cities.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +78,12 @@
 				8A2325B2222E30270055F1B6 /* Assets.xcassets */,
 				8A2325B4222E30270055F1B6 /* LaunchScreen.storyboard */,
 				8A2325B7222E30270055F1B6 /* Info.plist */,
+				8A75262722513830000FC3A6 /* firstNames.plist */,
+				8A75262B22514694000FC3A6 /* states.plist */,
+				8A75262922513845000FC3A6 /* lastNames.plist */,
+				8A7526312251C1F4000FC3A6 /* cities.plist */,
+				8A75262D22514E72000FC3A6 /* streetTypes.plist */,
+				8A75262F22514F89000FC3A6 /* streetNames.plist */,
 			);
 			path = AmusementParkPassGenerator;
 			sourceTree = "<group>";
@@ -128,9 +146,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A7526322251C1F4000FC3A6 /* cities.plist in Resources */,
+				8A75262A22513845000FC3A6 /* lastNames.plist in Resources */,
 				8A2325B6222E30270055F1B6 /* LaunchScreen.storyboard in Resources */,
+				8A75262C22514694000FC3A6 /* states.plist in Resources */,
 				8A2325B3222E30270055F1B6 /* Assets.xcassets in Resources */,
+				8A75262822513830000FC3A6 /* firstNames.plist in Resources */,
 				8A2325B1222E30240055F1B6 /* Main.storyboard in Resources */,
+				8A75263022514F8A000FC3A6 /* streetNames.plist in Resources */,
+				8A75262E22514E72000FC3A6 /* streetTypes.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

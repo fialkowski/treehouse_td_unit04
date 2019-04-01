@@ -138,6 +138,70 @@ extension Worker {
     func fullAddress() -> String {
         return "\(self.streetNumber) \(self.streetName), \(self.city), \(self.state) \(self.zip)"
     }
+    
+    var firstName: String { // Randomly assigning the first name from file
+        let randomName: String
+        do {
+           randomName = try NamesRetriever.randomElement(fromFile: "firstNames", ofType: "plist")
+        } catch let error {
+            fatalError("\(error)")
+        }
+        return randomName
+    }
+    
+    var lastName: String { // Randomly assigning the last name from file
+        let randomName: String
+        do {
+            randomName = try NamesRetriever.randomElement(fromFile: "lastNames", ofType: "plist")
+        } catch let error {
+            fatalError("\(error)")
+        }
+        return randomName
+    }
+    
+    var streetNumber: Int {
+        return Int.random(in: 1000 ... 10000)
+    }
+    
+    var streetName: String { // Randomly assigning the last name from file
+        var randomName: String
+        do {
+            randomName = try NamesRetriever.randomElement(fromFile: "streetNames", ofType: "plist")
+        } catch let error {
+            fatalError("\(error)")
+        }
+        do {
+            randomName += " \(try NamesRetriever.randomElement(fromFile: "streetTypes", ofType: "plist"))"
+        } catch let error {
+            fatalError("\(error)")
+        }
+        return randomName
+    }
+    
+    var city: String {
+        var randomName: String
+        do {
+            randomName = try NamesRetriever.randomElement(fromFile: "cities", ofType: "plist")
+        } catch let error {
+            fatalError("\(error)")
+        }
+        return randomName
+    }
+    
+    var state: String {
+        var randomName: String
+        do {
+            randomName = try NamesRetriever.randomElement(fromFile: "states", ofType: "plist")
+        } catch let error {
+            fatalError("\(error)")
+        }
+        return randomName
+    }
+    
+    var zip: String {
+       // let return String(format: "%05d", Int.random(in: 2801 ... 99950))
+        return String(format: "%05d", Int.random(in: 2801 ... 99950))
+    }
 }
 
 struct Classic: ParkAdmissable, RideAdmissable {
@@ -221,13 +285,7 @@ struct FreeChild: ParkAdmissable, Child, RideAdmissable {
 struct Employee: ParkAdmissable, Worker, RideAdmissable, Discountable {
     var employeeType: PaymentTerms
     var department: Department
-    var firstName: String
-    var lastName: String
-    var streetNumber: Int
-    var streetName: String
-    var city: String
-    var state: String
-    var zip: String
+    
     func printSelfToConsole() {
         var outputString = String()
         var headerString = String()
@@ -238,7 +296,7 @@ struct Employee: ParkAdmissable, Worker, RideAdmissable, Discountable {
             loopCounter += 1
             admissionAreasString += "\(admissionArea.rawValue)"
             if loopCounter != admissionAreas.count {
-                admissionAreasString += ","
+                admissionAreasString += ", "
             }
         }
         
@@ -267,6 +325,8 @@ struct Employee: ParkAdmissable, Worker, RideAdmissable, Discountable {
         }
         outputString += "\n➡️ This is \(headerString)) Pass \(emojiString)\n"
         outputString += "Pass key: \(key)\n"
+        outputString += "Full Name: \(self.fullName())\n"
+        outputString += "Address: \(self.fullAddress())\n"
         outputString += "Ride admission: \(rideAdmissionType.rawValue)\n"
         outputString += "Admission areas: \(admissionAreasString)"
         print(outputString)

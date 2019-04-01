@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Riverside</key>
+	<string></string>
+	<key>Georgetown</key>
+	<string></string>
+	<key>Fairfield</key>
+	<string></string>
+	<key>Washington</key>
+	<string></string>
+	<key>Arlington</key>
+	<string></string>
+	<key>Marion</key>
+	<string></string>
+	<key>Greenville</key>
+	<string></string>
+	<key>Springfield</key>
+	<string></string>
+	<key>Madison</key>
+	<string></string>
+	<key>Clinton</key>
+	<string></string>
+	<key>Franklin</key>
+	<string></string>
+	<key>Peterborough</key>
+	<string></string>
+	<key>Venice</key>
+	<string></string>
+	<key>Rochester</key>
+	<string></string>
+	<key>East York</key>
+	<string></string>
+</dict>
+</plist>

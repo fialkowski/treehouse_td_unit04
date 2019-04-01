@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Court</key>
+	<array>
+		<string>Ct.</string>
+	</array>
+	<key>Crescent</key>
+    <array>
+        <string>Cres.</string>
+    </array>
+	<key>Drive</key>
+	<array>
+        <string>Dr.</string>
+    </array>
+	<key>Boulevard</key>
+	<array>
+        <string>Blvd.</string>
+    </array>
+	<key>Avenue</key>
+	<array>
+        <string>Av.</string>
+    </array>
+	<key>Lane</key>
+	<array>
+        <string>Ln.</string>
+    </array>
+	<key>Road</key>
+	<array>
+        <string>Rd.</string>
+    </array>
+</dict>
+</plist>
