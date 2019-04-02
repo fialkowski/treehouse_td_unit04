@@ -144,6 +144,8 @@ extension Worker {
     }
     
     // TODO: MAKE IT WORK!!!
+    // I WANT TO INITIALIZE THIS ONE ONLY AFTER I HAVE employeeType INITIALIZED
+    // lazy doesn't work here unfortunately
     var department: Department {
         if self.employeeType == .payroll {
             return Department.office
