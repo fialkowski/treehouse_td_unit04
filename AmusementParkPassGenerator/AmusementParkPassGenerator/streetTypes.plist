@@ -3,32 +3,18 @@
 <plist version="1.0">
 <dict>
 	<key>Court</key>
-	<array>
-		<string>Ct.</string>
-	</array>
+	<string>Ct.</string>
 	<key>Crescent</key>
-    <array>
-        <string>Cres.</string>
-    </array>
+	<string>Cres.</string>
 	<key>Drive</key>
-	<array>
-        <string>Dr.</string>
-    </array>
+	<string>Dr.</string>
 	<key>Boulevard</key>
-	<array>
-        <string>Blvd.</string>
-    </array>
+	<string>Blvd.</string>
 	<key>Avenue</key>
-	<array>
-        <string>Av.</string>
-    </array>
+	<string>Av.</string>
 	<key>Lane</key>
-	<array>
-        <string>Ln.</string>
-    </array>
+	<string>Ln.</string>
 	<key>Road</key>
-	<array>
-        <string>Rd.</string>
-    </array>
+	<string>Rd.</string>
 </dict>
 </plist>

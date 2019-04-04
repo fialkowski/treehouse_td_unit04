@@ -46,18 +46,15 @@ protocol ParkAdmissable {
 }
 
 extension ParkAdmissable {
-    var key: String {
-        return RandomGenerator.randomKey(length: 32)
-    }
     var admissionAreas: [Area] {
         var admissionAreas = [Area]()
         admissionAreas.append(.amusement)
         if self is Employee {
             let employee = self as! Employee
-            if employee.employeeType == .payroll {
+            if employee.employeeCard.paymetTerms == .payroll {
                 admissionAreas += [.kitchen, .rideControl, .maintenance, .office]
-            } else if employee.employeeType == .hourly {
-                switch employee.department {
+            } else if employee.employeeCard.paymetTerms == .hourly {
+                switch employee.employeeCard.department {
                 case .foodServices : admissionAreas.append(.kitchen)
                 case .rideServices: admissionAreas.append(.rideControl)
                 case .parkMaintenance: admissionAreas += [.kitchen, .rideControl, .maintenance]
@@ -67,16 +64,11 @@ extension ParkAdmissable {
         }
         return admissionAreas
     }
+    
 }
 
 protocol Child {
     var birthDate: Date { get }
-}
-
-extension Child {
-    var birthDate: Date {
-        return RandomGenerator.randomDate(daysBack: 5200) ?? Date(timeIntervalSince1970: 0)
-    }
 }
 
 protocol RideAdmissable {
@@ -106,10 +98,10 @@ extension Discountable {
             discounts.append((value: 20, goodsGroup: .mercandise))
         } else if self is Employee {
             let employee = self as? Employee
-            if employee?.employeeType == .hourly {
+            if employee?.employeeCard.0 == .hourly {
                 discounts.append((value: 15, goodsGroup: .food))
                 discounts.append((value: 25, goodsGroup: .mercandise))
-            } else if employee?.employeeType == .payroll {
+            } else if employee?.employeeCard.0 == .payroll {
                 discounts.append((value: 15, goodsGroup: .food))
                 discounts.append((value: 25, goodsGroup: .mercandise))
             }
@@ -119,8 +111,8 @@ extension Discountable {
 }
 
 protocol Worker {
-    var employeeType: PaymentTerms { get }
-    var department: Department { get }
+    typealias EmployeeCard = (paymetTerms: PaymentTerms, department: Department)
+    var employeeCard: EmployeeCard { get }
     var firstName: String { get }
     var lastName: String { get }
     var streetNumber: Int { get }
@@ -138,214 +130,47 @@ extension Worker {
     func fullAddress() -> String {
         return "\(self.streetNumber) \(self.streetName), \(self.city), \(self.state) \(self.zip)"
     }
-    
-    var employeeType: PaymentTerms {
-        return PaymentTerms.allCases.randomElement()!
-    }
-    
-    // TODO: MAKE IT WORK!!!
-    // I WANT TO INITIALIZE THIS ONE ONLY AFTER I HAVE employeeType INITIALIZED
-    // lazy doesn't work here unfortunately
-    var department: Department {
-        if self.employeeType == .payroll {
-            return Department.office
-        } else {
-            var randomizedValues: [Department]
-            randomizedValues = Department.allCases
-            randomizedValues.remove(at: randomizedValues.firstIndex(of: Department.office)!)
-            return randomizedValues.randomElement()!
-        }
-    }
-    
-    var firstName: String { // Randomly assigning the first name from file
-        let randomName: String
-        do {
-           randomName = try NamesRetriever.randomElement(fromFile: "firstNames", ofType: "plist")
-        } catch let error {
-            fatalError("\(error)")
-        }
-        return randomName
-    }
-    
-    var lastName: String { // Randomly assigning the last name from file
-        let randomName: String
-        do {
-            randomName = try NamesRetriever.randomElement(fromFile: "lastNames", ofType: "plist")
-        } catch let error {
-            fatalError("\(error)")
-        }
-        return randomName
-    }
-    
-    var streetNumber: Int {
-        return Int.random(in: 1000 ... 10000)
-    }
-    
-    var streetName: String { // Randomly assigning the last name from file
-        var randomName: String
-        do {
-            randomName = try NamesRetriever.randomElement(fromFile: "streetNames", ofType: "plist")
-        } catch let error {
-            fatalError("\(error)")
-        }
-        do {
-            randomName += " \(try NamesRetriever.randomElement(fromFile: "streetTypes", ofType: "plist"))"
-        } catch let error {
-            fatalError("\(error)")
-        }
-        return randomName
-    }
-    
-    var city: String {
-        var randomName: String
-        do {
-            randomName = try NamesRetriever.randomElement(fromFile: "cities", ofType: "plist")
-        } catch let error {
-            fatalError("\(error)")
-        }
-        return randomName
-    }
-    
-    var state: String {
-        var randomName: String
-        do {
-            randomName = try NamesRetriever.randomElement(fromFile: "states", ofType: "plist")
-        } catch let error {
-            fatalError("\(error)")
-        }
-        return randomName
-    }
-    
-    var zip: String {
-       // let return String(format: "%05d", Int.random(in: 2801 ... 99950))
-        return String(format: "%05d", Int.random(in: 2801 ... 99950))
-    }
 }
 
 struct Classic: ParkAdmissable, RideAdmissable {
+    let key: String = RandomGenerator.randomKey(length: 32)
     func printSelfToConsole() {
-        var outputString = String()
-        var admissionAreasString = String()
-        var loopCounter: Int = 0
-        for admissionArea in admissionAreas {
-            loopCounter += 1
-            admissionAreasString += "\(admissionArea.rawValue)"
-            if loopCounter != admissionAreas.count {
-                admissionAreasString += ","
-            }
-        }
-        outputString += "\n➡️ This is Classic Guest Pass 😃\n"
-        outputString += "Pass key: \(key)\n"
-        outputString += "Ride admission: \(rideAdmissionType.rawValue)\n"
-        outputString += "Admission areas: \(admissionAreasString)"
-        print(outputString)
+        ConsolePrinter.printPass(self)
     }
 }
 
 struct Vip: ParkAdmissable, RideAdmissable, Discountable {
+    let key: String = RandomGenerator.randomKey(length: 32)
     func printSelfToConsole() {
-        var outputString = String()
-        var admissionAreasString = String()
-        var discountsString = String()
-        var loopCounter: Int = 0
-        for admissionArea in admissionAreas {
-            loopCounter += 1
-            admissionAreasString += "\(admissionArea.rawValue)"
-            if loopCounter != admissionAreas.count {
-                admissionAreasString += "; "
-            }
-        }
-        loopCounter = 0
-        for discount in discounts {
-            loopCounter += 1
-            discountsString += "\(discount.value)% for \(discount.goodsGroup.rawValue)"
-            if loopCounter != discounts.count {
-                discountsString += "; "
-            }
-        }
-        outputString += "\n➡️ This is VIP Guest Pass 🎩🧐\n"
-        outputString += "Pass key: \(key)\n"
-        outputString += "Ride admission: \(rideAdmissionType.rawValue)\n"
-        outputString += "Admission areas: \(admissionAreasString)\n"
-        outputString += "Eligible for discounts: \(discountsString)"
-        print(outputString)
+        ConsolePrinter.printPass(self)
     }
 }
 
 struct FreeChild: ParkAdmissable, Child, RideAdmissable {
+    let key: String = RandomGenerator.randomKey(length: 32)
+    let birthDate: Date = RandomGenerator.randomDate(daysBack: 5200) ?? Date(timeIntervalSince1970: 0)
+    
     func printSelfToConsole() {
-        var outputString = String()
-        var birthDateString = String()
-        var admissionAreasString = String()
-        var loopCounter: Int = 0
-        for admissionArea in admissionAreas {
-            loopCounter += 1
-            admissionAreasString += "\(admissionArea.rawValue)"
-            if loopCounter != admissionAreas.count {
-                admissionAreasString += ","
-            }
-        }
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        dateFormatter.locale = Locale(identifier: "en_US")
-        birthDateString = dateFormatter.string(from: birthDate) // Jan 2, 2001
-        
-        outputString += "\n➡️ This is Free Child Guest Pass 🦄🌈😊\n"
-        outputString += "Pass key: \(key)\n"
-        outputString += "Birth date: \(birthDateString)\n"
-        outputString += "Ride admission: \(rideAdmissionType.rawValue)\n"
-        outputString += "Admission areas: \(admissionAreasString)"
-        print(outputString)
+        ConsolePrinter.printPass(self)
     }
 }
 
 struct Employee: ParkAdmissable, Worker, RideAdmissable, Discountable {
     
+    let key: String = RandomGenerator.randomKey(length: 32)
+    let firstName: String = RandomGenerator.randomElementFrom(file: "firstNames", ofType: "plist")
+    let lastName: String = RandomGenerator.randomElementFrom(file: "lastNames", ofType: "plist")
+    let streetNumber: Int = Int.random(in: 1000...20000)
+    let streetName: String = "\(RandomGenerator.randomElementFrom(file: "streetNames", ofType: "plist")) "
+                           + "\(RandomGenerator.randomElementFrom(file: "streetTypes", ofType: "plist"))"
+    let city: String = RandomGenerator.randomElementFrom(file: "cities", ofType: "plist")
+    let state: String = RandomGenerator.randomElementFrom(file: "states", ofType: "plist")
+    let zip: String = String(format: "%05d", Int.random(in: 2801 ... 99950))
+    var employeeCard: EmployeeCard = RandomGenerator.randomEmployeeCard()
+
+
     func printSelfToConsole() {
-        var outputString = String()
-        var headerString = String()
-        var emojiString = String()
-        var admissionAreasString = String()
-        var loopCounter: Int = 0
-        for admissionArea in admissionAreas {
-            loopCounter += 1
-            admissionAreasString += "\(admissionArea.rawValue)"
-            if loopCounter != admissionAreas.count {
-                admissionAreasString += ", "
-            }
-        }
-        
-        switch self.employeeType {
-        case .hourly:
-            headerString += "Hourly"
-            emojiString += "⏱"
-        case .payroll:
-            headerString += "Payroll"
-            emojiString += "👔"
-        }
-        headerString += " Employee ("
-        switch self.department {
-        case .foodServices:
-            headerString += "Food Services"
-            emojiString += "🍕🥤"
-        case .rideServices:
-            headerString += "Ride Services"
-            emojiString += "🎡🛠"
-        case .parkMaintenance:
-            headerString += "Maintenance"
-            emojiString += "🚚🏭"
-        case .office:
-            headerString += "Ride Services "
-            emojiString += "🗄📈"
-        }
-        outputString += "\n➡️ This is \(headerString)) Pass \(emojiString)\n"
-        outputString += "Pass key: \(key)\n"
-        outputString += "Full Name: \(self.fullName())\n"
-        outputString += "Address: \(self.fullAddress())\n"
-        outputString += "Ride admission: \(rideAdmissionType.rawValue)\n"
-        outputString += "Admission areas: \(admissionAreasString)"
-        print(outputString)
+        ConsolePrinter.printPass(self)
     }
 }
 

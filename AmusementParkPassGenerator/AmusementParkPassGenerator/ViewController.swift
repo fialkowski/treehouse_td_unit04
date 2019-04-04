@@ -12,14 +12,22 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let classicGuest = Classic()
-        let freeChild = FreeChild()
-        let vipGuest = Vip()
-        let employee = Employee()
-        classicGuest.printSelfToConsole()
-        vipGuest.printSelfToConsole()
-        freeChild.printSelfToConsole()
-        employee.printSelfToConsole()
+        var guests = [ParkAdmissable]()
+        
+        for _ in 1...50 {
+            let newItem: ParkAdmissable
+            switch Int.random(in: 0...3) {
+            case 0: newItem = Classic()
+            case 1: newItem = Vip()
+            case 2: newItem = FreeChild()
+            default: newItem = Employee()
+            }
+            guests.append(newItem)
+        }
+        
+        for guest in guests {
+            guest.printSelfToConsole()
+        }
     }
 
 

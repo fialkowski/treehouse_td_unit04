@@ -3,200 +3,102 @@
 <plist version="1.0">
 <dict>
 	<key>Arizona</key>
-	<array>
-		<string>AZ</string>
-	</array>
+	<string>AZ</string>
 	<key>Alaska</key>
-	<array>
-        <string>AK</string>
-    </array>
+	<string>AK</string>
 	<key>Alabama</key>
-	<array>
-        <string>AL</string>
-    </array>
+	<string>AL</string>
 	<key>Arkansas</key>
-	<array>
-        <string>AR</string>
-    </array>
+	<string>AR</string>
 	<key>California</key>
-	<array>
-        <string>CA</string>
-    </array>
+	<string>CA</string>
 	<key>Colorado</key>
-	<array>
-        <string>CO</string>
-    </array>
+	<string>CO</string>
 	<key>Connecticut</key>
-	<array>
-        <string>CT</string>
-    </array>
+	<string>CT</string>
 	<key>Delaware</key>
-	<array>
-        <string>DE</string>
-    </array>
+	<string>DE</string>
 	<key>Florida</key>
-	<array>
-        <string>FL</string>
-    </array>
+	<string>FL</string>
 	<key>Georgia</key>
-	<array>
-        <string>GA</string>
-    </array>
+	<string>GA</string>
 	<key>Hawaii</key>
-	<array>
-        <string>HI</string>
-    </array>
+	<string>HI</string>
 	<key>Idaho</key>
-	<array>
-        <string>ID</string>
-    </array>
+	<string>ID</string>
 	<key>Illinois</key>
-	<array>
-        <string>IL</string>
-    </array>
+	<string>IL</string>
 	<key>Indiana</key>
-	<array>
-        <string>IN</string>
-    </array>
+	<string>IN</string>
 	<key>Iowa</key>
-	<array>
-        <string>IA</string>
-    </array>
+	<string>IA</string>
 	<key>Kansas</key>
-	<array>
-        <string>KS</string>
-    </array>
+	<string>KS</string>
 	<key>Kentucky</key>
-	<array>
-        <string>KY</string>
-    </array>
+	<string>KY</string>
 	<key>Louisiana</key>
-	<array>
-        <string>LA</string>
-    </array>
+	<string>LA</string>
 	<key>Maine</key>
-	<array>
-        <string>ME</string>
-    </array>
+	<string>ME</string>
 	<key>Maryland</key>
-	<array>
-        <string>MD</string>
-    </array>
+	<string>MD</string>
 	<key>Massachusettes</key>
-	<array>
-        <string>MA</string>
-    </array>
+	<string>MA</string>
 	<key>Michigan</key>
-	<array>
-        <string>MI</string>
-    </array>
+	<string>MI</string>
 	<key>Minnesota</key>
-	<array>
-        <string>MN</string>
-    </array>
+	<string>MN</string>
 	<key>Mississippi</key>
-	<array>
-        <string>MS</string>
-    </array>
+	<string>MS</string>
 	<key>Missouri</key>
-	<array>
-        <string>MO</string>
-    </array>
+	<string>MO</string>
 	<key>Montana</key>
-	<array>
-        <string>MT</string>
-    </array>
+	<string>MT</string>
 	<key>Nebraska</key>
-	<array>
-        <string>NE</string>
-    </array>
+	<string>NE</string>
 	<key>Nevada</key>
-	<array>
-        <string>NV</string>
-    </array>
+	<string>NV</string>
 	<key>New Hampshire</key>
-	<array>
-        <string>NH</string>
-    </array>
+	<string>NH</string>
 	<key>New Jersey</key>
-	<array>
-        <string>NJ</string>
-    </array>
+	<string>NJ</string>
 	<key>New York</key>
-	<array>
-        <string>NY</string>
-    </array>
+	<string>NY</string>
 	<key>North Carolina</key>
-	<array>
-        <string>NC</string>
-    </array>
+	<string>NC</string>
 	<key>North Dakota</key>
-	<array>
-        <string>ND</string>
-    </array>
+	<string>ND</string>
 	<key>Ohio</key>
-	<array>
-        <string>OH</string>
-    </array>
+	<string>OH</string>
 	<key>Oklahoma</key>
-	<array>
-        <string>OK</string>
-    </array>
+	<string>OK</string>
 	<key>Oregon</key>
-	<array>
-        <string>OR</string>
-    </array>
+	<string>OR</string>
 	<key>Pennsylvania</key>
-	<array>
-        <string>PA</string>
-    </array>
+	<string>PA</string>
 	<key>Rhode Island</key>
-	<array>
-        <string>RI</string>
-    </array>
+	<string>RI</string>
 	<key>South Carolina</key>
-	<array>
-        <string>SC</string>
-    </array>
+	<string>SC</string>
 	<key>South Dakota</key>
-	<array>
-        <string>SD</string>
-    </array>
+	<string>SD</string>
 	<key>Tennessee</key>
-	<array>
-        <string>TN</string>
-    </array>
+	<string>TN</string>
 	<key>Texas</key>
-	<array>
-        <string>TX</string>
-    </array>
+	<string>TX</string>
 	<key>Utah</key>
-	<array>
-        <string>UT</string>
-    </array>
+	<string>UT</string>
 	<key>Vermont</key>
-	<array>
-        <string>VT</string>
-    </array>
+	<string>VT</string>
 	<key>Virginia</key>
-	<array>
-        <string>VA</string>
-    </array>
+	<string>VA</string>
 	<key>Washington</key>
-	<array>
-        <string>WA</string>
-    </array>
+	<string>WA</string>
 	<key>West Virginia</key>
-	<array>
-        <string>WV</string>
-    </array>
+	<string>WV</string>
 	<key>Wisconsin</key>
-	<array>
-        <string>WI</string>
-    </array>
+	<string>WI</string>
 	<key>Wyoming</key>
-	<array>
-        <string>WY</string>
-    </array>
+	<string>WY</string>
 </dict>
 </plist>
