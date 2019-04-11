@@ -1,42 +1,16 @@
 //
-//  DataModel.swift
+//  Protocols.swift
 //  AmusementParkPassGenerator
 //
-//  Created by nikko444 on 2019-03-04.
+//  Created by nikko444 on 2019-04-10.
 //  Copyright © 2019 nikko444. All rights reserved.
 //
-
 import Foundation
-import UIKit
 
-enum RideAdmission: String {
-    case general
-    case vip
-}
-
-enum Area: String {
-    case amusement
-    case kitchen
-    case rideControl
-    case maintenance
-    case office
-}
-
-enum Good: String {
-    case food
-    case mercandise
-}
-
-enum PaymentTerms: String, CaseIterable {
-    case hourly
-    case payroll
-}
-
-enum Department: String, CaseIterable {
-    case foodServices
-    case rideServices
-    case parkMaintenance
-    case office
+protocol PassReadable {
+    var key: String { get }
+    func swipe (pass: ParkAdmissable)
+    func printSelfToConsole()
 }
 
 protocol ParkAdmissable {
@@ -45,7 +19,7 @@ protocol ParkAdmissable {
     func printSelfToConsole()
 }
 
-extension ParkAdmissable {
+extension ParkAdmissable { // This extention contains computed array, that always returns the right admission areas for the given pass as per Instruction
     var admissionAreas: [Area] {
         var admissionAreas = [Area]()
         admissionAreas.append(.amusement)
@@ -123,56 +97,11 @@ protocol Worker {
 }
 
 extension Worker {
-    func fullName() -> String {
+    var fullName: String {
         return "\(self.firstName) \(self.lastName)"
     }
     
-    func fullAddress() -> String {
+    var fullAddress: String {
         return "\(self.streetNumber) \(self.streetName), \(self.city), \(self.state) \(self.zip)"
     }
 }
-
-struct Classic: ParkAdmissable, RideAdmissable {
-    let key: String = RandomGenerator.randomKey(length: 32)
-    func printSelfToConsole() {
-        ConsolePrinter.printPass(self)
-    }
-}
-
-struct Vip: ParkAdmissable, RideAdmissable, Discountable {
-    let key: String = RandomGenerator.randomKey(length: 32)
-    func printSelfToConsole() {
-        ConsolePrinter.printPass(self)
-    }
-}
-
-struct FreeChild: ParkAdmissable, Child, RideAdmissable {
-    let key: String = RandomGenerator.randomKey(length: 32)
-    let birthDate: Date = RandomGenerator.randomDate(daysBack: 5200) ?? Date(timeIntervalSince1970: 0)
-    
-    func printSelfToConsole() {
-        ConsolePrinter.printPass(self)
-    }
-}
-
-struct Employee: ParkAdmissable, Worker, RideAdmissable, Discountable {
-    
-    let key: String = RandomGenerator.randomKey(length: 32)
-    let firstName: String = RandomGenerator.randomElementFrom(file: "firstNames", ofType: "plist")
-    let lastName: String = RandomGenerator.randomElementFrom(file: "lastNames", ofType: "plist")
-    let streetNumber: Int = Int.random(in: 1000...20000)
-    let streetName: String = "\(RandomGenerator.randomElementFrom(file: "streetNames", ofType: "plist")) "
-                           + "\(RandomGenerator.randomElementFrom(file: "streetTypes", ofType: "plist"))"
-    let city: String = RandomGenerator.randomElementFrom(file: "cities", ofType: "plist")
-    let state: String = RandomGenerator.randomElementFrom(file: "states", ofType: "plist")
-    let zip: String = String(format: "%05d", Int.random(in: 2801 ... 99950))
-    var employeeCard: EmployeeCard = RandomGenerator.randomEmployeeCard()
-
-
-    func printSelfToConsole() {
-        ConsolePrinter.printPass(self)
-    }
-}
-
-
-

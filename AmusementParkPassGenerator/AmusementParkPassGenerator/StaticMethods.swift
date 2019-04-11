@@ -174,8 +174,8 @@ class ConsolePrinter {
             }
             outputString += "\n➡️ This is \(headerString)) Pass \(emojiString)\n"
             outputString += "Pass key: \(employee.key)\n"
-            outputString += "Full Name: \(employee.fullName())\n"
-            outputString += "Address: \(employee.fullAddress())\n"
+            outputString += "Full Name: \(employee.fullName)\n"
+            outputString += "Address: \(employee.fullAddress)\n"
             outputString += "Ride admission: \(employee.rideAdmissionType.rawValue)\n"
             outputString += "Admission areas: \(admissionAreasString)"
             }
@@ -201,5 +201,21 @@ class ConsolePrinter {
             }
         }
     print(outputString)
+    }
+    
+    static func printSwipeResult (_ pass: ParkAdmissable, hasAccess: Bool) {
+        switch hasAccess {
+        case true: do {
+            if let child = pass as? FreeChild {
+                let calendar = Calendar.current
+                if (calendar.component(.month, from: child.birthDate) == calendar.component(.month, from: Date(timeIntervalSinceNow: 0))) &&
+                    (calendar.component(.day, from: child.birthDate) == calendar.component(.day, from: Date(timeIntervalSinceNow: 0))) {
+                    print("🎉🎉🎉🎈🎈🎈🎉🎉🎉Party Time! It's your BD!🎉🎉🎉🎈🎈🎈🎉🎉🎉")
+                }
+            }
+            print("\n✅ ✅ ✅ ✅ ✅ ✅ ✅ ACCESS ALLOWED ✅ ✅ ✅ ✅ ✅ ✅ ✅\n")
+            }
+        case false: print("\n🚨 🚨 🚨 🚨 🚨 🚨 🚨 ACCESS DENIED 🚨 🚨 🚨 🚨 🚨 🚨 🚨\n")
+        }
     }
 }

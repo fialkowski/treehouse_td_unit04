@@ -12,7 +12,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        var guests = [ParkAdmissable]()
+        var entrants = [ParkAdmissable]()
+        let testReader = AreaEntryPassReader(ofArea: .amusement)
         
         for _ in 1...50 {
             let newItem: ParkAdmissable
@@ -22,11 +23,11 @@ class ViewController: UIViewController {
             case 2: newItem = FreeChild()
             default: newItem = Employee()
             }
-            guests.append(newItem)
+            entrants.append(newItem)
         }
         
-        for guest in guests {
-            guest.printSelfToConsole()
+        for entrant in entrants {
+            testReader.swipe(pass: entrant)
         }
     }
 
