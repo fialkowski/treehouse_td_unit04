@@ -7,12 +7,29 @@
 //
 import Foundation
 
-protocol PassReadable {
+//PASS READER PROTOCOLS  -------------------------------------------------------------------------------
+
+protocol PassReader { // General protocol that we use to define any pass reader. Will be used as Data type.
     var key: String { get }
     func swipe (pass: ParkAdmissable)
     func printSelfToConsole()
 }
 
+protocol AreaAssignable {
+    var areaType: Area { get }
+}
+
+protocol CashRegisterAssignable {
+    var storeType: Good { get }
+}
+
+//------------------------------------------------------------------------------------------------------
+
+
+
+//PASS TYPES DEFINING PROTOCOLS /W EXTENSIONS  ---------------------------------------------------------
+
+// General protocol that we use to define any pass. Will be used as Data type.
 protocol ParkAdmissable {
     var key: String { get }
     var admissionAreas: [Area] { get }
@@ -41,6 +58,8 @@ extension ParkAdmissable { // This extention contains computed array, that alway
     
 }
 
+
+// Free child pass defining protocol, set as per objective.
 protocol Child {
     var birthDate: Date { get }
 }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A1CDDF22245D58800FAE4B6 /* StaticMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CDDF12245D58800FAE4B6 /* StaticMethods.swift */; };
+		8A1CDDF22245D58800FAE4B6 /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CDDF12245D58800FAE4B6 /* RandomGenerator.swift */; };
 		8A2325AC222E30240055F1B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2325AB222E30240055F1B6 /* AppDelegate.swift */; };
 		8A2325AE222E30240055F1B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2325AD222E30240055F1B6 /* ViewController.swift */; };
 		8A2325B1222E30240055F1B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A2325AF222E30240055F1B6 /* Main.storyboard */; };
@@ -19,17 +19,15 @@
 		8A75262E22514E72000FC3A6 /* streetTypes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A75262D22514E72000FC3A6 /* streetTypes.plist */; };
 		8A75263022514F8A000FC3A6 /* streetNames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A75262F22514F89000FC3A6 /* streetNames.plist */; };
 		8A7526322251C1F4000FC3A6 /* cities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A7526312251C1F4000FC3A6 /* cities.plist */; };
+		8A8C18F12264236D00735FAE /* PassStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C18F02264236D00735FAE /* PassStructs.swift */; };
+		8A8C18F3226429AE00735FAE /* ConsolePrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C18F2226429AE00735FAE /* ConsolePrinter.swift */; };
 		8AA52863225ED5110033A09C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA52862225ED5110033A09C /* Enums.swift */; };
 		8AA52865225ED5460033A09C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA52864225ED5460033A09C /* Protocols.swift */; };
-		8AA52867225ED5D40033A09C /* Classic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA52866225ED5D40033A09C /* Classic.swift */; };
-		8AA52869225ED66F0033A09C /* Vip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA52868225ED66F0033A09C /* Vip.swift */; };
-		8AA5286B225ED6900033A09C /* FreeChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5286A225ED6900033A09C /* FreeChild.swift */; };
-		8AA5286D225ED6B10033A09C /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5286C225ED6B10033A09C /* Employee.swift */; };
-		8AA5286F225EDDCE0033A09C /* AreaEntryPassReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5286E225EDDCE0033A09C /* AreaEntryPassReader.swift */; };
+		8AA5286F225EDDCE0033A09C /* PassReaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5286E225EDDCE0033A09C /* PassReaders.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8A1CDDF12245D58800FAE4B6 /* StaticMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMethods.swift; sourceTree = "<group>"; };
+		8A1CDDF12245D58800FAE4B6 /* RandomGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGenerator.swift; sourceTree = "<group>"; };
 		8A2325A8222E30240055F1B6 /* AmusementParkPassGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AmusementParkPassGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A2325AB222E30240055F1B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A2325AD222E30240055F1B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,13 +41,11 @@
 		8A75262D22514E72000FC3A6 /* streetTypes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = streetTypes.plist; sourceTree = "<group>"; };
 		8A75262F22514F89000FC3A6 /* streetNames.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = streetNames.plist; sourceTree = "<group>"; };
 		8A7526312251C1F4000FC3A6 /* cities.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = cities.plist; sourceTree = "<group>"; };
+		8A8C18F02264236D00735FAE /* PassStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassStructs.swift; sourceTree = "<group>"; };
+		8A8C18F2226429AE00735FAE /* ConsolePrinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolePrinter.swift; sourceTree = "<group>"; };
 		8AA52862225ED5110033A09C /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		8AA52864225ED5460033A09C /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
-		8AA52866225ED5D40033A09C /* Classic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classic.swift; sourceTree = "<group>"; };
-		8AA52868225ED66F0033A09C /* Vip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vip.swift; sourceTree = "<group>"; };
-		8AA5286A225ED6900033A09C /* FreeChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeChild.swift; sourceTree = "<group>"; };
-		8AA5286C225ED6B10033A09C /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
-		8AA5286E225EDDCE0033A09C /* AreaEntryPassReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaEntryPassReader.swift; sourceTree = "<group>"; };
+		8AA5286E225EDDCE0033A09C /* PassReaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassReaders.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,14 +79,12 @@
 			isa = PBXGroup;
 			children = (
 				8A2325AB222E30240055F1B6 /* AppDelegate.swift */,
-				8AA52868225ED66F0033A09C /* Vip.swift */,
-				8AA5286A225ED6900033A09C /* FreeChild.swift */,
-				8AA5286E225EDDCE0033A09C /* AreaEntryPassReader.swift */,
-				8AA52866225ED5D40033A09C /* Classic.swift */,
-				8AA5286C225ED6B10033A09C /* Employee.swift */,
 				8AA52862225ED5110033A09C /* Enums.swift */,
 				8AA52864225ED5460033A09C /* Protocols.swift */,
-				8A1CDDF12245D58800FAE4B6 /* StaticMethods.swift */,
+				8AA5286E225EDDCE0033A09C /* PassReaders.swift */,
+				8A8C18F02264236D00735FAE /* PassStructs.swift */,
+				8A1CDDF12245D58800FAE4B6 /* RandomGenerator.swift */,
+				8A8C18F2226429AE00735FAE /* ConsolePrinter.swift */,
 				8A2325AD222E30240055F1B6 /* ViewController.swift */,
 				8A2325AF222E30240055F1B6 /* Main.storyboard */,
 				8A2325B2222E30270055F1B6 /* Assets.xcassets */,
@@ -185,14 +179,12 @@
 			files = (
 				8A2325AE222E30240055F1B6 /* ViewController.swift in Sources */,
 				8A2325AC222E30240055F1B6 /* AppDelegate.swift in Sources */,
+				8A8C18F12264236D00735FAE /* PassStructs.swift in Sources */,
 				8AA52863225ED5110033A09C /* Enums.swift in Sources */,
-				8AA5286D225ED6B10033A09C /* Employee.swift in Sources */,
-				8AA52869225ED66F0033A09C /* Vip.swift in Sources */,
-				8AA5286F225EDDCE0033A09C /* AreaEntryPassReader.swift in Sources */,
+				8AA5286F225EDDCE0033A09C /* PassReaders.swift in Sources */,
 				8AA52865225ED5460033A09C /* Protocols.swift in Sources */,
-				8A1CDDF22245D58800FAE4B6 /* StaticMethods.swift in Sources */,
-				8AA5286B225ED6900033A09C /* FreeChild.swift in Sources */,
-				8AA52867225ED5D40033A09C /* Classic.swift in Sources */,
+				8A8C18F3226429AE00735FAE /* ConsolePrinter.swift in Sources */,
+				8A1CDDF22245D58800FAE4B6 /* RandomGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,10 +1,55 @@
 //
-//  Employee.swift
+//  PassStructs.swift
 //  AmusementParkPassGenerator
 //
-//  Created by nikko444 on 2019-04-10.
+//  Created by nikko444 on 2019-04-14.
 //  Copyright © 2019 nikko444. All rights reserved.
 //
+
+import Foundation
+
+struct Classic: ParkAdmissable, RideAdmissable {
+    let key: String
+    func printSelfToConsole() {
+        ConsolePrinter.printPass(self)
+    }
+    
+    init() {
+        self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
+    }
+}
+
+struct Vip: ParkAdmissable, RideAdmissable, Discountable {
+    let key: String
+    func printSelfToConsole() {
+        ConsolePrinter.printPass(self)
+    }
+    
+    init() {
+        self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
+    }
+}
+
+struct FreeChild: ParkAdmissable, Child, RideAdmissable {
+    let key: String
+    let birthDate: Date
+    
+    func printSelfToConsole() {
+        ConsolePrinter.printPass(self)
+    }
+    
+    init() {
+        self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
+        self.birthDate = RandomGenerator.randomDate(daysBack: 5200) ?? Date(timeIntervalSince1970: 0) // Generates a random date within 5200 days back from today
+        
+        /* FIXED DATE ASSIGNING BLOCK FOR TESTING
+         let formatter = DateFormatter()
+         formatter.dateFormat = "yyyy/MM/dd HH:mm"
+         self.birthDate = formatter.date(from: "2001/04/11 22:31")!
+         */
+    
+    }
+}
 
 struct Employee: ParkAdmissable, Worker, RideAdmissable, Discountable {
     let key: String
@@ -21,7 +66,7 @@ struct Employee: ParkAdmissable, Worker, RideAdmissable, Discountable {
         ConsolePrinter.printPass(self)
     }
     
-    init() {
+    init() { // THIS INIT GENERATES RANDOM DATA FOR THE STRUCT
         self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
         self.firstName = RandomGenerator.randomElementFrom(file: "firstNames", ofType: "plist") //Grabs a random string from the plist as a first name
         self.lastName = RandomGenerator.randomElementFrom(file: "lastNames", ofType: "plist") //Grabs a random string from the plist as a last name

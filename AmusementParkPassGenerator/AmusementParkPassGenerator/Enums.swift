@@ -19,7 +19,7 @@ enum Area: String, CaseIterable {
     case office
 }
 
-enum Good: String {
+enum Good: String, CaseIterable {
     case food
     case mercandise
 }
