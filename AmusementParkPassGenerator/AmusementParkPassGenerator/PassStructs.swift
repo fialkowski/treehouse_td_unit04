@@ -10,28 +10,35 @@ import Foundation
 
 struct Classic: ParkAdmissable, RideAdmissable {
     let key: String
+    var lastSwipeTimestamp: Date
     func printSelfToConsole() {
         ConsolePrinter.printPass(self)
     }
     
     init() {
         self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
+        self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
     }
+    
 }
 
 struct Vip: ParkAdmissable, RideAdmissable, Discountable {
     let key: String
+    var lastSwipeTimestamp: Date
     func printSelfToConsole() {
         ConsolePrinter.printPass(self)
     }
     
     init() {
         self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
+        self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
     }
+    
 }
 
 struct FreeChild: ParkAdmissable, Child, RideAdmissable {
     let key: String
+    var lastSwipeTimestamp: Date
     let birthDate: Date
     
     func printSelfToConsole() {
@@ -40,6 +47,7 @@ struct FreeChild: ParkAdmissable, Child, RideAdmissable {
     
     init() {
         self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
+        self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
         self.birthDate = RandomGenerator.randomDate(daysBack: 5200) ?? Date(timeIntervalSince1970: 0) // Generates a random date within 5200 days back from today
         
         /* FIXED DATE ASSIGNING BLOCK FOR TESTING
@@ -47,12 +55,12 @@ struct FreeChild: ParkAdmissable, Child, RideAdmissable {
          formatter.dateFormat = "yyyy/MM/dd HH:mm"
          self.birthDate = formatter.date(from: "2001/04/11 22:31")!
          */
-    
     }
 }
 
 struct Employee: ParkAdmissable, Worker, RideAdmissable, Discountable {
     let key: String
+    var lastSwipeTimestamp: Date
     let firstName: String
     let lastName: String
     let streetNumber: Int
@@ -68,6 +76,7 @@ struct Employee: ParkAdmissable, Worker, RideAdmissable, Discountable {
     
     init() { // THIS INIT GENERATES RANDOM DATA FOR THE STRUCT
         self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
+        self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
         self.firstName = RandomGenerator.randomElementFrom(file: "firstNames", ofType: "plist") //Grabs a random string from the plist as a first name
         self.lastName = RandomGenerator.randomElementFrom(file: "lastNames", ofType: "plist") //Grabs a random string from the plist as a last name
         self.streetNumber = Int.random(in: 1000...20000) //Generates a random integer within a given range

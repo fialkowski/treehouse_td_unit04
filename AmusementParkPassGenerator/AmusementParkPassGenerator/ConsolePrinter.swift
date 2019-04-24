@@ -129,28 +129,42 @@ class ConsolePrinter {
         print(outputString)
     }
     
-    static func printAreaSwipeResult (_ pass: ParkAdmissable, hasAccess: Bool) {
-        switch hasAccess {
-        case true: do {
+    enum SwipeFeedback {
+        case granted
+        case denied
+        case tailGated
+    }
+    
+    static func printAreaSwipeResult (_ pass: ParkAdmissable, printOut: SwipeFeedback) {
+        switch printOut {
+        case .granted: do {
             if let child = pass as? FreeChild {
                 let calendar = Calendar.current
                 if (calendar.component(.month, from: child.birthDate) == calendar.component(.month, from: Date(timeIntervalSinceNow: 0))) &&
                     (calendar.component(.day, from: child.birthDate) == calendar.component(.day, from: Date(timeIntervalSinceNow: 0))) {
-                    print("🎉🎉🎉🎈🎈🎈🎉🎉🎉Party Time! It's your BD!🎉🎉🎉🎈🎈🎈🎉🎉🎉")
+                    print("🎉🎉🎉🎈🎈🎈🎉🎉🎉Party Time! It's your BD!🎉🎉🎉🎈🎈🎈🎉🎉🎉\n")
                 }
             }
-            print("\n✅ ✅ ✅ ✅ ✅ ✅ ✅ ACCESS ALLOWED ✅ ✅ ✅ ✅ ✅ ✅ ✅\n")
+            print("\n✅ ✅ ✅ ✅ ✅ ✅ ✅ ACCESS ALLOWED ✅ ✅ ✅ ✅ ✅ ✅ ✅\n\n")
             }
-        case false: print("\n🚨 🚨 🚨 🚨 🚨 🚨 🚨 ACCESS DENIED 🚨 🚨 🚨 🚨 🚨 🚨 🚨\n")
+        case .denied: print("\n🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 ACCESS DENIED 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨\n\n")
+        case .tailGated: print("\n🚨⏱ ACCESS DENIED!!! SLOWDOWN - DOUBLE TAP-IN ATTEMPT!!! ⏱🚨\n\n")
         }
     }
+
     
-    // TODO: This should print only the discount matching the goods groop
-    
-    static func printCashRegisterSwipeResult (_ pass: Discountable) {
+    static func printCashRegisterSwipeResult (_ pass: Discountable, forCashRegisterPassReader cashRegisterPassReader: CashRegisterAssignable) {
         var outputString = String()
-        for discount in pass.discounts {
-            outputString += "\(discount.goodsGroup.rawValue)"
+        outputString += "\n"
+        if pass.discounts.isEmpty {
+            outputString += "💳 Regular rate applies 💳"
+        } else {
+            outputString += "💰💰💰 "
+            for discount in pass.discounts {
+                outputString += "\(discount.value)% for \(discount.goodsGroup.rawValue) "
+            }
         }
+        
+        print(outputString)
     }
 }

@@ -11,7 +11,6 @@ import Foundation
 
 protocol PassReader { // General protocol that we use to define any pass reader. Will be used as Data type.
     var key: String { get }
-    func swipe (pass: ParkAdmissable)
     func printSelfToConsole()
 }
 
@@ -32,8 +31,10 @@ protocol CashRegisterAssignable {
 // General protocol that we use to define any pass. Will be used as Data type.
 protocol ParkAdmissable {
     var key: String { get }
+    var lastSwipeTimestamp: Date { get set }
     var admissionAreas: [Area] { get }
     func printSelfToConsole()
+    mutating func swipe (reader: PassReader)
 }
 
 extension ParkAdmissable { // This extention contains computed array, that always returns the right admission areas for the given pass as per Instruction
@@ -56,6 +57,22 @@ extension ParkAdmissable { // This extention contains computed array, that alway
         return admissionAreas
     }
     
+    mutating func swipe(reader: PassReader) {
+        reader.printSelfToConsole()
+        self.printSelfToConsole()
+        if let areaReader = reader as? AreaAssignable {
+            if !self.admissionAreas.contains(areaReader.areaType) {
+                ConsolePrinter.printAreaSwipeResult(self, printOut: .denied)
+            } else if Date(timeIntervalSinceNow: -5) <= self.lastSwipeTimestamp {
+                ConsolePrinter.printAreaSwipeResult(self, printOut: .tailGated)
+            } else {
+                ConsolePrinter.printAreaSwipeResult(self, printOut: .granted)
+            }
+        } else if let cashRegisterReader = reader as? CashRegisterAssignable, let selfDiscountable = self as? Discountable {
+            ConsolePrinter.printCashRegisterSwipeResult(selfDiscountable, forCashRegisterPassReader: cashRegisterReader)
+        }
+        lastSwipeTimestamp = Date(timeIntervalSinceNow: 0)
+    }
 }
 
 

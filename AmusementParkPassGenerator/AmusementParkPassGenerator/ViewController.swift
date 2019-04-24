@@ -13,7 +13,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         var entrants = [ParkAdmissable]()
-        let testReader = AreaEntryPassReader(ofArea: .amusement)
+        var passReaders = [PassReader]()
+        
+        passReaders.append(AreaEntryPassReader(ofArea: .amusement))
+        passReaders.append(AreaEntryPassReader(ofArea: .kitchen))
+        passReaders.append(AreaEntryPassReader(ofArea: .maintenance))
+        passReaders.append(AreaEntryPassReader(ofArea: .office))
+        passReaders.append(AreaEntryPassReader(ofArea: .rideControl))
+        passReaders.append(CashRegisterPassReader(ofStoreType: .food))
+        passReaders.append(CashRegisterPassReader(ofStoreType: .mercandise))
         
         for _ in 1...50 {
             let newItem: ParkAdmissable
@@ -26,9 +34,13 @@ class ViewController: UIViewController {
             entrants.append(newItem)
         }
         
-        for entrant in entrants {
-            testReader.swipe(pass: entrant)
+        for index in 0...entrants.count - 1 { //Value type - using index reference
+            for reader in passReaders {
+                entrants[index].swipe(reader: reader)
+                entrants[index].swipe(reader: reader)
+            }
         }
+        
     }
 
 
