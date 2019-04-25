@@ -21,7 +21,6 @@
 		8A7526322251C1F4000FC3A6 /* cities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A7526312251C1F4000FC3A6 /* cities.plist */; };
 		8A8C18F12264236D00735FAE /* PassStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C18F02264236D00735FAE /* PassStructs.swift */; };
 		8A8C18F3226429AE00735FAE /* ConsolePrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C18F2226429AE00735FAE /* ConsolePrinter.swift */; };
-		8AA52863225ED5110033A09C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA52862225ED5110033A09C /* Enums.swift */; };
 		8AA52865225ED5460033A09C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA52864225ED5460033A09C /* Protocols.swift */; };
 		8AA5286F225EDDCE0033A09C /* PassReaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5286E225EDDCE0033A09C /* PassReaders.swift */; };
 /* End PBXBuildFile section */
@@ -43,7 +42,6 @@
 		8A7526312251C1F4000FC3A6 /* cities.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = cities.plist; sourceTree = "<group>"; };
 		8A8C18F02264236D00735FAE /* PassStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassStructs.swift; sourceTree = "<group>"; };
 		8A8C18F2226429AE00735FAE /* ConsolePrinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolePrinter.swift; sourceTree = "<group>"; };
-		8AA52862225ED5110033A09C /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		8AA52864225ED5460033A09C /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		8AA5286E225EDDCE0033A09C /* PassReaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassReaders.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,7 +77,6 @@
 			isa = PBXGroup;
 			children = (
 				8A2325AB222E30240055F1B6 /* AppDelegate.swift */,
-				8AA52862225ED5110033A09C /* Enums.swift */,
 				8AA52864225ED5460033A09C /* Protocols.swift */,
 				8AA5286E225EDDCE0033A09C /* PassReaders.swift */,
 				8A8C18F02264236D00735FAE /* PassStructs.swift */,
@@ -180,7 +177,6 @@
 				8A2325AE222E30240055F1B6 /* ViewController.swift in Sources */,
 				8A2325AC222E30240055F1B6 /* AppDelegate.swift in Sources */,
 				8A8C18F12264236D00735FAE /* PassStructs.swift in Sources */,
-				8AA52863225ED5110033A09C /* Enums.swift in Sources */,
 				8AA5286F225EDDCE0033A09C /* PassReaders.swift in Sources */,
 				8AA52865225ED5460033A09C /* Protocols.swift in Sources */,
 				8A8C18F3226429AE00735FAE /* ConsolePrinter.swift in Sources */,
