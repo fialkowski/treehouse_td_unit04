@@ -8,6 +8,19 @@
 
 import Foundation
 
+enum PassInitError: Error {
+    case noKey
+    case noBirthDate
+    case noFirstName
+    case noLastName
+    case noStreetNumber
+    case noStreetName
+    case noCity
+    case noState
+    case noZip
+    case noEmployeeCard
+}
+
 struct Classic: ParkAdmissable, RideAdmissable {
     let key: String
     var lastSwipeTimestamp: Date
