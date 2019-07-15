@@ -34,7 +34,7 @@ class ViewController: UIViewController {
                             try newItem = Classic()
                             entrants.append(newItem)
                         } catch PassInitError.invalidKey(let description) {
-                            print("\n🚨 Wrong Key or nil value was entered while creating an instance of \(description) 🚨\n")
+                            print("\n🚨 Wrong Key or nil value was entered while creating an instance of \(description) 🚨")
                         } catch let error {
                             fatalError("Sorry, something comeletely unexpected has happened ->>> \(error)")
                         }
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
                             try newItem = Vip()
                             entrants.append(newItem)
                         } catch PassInitError.invalidKey(let description) {
-                            print("\n🚨 Wrong Key or nil value was entered while creating an instance of \(description) 🚨\n")
+                            print("\n🚨 Wrong Key or nil value was entered while creating an instance of \(description) 🚨")
                         } catch let error {
                             fatalError("Sorry, something comeletely unexpected has happened ->>> \(error)")
                         }
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
                             try newItem = FreeChild()
                             entrants.append(newItem)
                         } catch PassInitError.invalidKey(let description) {
-                            print("\n🚨 Wrong Key or nil value was entered while creating an instance of \(description) 🚨\n")
+                            print("\n🚨 Wrong Key or nil value was entered while creating an instance of \(description) 🚨")
                         } catch PassInitError.invalidBirthDate(let description){
                             print(description)
                         } catch let error {
