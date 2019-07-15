@@ -81,6 +81,7 @@ class ViewController: UIViewController {
                         } catch let error {
                             fatalError("Sorry, something comeletely unexpected has happened ->>> \(error)")
                         }
+                }
         }
         
         for index in 0...entrants.count - 1 { //Value type - using index reference
@@ -91,7 +92,5 @@ class ViewController: UIViewController {
         }
         
     }
-
-
 }
 
