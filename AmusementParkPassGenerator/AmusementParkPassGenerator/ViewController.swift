@@ -25,11 +25,21 @@ class ViewController: UIViewController {
         
         for _ in 1...50 {
             let newItem: ParkAdmissable
-            switch Int.random(in: 0...3) {
-            case 0: newItem = Classic()
-            case 1: newItem = Vip()
-            case 2: newItem = FreeChild()
-            default: newItem = Employee()
+            do {
+                switch Int.random(in: 0...3) {
+                    case 0: try newItem = Classic()
+                    case 1: try newItem = Vip()
+                    case 2: try newItem = FreeChild()
+                    default: try newItem = Employee()
+                }
+            } catch PassInitError.invalidKey {
+                print("Wrong Key is entered")
+            } catch PassInitError.invalidBirthDate {
+                print("Wrong Birth Date is entered")
+            } catch PassInitError.invalidCity {
+                print("Wrong City Name is entered")
+            } catch {
+                fatalError("Sorry, something comeletely unexpected has happened")
             }
             entrants.append(newItem)
         }

@@ -9,16 +9,16 @@
 import Foundation
 
 enum PassInitError: Error {
-    case noKey
-    case noBirthDate
-    case noFirstName
-    case noLastName
-    case noStreetNumber
-    case noStreetName
-    case noCity
-    case noState
-    case noZip
-    case noEmployeeCard
+    case invalidKey
+    case invalidBirthDate
+    case invalidFirstName
+    case invalidLastName
+    case invalidStreetNumber
+    case invalidStreetName
+    case invalidCity
+    case invalidState
+    case invalidZip
+    case invalidEmployeeCard
 }
 
 struct Classic: ParkAdmissable, RideAdmissable {
@@ -28,8 +28,11 @@ struct Classic: ParkAdmissable, RideAdmissable {
         ConsolePrinter.printPass(self)
     }
     
-    init() {
-        self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
+    init() throws {
+        guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else { // Generates a random key for the instance
+            throw PassInitError.invalidKey
+        }
+        self.key = unwrappedKey
         self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
     }
     
