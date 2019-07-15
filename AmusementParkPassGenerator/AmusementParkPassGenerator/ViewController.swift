@@ -63,21 +63,21 @@ class ViewController: UIViewController {
                             try newItem = Employee()
                             entrants.append(newItem)
                         } catch PassInitError.invalidKey(let description) {
-                            print("\n🚨 Wrong Key or nil value was entered while creating an instance of \(description) 🚨\n")
+                            print("\n🚨 Wrong Key or nil value was entered while creating an instance of \(description) 🚨")
                         } catch PassInitError.invalidFirstName(let description) {
-                            print("\n🚨 Wrong First Name or nil value was entered while creating an instance of \(description) 🚨\n")
+                            print("\n🚨 Wrong First Name or nil value was entered while creating an instance of \(description) 🚨")
                         } catch PassInitError.invalidLastName(let description) {
-                            print("\n🚨 Wrong Last Name or nil value was entered while creating an instance of \(description) 🚨\n")
+                            print("\n🚨 Wrong Last Name or nil value was entered while creating an instance of \(description) 🚨")
                         } catch PassInitError.invalidStreetNumber(let description) {
-                            print("\n🚨 Wrong Street Numer or nil value was entered while creating an instance of \(description) 🚨\n")
+                            print("\n🚨 Wrong Street Numer or nil value was entered while creating an instance of \(description) 🚨")
                         } catch PassInitError.invalidStreetName(let description) {
-                            print("\n🚨 Wrong Street Name or nil value was entered while creating an instance of \(description) 🚨\n")
+                            print("\n🚨 Wrong Street Name or nil value was entered while creating an instance of \(description) 🚨")
                         } catch PassInitError.invalidCity(let description) {
-                            print("\n🚨 Wrong City Name or nil value was entered while creating an instance of \(description) 🚨\n")
+                            print("\n🚨 Wrong City Name or nil value was entered while creating an instance of \(description) 🚨")
                         } catch PassInitError.invalidState(let description) {
-                            print("\n🚨 Wrong State Name or nil value was entered while creating an instance of \(description) 🚨\n")
+                            print("\n🚨 Wrong State Name or nil value was entered while creating an instance of \(description) 🚨")
                         } catch PassInitError.invalidZip(let description) {
-                            print("\n🚨 Wrong Zip Code or nil value was entered while creating an instance of \(description) 🚨\n")
+                            print("\n🚨 Wrong Zip Code or nil value was entered while creating an instance of \(description) 🚨")
                         } catch let error {
                             fatalError("Sorry, something comeletely unexpected has happened ->>> \(error)")
                         }
