@@ -9,16 +9,16 @@
 import Foundation
 
 enum PassInitError: Error {
-    case invalidKey
-    case invalidBirthDate
-    case invalidFirstName
-    case invalidLastName
-    case invalidStreetNumber
-    case invalidStreetName
-    case invalidCity
-    case invalidState
-    case invalidZip
-    case invalidEmployeeCard
+    case invalidKey(throwingInstance: String)
+    case invalidBirthDate(throwingInstance: String)
+    case invalidFirstName(throwingInstance: String)
+    case invalidLastName(throwingInstance: String)
+    case invalidStreetNumber(throwingInstance: String)
+    case invalidStreetName(throwingInstance: String)
+    case invalidCity(throwingInstance: String)
+    case invalidState(throwingInstance: String)
+    case invalidZip(throwingInstance: String)
+    case invalidEmployeeCard(throwingInstance: String)
 }
 
 struct Classic: ParkAdmissable, RideAdmissable {
@@ -30,7 +30,7 @@ struct Classic: ParkAdmissable, RideAdmissable {
     
     init() throws {
         guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else { // Generates a random key for the instance
-            throw PassInitError.invalidKey
+            throw PassInitError.invalidKey(throwingInstance: String(describing: Classic.self))
         }
         self.key = unwrappedKey
         self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
@@ -45,8 +45,11 @@ struct Vip: ParkAdmissable, RideAdmissable, Discountable {
         ConsolePrinter.printPass(self)
     }
     
-    init() {
-        self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
+    init() throws {
+        guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else { // Generates a random key for the instance
+            throw PassInitError.invalidKey(throwingInstance: String(describing: Vip.self))
+        }
+        self.key = unwrappedKey
         self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
     }
     
@@ -60,12 +63,16 @@ struct FreeChild: ParkAdmissable, Child, RideAdmissable {
     func printSelfToConsole() {
         ConsolePrinter.printPass(self)
     }
-    
-    init() {
-        self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
+    init() throws {
+        guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else { // Generates a random key for the instance
+            throw PassInitError.invalidKey(throwingInstance: String(describing: FreeChild.self))
+        }
+        self.key = unwrappedKey
+        guard let unwrappedBirthDate = RandomGenerator.randomDate(daysBack: 5200) else {
+            throw PassInitError.invalidBirthDate(throwingInstance: String(describing: FreeChild.self))
+        }
+        self.birthDate = unwrappedBirthDate
         self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
-        self.birthDate = RandomGenerator.randomDate(daysBack: 5200) ?? Date(timeIntervalSince1970: 0) // Generates a random date within 5200 days back from today
-        
         /* FIXED DATE ASSIGNING BLOCK FOR TESTING
          let formatter = DateFormatter()
          formatter.dateFormat = "yyyy/MM/dd HH:mm"
@@ -90,17 +97,49 @@ struct Employee: ParkAdmissable, Worker, RideAdmissable, Discountable {
         ConsolePrinter.printPass(self)
     }
     
-    init() { // THIS INIT GENERATES RANDOM DATA FOR THE STRUCT
-        self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
-        self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
-        self.firstName = RandomGenerator.randomElementFrom(file: "firstNames", ofType: "plist") //Grabs a random string from the plist as a first name
-        self.lastName = RandomGenerator.randomElementFrom(file: "lastNames", ofType: "plist") //Grabs a random string from the plist as a last name
-        self.streetNumber = Int.random(in: 1000...20000) //Generates a random integer within a given range
-        self.streetName = "\(RandomGenerator.randomElementFrom(file: "streetNames", ofType: "plist")) " //Grabs a random string from the plist as a street name
-            + "\(RandomGenerator.randomElementFrom(file: "streetTypes", ofType: "plist"))" //Grabs a random string from the plist as a street type
-        self.city = RandomGenerator.randomElementFrom(file: "cities", ofType: "plist") //Grabs a random string from the plist as a city
-        self.state = RandomGenerator.randomElementFrom(file: "states", ofType: "plist") //Grabs a random string from the plist as a state
-        self.zip = String(format: "%05d", Int.random(in: 2801 ... 99950)) //Generates a random integer within a given range and format
+    init() throws { // THIS INIT GENERATES RANDOM DATA FOR THE STRUCT
+        guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else { // Generates a random key for the instance
+            throw PassInitError.invalidKey(throwingInstance: String(describing: Employee.self))
+        }
+        self.key = unwrappedKey
+        
+        guard let unwrappedFirstName = RandomGenerator.randomElementFrom(file: "firstNames", ofType: "plist") else { //Grabs a random string from the plist as a first name
+            throw PassInitError.invalidFirstName(throwingInstance: String(describing: Employee.self))
+        }
+        self.firstName = unwrappedFirstName
+        
+        guard let unwrappedLastName = RandomGenerator.randomElementFrom(file: "lastNames", ofType: "plist") else { //Grabs a random string from the plist as a last name
+            throw PassInitError.invalidLastName(throwingInstance: String(describing: Employee.self))
+        }
+        self.lastName = unwrappedLastName
+        
+        guard let unwrappedStreetNumber = RandomGenerator.randomStreetNumber() else {
+            throw PassInitError.invalidStreetNumber(throwingInstance: String(describing: Employee.self))
+        }
+        self.streetNumber = unwrappedStreetNumber
+        
+        guard let unwrappedStreetName = RandomGenerator.randomElementFrom(file: "streetNames", ofType: "plist"),         //Grabs a random string from the plist as a street name
+              let unwrappedStreetType = RandomGenerator.randomElementFrom(file: "streetTypes", ofType: "plist") else {   //Grabs a random string from the plist as a street name
+                    throw PassInitError.invalidStreetName(throwingInstance: String(describing: Employee.self))
+        }
+        self.streetName = "\(unwrappedStreetName) " + "\(unwrappedStreetType)"
+        
+        guard let unwrappedCity = RandomGenerator.randomElementFrom(file: "cities", ofType: "plist") else { //Grabs a random string from the plist as a city
+            throw PassInitError.invalidCity(throwingInstance: String(describing: Employee.self))
+        }
+        self.city = unwrappedCity
+        
+        guard let unwrappedState = RandomGenerator.randomElementFrom(file: "states", ofType: "plist") else { //Grabs a random string from the plist as a state
+            throw PassInitError.invalidState(throwingInstance: String(describing: Employee.self))
+        }
+        self.state = unwrappedState
+        
+        guard let unwrappedZip = RandomGenerator.randomZipCode() else {
+            throw PassInitError.invalidZip(throwingInstance: String(describing: Employee.self))
+        }
+        self.zip = unwrappedZip
+        
         self.employeeCard = RandomGenerator.randomEmployeeCard() //Generates a random employye card
+        self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
     }
 }

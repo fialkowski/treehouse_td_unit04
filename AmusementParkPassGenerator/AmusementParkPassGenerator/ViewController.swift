@@ -14,34 +14,73 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         var entrants = [ParkAdmissable]()
         var passReaders = [PassReader]()
-        
-        passReaders.append(AreaEntryPassReader(ofArea: .amusement))
-        passReaders.append(AreaEntryPassReader(ofArea: .kitchen))
-        passReaders.append(AreaEntryPassReader(ofArea: .maintenance))
-        passReaders.append(AreaEntryPassReader(ofArea: .office))
-        passReaders.append(AreaEntryPassReader(ofArea: .rideControl))
-        passReaders.append(CashRegisterPassReader(ofStoreType: .food))
-        passReaders.append(CashRegisterPassReader(ofStoreType: .mercandise))
-        
+        do {
+        try passReaders.append(AreaEntryPassReader(ofArea: .amusement))
+        try passReaders.append(AreaEntryPassReader(ofArea: .kitchen))
+        try passReaders.append(AreaEntryPassReader(ofArea: .maintenance))
+        try passReaders.append(AreaEntryPassReader(ofArea: .office))
+        try passReaders.append(AreaEntryPassReader(ofArea: .rideControl))
+        try passReaders.append(CashRegisterPassReader(ofStoreType: .food))
+        try passReaders.append(CashRegisterPassReader(ofStoreType: .mercandise))
+        } catch PassReaderInitError.invalidKey(let description) {
+            print(description)
+        } catch let error {
+            print(error)
+        }
         for _ in 1...50 {
             let newItem: ParkAdmissable
-            do {
                 switch Int.random(in: 0...3) {
-                    case 0: try newItem = Classic()
-                    case 1: try newItem = Vip()
-                    case 2: try newItem = FreeChild()
-                    default: try newItem = Employee()
-                }
-            } catch PassInitError.invalidKey {
-                print("Wrong Key is entered")
-            } catch PassInitError.invalidBirthDate {
-                print("Wrong Birth Date is entered")
-            } catch PassInitError.invalidCity {
-                print("Wrong City Name is entered")
-            } catch {
-                fatalError("Sorry, something comeletely unexpected has happened")
-            }
-            entrants.append(newItem)
+                case 0: do {
+                            try newItem = Classic()
+                            entrants.append(newItem)
+                        } catch PassInitError.invalidKey(let description) {
+                            print("\n🚨 Wrong Key or nil value was entered while creating an instance of \(description) 🚨\n")
+                        } catch let error {
+                            fatalError("Sorry, something comeletely unexpected has happened ->>> \(error)")
+                        }
+                
+                case 1: do {
+                            try newItem = Vip()
+                            entrants.append(newItem)
+                        } catch PassInitError.invalidKey(let description) {
+                            print("\n🚨 Wrong Key or nil value was entered while creating an instance of \(description) 🚨\n")
+                        } catch let error {
+                            fatalError("Sorry, something comeletely unexpected has happened ->>> \(error)")
+                        }
+                    
+                case 2: do {
+                            try newItem = FreeChild()
+                            entrants.append(newItem)
+                        } catch PassInitError.invalidKey(let description) {
+                            print("\n🚨 Wrong Key or nil value was entered while creating an instance of \(description) 🚨\n")
+                        } catch PassInitError.invalidBirthDate(let description){
+                            print(description)
+                        } catch let error {
+                            fatalError("Sorry, something comeletely unexpected has happened ->>> \(error)")
+                        }
+                    
+                default: do {
+                            try newItem = Employee()
+                            entrants.append(newItem)
+                        } catch PassInitError.invalidKey(let description) {
+                            print("\n🚨 Wrong Key or nil value was entered while creating an instance of \(description) 🚨\n")
+                        } catch PassInitError.invalidFirstName(let description) {
+                            print("\n🚨 Wrong First Name or nil value was entered while creating an instance of \(description) 🚨\n")
+                        } catch PassInitError.invalidLastName(let description) {
+                            print("\n🚨 Wrong Last Name or nil value was entered while creating an instance of \(description) 🚨\n")
+                        } catch PassInitError.invalidStreetNumber(let description) {
+                            print("\n🚨 Wrong Street Numer or nil value was entered while creating an instance of \(description) 🚨\n")
+                        } catch PassInitError.invalidStreetName(let description) {
+                            print("\n🚨 Wrong Street Name or nil value was entered while creating an instance of \(description) 🚨\n")
+                        } catch PassInitError.invalidCity(let description) {
+                            print("\n🚨 Wrong City Name or nil value was entered while creating an instance of \(description) 🚨\n")
+                        } catch PassInitError.invalidState(let description) {
+                            print("\n🚨 Wrong State Name or nil value was entered while creating an instance of \(description) 🚨\n")
+                        } catch PassInitError.invalidZip(let description) {
+                            print("\n🚨 Wrong Zip Code or nil value was entered while creating an instance of \(description) 🚨\n")
+                        } catch let error {
+                            fatalError("Sorry, something comeletely unexpected has happened ->>> \(error)")
+                        }
         }
         
         for index in 0...entrants.count - 1 { //Value type - using index reference

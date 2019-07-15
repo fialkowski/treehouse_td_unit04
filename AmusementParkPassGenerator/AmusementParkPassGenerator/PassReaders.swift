@@ -7,12 +7,20 @@
 //
 import Foundation
 
+enum PassReaderInitError: Error {
+    case invalidKey(throwingInstance: String)
+}
+
 struct AreaEntryPassReader: PassReader, AreaAssignable {
     let key: String
     let areaType: Area
     
-    init(ofArea area: Area = Area.allCases.randomElement()!) {
-        self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
+    init(ofArea area: Area = Area.allCases.randomElement()!) throws {
+        //TODO: FIX THE FORCE UNWRAPPING WITH ERROR HANDLING
+        guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else {
+            throw PassReaderInitError.invalidKey(throwingInstance: String(describing: Classic.self))
+        }
+        self.key = unwrappedKey
         self.areaType = area
     }
     
@@ -27,8 +35,11 @@ struct CashRegisterPassReader: PassReader, CashRegisterAssignable {
     var key: String
     var storeType: Good
     
-    init(ofStoreType storeType: Good = Good.allCases.randomElement()!) {
-        self.key = RandomGenerator.randomKey(length: 32) // Generates a random key for the instance
+    init(ofStoreType storeType: Good = Good.allCases.randomElement()!) throws {
+        guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else {
+            throw PassReaderInitError.invalidKey(throwingInstance: String(describing: Classic.self))
+        }
+        self.key = unwrappedKey
         self.storeType = storeType
     }
     

@@ -33,7 +33,28 @@ class RandomGenerator {
     
     static func randomKey(length: Int) -> String? {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        return String((0..<length).map{ _ in letters.randomElement()!})
+        switch Int.random(in: 0...30) { // One of 30 will generate nil value for testing purpose
+        case 0: return nil
+        default: return String((0..<length).map{ _ in letters.randomElement()!})
+        }
+    }
+    
+    static func randomStreetNumber() -> Int? {
+        var streetNumber: Int?
+            switch Int.random(in: 0...30) { // One of 30 will generate nil value for testing purpose
+            case 0: streetNumber = nil
+            default: streetNumber = Int.random(in: 1000...20000)
+            }
+        return streetNumber
+    }
+    
+    static func randomZipCode() -> String? {
+        var zipCode: String?
+        switch Int.random(in: 0...30) { // One of 30 will generate nil value for testing purpose
+        case 0: zipCode = nil
+        default: zipCode = String(format: "%05d", Int.random(in: 2801 ... 99950))
+        }
+        return zipCode
     }
     
     static func randomEmployeeCard() -> (PaymentTerms, Department) {
@@ -68,8 +89,8 @@ class RandomGenerator {
         return retrivedNames
     }
     
-    static func randomElementFrom(file: String, ofType type: String) -> String {
-        var names: [String]
+    static func randomElementFrom(file: String, ofType type: String) -> String? {
+        var names: [String?]
         do {
             names = try retriveNamesFrom(file: file, ofType: type)
         } catch let error {
@@ -78,6 +99,9 @@ class RandomGenerator {
         if names.isEmpty {
             fatalError("Sorry, we found an empty file!")
         }
-        return names[Int.random(in: 0...names.count - 1)]
+        switch Int.random(in: 0...30) { // One of 30 will generate nil value for testing purpose
+        case 0: return nil
+        default: return names[Int.random(in: 0...names.count - 1)]
+        }
     }
 }
