@@ -15,7 +15,9 @@ extension UIStackView {
             view.backgroundColor = color
             return view
         }()
+        
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
         self.insertSubview(backgroundView, at: 0)
         NSLayoutConstraint.activate([
             backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -29,6 +31,17 @@ extension UIStackView {
 extension UIColor {
         static var topMenuBarColor: UIColor  { return UIColor(red: 138/255.0, green: 109/255.0, blue: 170/255.0, alpha: 1.0) }
         static var subMenuBarColor: UIColor { return UIColor(red: 61/255.0, green: 55/255.0, blue: 71/255.0, alpha: 1.0) }
+        static var menuButtonActive: UIColor { return UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0) }
+        static var topMenuButtonInactive: UIColor { return UIColor(red: 206/255.0, green: 193/255.0, blue: 222/255.0, alpha: 1.0) }
+        static var subMenuButtonInactive: UIColor { return UIColor(red: 131/255.0, green: 124/255.0, blue: 141/255.0, alpha: 1.0) }
+        
+}
+
+enum TopMenuCaption: String, CaseIterable {
+    case Guest
+    case Employee
+    case Manager
+    case Vendor
 }
 
 class ViewController: UIViewController {
@@ -36,11 +49,42 @@ class ViewController: UIViewController {
     @IBOutlet weak var topMenuBarStackView: UIStackView!
     @IBOutlet weak var subMenuBarStackView: UIStackView!
     
+    @IBOutlet weak var topMenuButton1: UIButton!
+    @IBOutlet weak var topMenuButton2: UIButton!
+    @IBOutlet weak var topMenuButton3: UIButton!
+    @IBOutlet weak var topMenuButton4: UIButton!
+    
+    @IBOutlet weak var subMenuButton1: UIButton!
+    @IBOutlet weak var subMenuButton2: UIButton!
+    @IBOutlet weak var subMenuButton3: UIButton!
+    @IBOutlet weak var subMenuButton4: UIButton!
+    @IBOutlet weak var subMenuButton5: UIButton!
+    
+    @IBAction func topMenuButtonPress(_ sender: Any) {
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let menuButtonHandler = MenuButtonHandler(topMenuButtons: [
+                                                    topMenuButton1,
+                                                    topMenuButton2,
+                                                    topMenuButton3,
+                                                    topMenuButton4]
+                                                , subMenuButtons: [
+                                                    subMenuButton1,
+                                                    subMenuButton2,
+                                                    subMenuButton3,
+                                                    subMenuButton4,
+                                                    subMenuButton5]
+//                                                , topCaptions: TopMenuCaption.allCases.map({$0.rawValue})
+                                                , topMenuCaptions: TopMenuCaption.allCases
+                                                )
+        
         topMenuBarStackView.setBackground(to: .topMenuBarColor)
         subMenuBarStackView.setBackground(to: .subMenuBarColor)
+        menuButtonHandler.deactivate(.topMenu)
+        menuButtonHandler.deactivate(.subMenu)
         var entrants = [ParkAdmissable]()
         var passReaders = [PassReader]()
         do {
