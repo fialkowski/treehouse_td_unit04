@@ -18,6 +18,7 @@ enum ButtonRow: CaseIterable {
     case subMenu
 }
 
+
 class MenuButtonHandler {
     private let topMenuButtons:[UIButton]
     private let subMenuButtons:[UIButton]
@@ -38,6 +39,10 @@ class MenuButtonHandler {
     
     private func deactivate(_ button: UIButton, with color: UIColor) -> Void {
         button.setTitleColor(color, for: .normal)
+    }
+    
+    func set(_ subMenu: [ButtonAssignable]) {
+        subMenuButtons.forEach {$0.setTitle(subMenu[subMenuButtons.firstIndex(of: $0) ?? 0].text, for: .normal)}
     }
     
     func deactivate(_ row: ButtonRow) {

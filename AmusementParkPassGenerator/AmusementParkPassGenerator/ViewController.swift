@@ -37,12 +37,87 @@ extension UIColor {
         
 }
 
-enum TopMenuCaption: String, CaseIterable {
-    case Guest
-    case Employee
-    case Manager
-    case Vendor
+extension UIButton {
+    func setCaption (_ caption: ButtonAssignable) {
+        self.setTitle(caption.text, for: .normal)
+    }
+    func enable () {
+        self.isEnabled = true
+    }
+    func disable () {
+        self.isEnabled = false
+    }
 }
+
+struct Menu {
+    
+    enum Guest: String, CaseIterable, ButtonAssignable {
+        case classic = "Classic"
+        case child = "Child"
+        case vip = "VIP"
+        case seasonPass = "Season Pass"
+        case senior = "Senior"
+        
+        var text: String { return self.rawValue }
+    }
+    
+    enum Employee: String, CaseIterable, ButtonAssignable {
+        case foodServices = "Food Services"
+        case rideServices = "Ride Services"
+        case maintenance = "Maintenance"
+        case manager = "Manager"
+        case contract = "Contract"
+        
+        var text: String { return self.rawValue }
+    }
+}
+
+// AN Idea how to add a required button behaviour look below
+
+//enum OnOffSwitch: Togglable {
+//    case off, on
+//    mutating func toggle() {
+//        switch self {
+//        case .off:
+//            self = .on
+//        case .on:
+//            self = .off
+//        }
+//    }
+//}
+//var lightSwitch = OnOffSwitch.off
+//lightSwitch.toggle()
+//// lightSwitch is now equal to .on
+
+protocol ButtonAssignable {
+    var text: String { get }
+}
+
+enum TopMenuCaption: String, CaseIterable, ButtonAssignable {
+    case guest = "Guest"
+    case employee = "Employee"
+    case manager = "Manager"
+    case vendor = "Vendor"
+    
+    var text: String { return self.rawValue }
+}
+
+enum GuestSubMenu: String, CaseIterable, ButtonAssignable {
+    case classic = "Classic"
+    case child = "Child"
+    case vip = "VIP"
+    
+    var text: String { return self.rawValue }
+}
+
+enum EmployeeSubMenu: String, CaseIterable, ButtonAssignable {
+    case hourly = "Hourly"
+    case office = "Office"
+    
+    var text: String { return self.rawValue }
+}
+
+//struct MenuButton<T: UIButton>
 
 class ViewController: UIViewController {
 
@@ -60,7 +135,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var subMenuButton4: UIButton!
     @IBOutlet weak var subMenuButton5: UIButton!
     
-    @IBAction func topMenuButtonPress(_ sender: Any) {
+    
+    @IBAction func topMenuButtonPress(_ sender: UIButton) {
+        switch sender.titleLabel?.text {
+        case TopMenuCaption.guest.rawValue: subMenuButton1.setTitle("1", for: .normal)
+        case TopMenuCaption.employee.rawValue: subMenuButton1.setTitle("2", for: .normal)
+        case TopMenuCaption.manager.rawValue: subMenuButton1.setTitle("3", for: .normal)
+        case TopMenuCaption.vendor.rawValue: subMenuButton1.setTitle("4", for: .normal)
+        default: fatalError("Binding error - Button tieleLabel?.text contains a non TopMenuCaption.rawValue string")
+        }
     }
     
     
@@ -83,6 +166,19 @@ class ViewController: UIViewController {
         
         topMenuBarStackView.setBackground(to: .topMenuBarColor)
         subMenuBarStackView.setBackground(to: .subMenuBarColor)
+        
+
+        
+        let button = UIButton(type: .system)
+        button.setTitle("Click here", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = .red
+        button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        
+        topMenuBarStackView.insertArrangedSubview(button, at: 0)
+        //TODO: A new menu concept will be creating a struct that will create and add all of the required buttons for us and add them to the stack views. I'm thinking of making it a class that manages the entire menu, where all of the menus and sub menues are dictionaries! DO DICTIONARY NOT ENUM!!!!
+        
+        
         menuButtonHandler.deactivate(.topMenu)
         menuButtonHandler.deactivate(.subMenu)
         var entrants = [ParkAdmissable]()
@@ -165,6 +261,14 @@ class ViewController: UIViewController {
         }
         
     }
+
+    @objc func buttonClicked(sender : UIButton){
+        let alert = UIAlertController(title: "Clicked", message: "You have clicked on the button", preferredStyle: .alert)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+
+
 }
 
 /* AN EXAMPLE OF AN ERROR POP-UPs
