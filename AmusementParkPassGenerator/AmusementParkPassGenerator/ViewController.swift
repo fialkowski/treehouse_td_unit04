@@ -167,6 +167,17 @@ class ViewController: UIViewController {
         topMenuBarStackView.setBackground(to: .topMenuBarColor)
         subMenuBarStackView.setBackground(to: .subMenuBarColor)
         
+        do {
+            let temp = try MainMenuRetriever(from: "mainMenu", ofType: "plist")
+            //let mainMenuHandler = try MainMenuHandler(topStackView: topMenuBarStackView, bottomStackView: subMenuBarStackView, source: MainMenuRetriever(from: "mainMenu", ofType: "plist"))
+        } catch MainMenuRetriverError.invalidMainMenuFileNameOrType {
+            AlertController.showFatalError(for: MainMenuRetriverError.invalidMainMenuFileNameOrType)
+        } catch MainMenuRetriverError.corruptMainMenuFileOrWrongFormat {
+            AlertController.showFatalError(for: MainMenuRetriverError.invalidMainMenuFileNameOrType)
+        } catch let error {
+            AlertController.showFatalError(for: error)
+        }
+
 
         
         let button = UIButton(type: .system)
@@ -267,7 +278,6 @@ class ViewController: UIViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
-
 
 }
 

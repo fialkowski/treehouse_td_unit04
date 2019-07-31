@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Vendor</key>
+	<dict/>
+	<key>Manager</key>
+	<dict/>
+	<key>Employee</key>
+	<dict>
+		<key>Contract</key>
+		<string></string>
+		<key>Food Services</key>
+		<string></string>
+		<key>Ride Services</key>
+		<string></string>
+		<key>Maintenance</key>
+		<string></string>
+	</dict>
+	<key>Guest</key>
+	<dict>
+		<key>Season Pass</key>
+		<string></string>
+		<key>VIP</key>
+		<string></string>
+		<key>Senior</key>
+		<string></string>
+		<key>Child</key>
+		<string></string>
+		<key>Adult</key>
+		<string></string>
+	</dict>
+</dict>
+</plist>
