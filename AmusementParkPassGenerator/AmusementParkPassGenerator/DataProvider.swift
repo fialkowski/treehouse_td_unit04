@@ -1,5 +1,5 @@
 //
-//  DataProviders.swift
+//  DataProvider.swift
 //  AmusementParkPassGenerator
 //
 //  Created by Nikolay Fialkowski on 2019-07-30.
@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+
+#warning("Think how you can possibly organize errors for this file in a better way")
 
 enum MainMenuRetriverError: String, Error {
     case invalidMainMenuFileNameOrType
@@ -38,19 +40,5 @@ class MainMenuInterpreter {
             output.updateValue(returnArray, forKey: key)
         }
         return output
-    }
-}
-
-    
-#warning("MoveMainMenuHandlerToAnotherFile!!!")
-
-class MainMenuHandler {
-    let topStackView: UIStackView
-    let bottomStackView: UIStackView
-    let source: [String:[String]]
-    init (topStackView: UIStackView, bottomStackView: UIStackView, source: [String:[String]]) {
-        self.topStackView = topStackView
-        self.bottomStackView = bottomStackView
-        self.source = source
     }
 }
