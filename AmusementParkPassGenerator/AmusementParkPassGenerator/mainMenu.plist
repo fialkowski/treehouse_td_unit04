@@ -9,26 +9,26 @@
 	<key>Employee</key>
 	<dict>
 		<key>Contract</key>
-		<string></string>
+		<dict/>
 		<key>Food Services</key>
-		<string></string>
+		<dict/>
 		<key>Ride Services</key>
-		<string></string>
+		<dict/>
 		<key>Maintenance</key>
-		<string></string>
+		<dict/>
 	</dict>
 	<key>Guest</key>
 	<dict>
 		<key>Season Pass</key>
-		<string></string>
+		<dict/>
 		<key>VIP</key>
-		<string></string>
+		<dict/>
 		<key>Senior</key>
-		<string></string>
+		<dict/>
 		<key>Child</key>
-		<string></string>
+		<dict/>
 		<key>Adult</key>
-		<string></string>
+		<dict/>
 	</dict>
 </dict>
 </plist>
