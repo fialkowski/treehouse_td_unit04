@@ -73,13 +73,6 @@ class MainMenuHandler {
         viewController.topMenuBarStackView.isHidden = true
         viewController.subMenuBarStackView.isHidden = true
         resetButtons(in: viewController.topMenuBarStackView)
-//        numbers.map() { number -> Int in
-//            if number % 2  == 0 {
-//                return number/2
-//            } else {
-//                return number/3
-//            }
-//        }
         
         sender.setTitleColor(.menuButtonActive, for: .normal)
         sender.titleLabel?.font = .topMenuButtonActive
