@@ -8,83 +8,76 @@
 
 import UIKit
 
-extension UIStackView {
-    func setBackground (to color: UIColor) {
-        let backgroundView: UIView = {
-            let view = UIView()
-            view.backgroundColor = color
-            return view
-        }()
-        
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.insertSubview(backgroundView, at: 0)
-        NSLayoutConstraint.activate([
-            backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            backgroundView.topAnchor.constraint(equalTo: self.topAnchor),
-            backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-            ])
-    }
-    
-    func removeAllArrangedSubviews () {
-        
-        let removedSubviews = arrangedSubviews.reduce([]) { (allSubviews, subview) -> [UIView] in
-            self.removeArrangedSubview(subview)
-            return allSubviews + [subview]
-        }
-        
-        removedSubviews.forEach({ $0.removeFromSuperview() })
-    }
-    
-    func setButtonsStyleTo (_ color: UIColor, _ font: UIFont) {
-        guard let buttonArray = self.arrangedSubviews as? [UIButton] else {
-            return
-        }
-        for button in buttonArray { button.titleLabel?.font = font; button.setTitleColor(color, for: .normal) }
-    }
-    
-}
-
-extension UIFont {
-        static var topMenuButtonInactive: UIFont { return UIFont.systemFont(ofSize: 19.0) }
-        static var topMenuButtonActive: UIFont { return UIFont.systemFont(ofSize: 19.0, weight: .bold) }
-        static var subMenuButtonInactive: UIFont { return UIFont.systemFont(ofSize: 17.0) }
-        static var subMenuButtonActive: UIFont { return UIFont.systemFont(ofSize: 17.0, weight: .bold) }
-    
-        static var label: UIFont { return UIFont.systemFont(ofSize: 18.0, weight: .bold) }
-}
-
-extension UIColor {
-        static var topMenuBarColor: UIColor  { return UIColor(red: 138/255.0, green: 109/255.0, blue: 170/255.0, alpha: 1.0) }
-        static var subMenuBarColor: UIColor { return UIColor(red: 61/255.0, green: 55/255.0, blue: 71/255.0, alpha: 1.0) }
-        static var menuButtonActive: UIColor { return UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0) }
-        static var topMenuButtonInactive: UIColor { return UIColor(red: 206/255.0, green: 193/255.0, blue: 222/255.0, alpha: 1.0) }
-        static var subMenuButtonInactive: UIColor { return UIColor(red: 131/255.0, green: 124/255.0, blue: 141/255.0, alpha: 1.0) }
-    
-        static var labelActive: UIColor { return UIColor(red: 71/255.0, green: 70/255.0, blue: 73/255.0, alpha: 1.0) }
-        static var labelInactive: UIColor { return UIColor(red: 154/255.0, green: 151/255.0, blue: 157/255.0, alpha: 1.0) }
-    
-        static var textFieldActive: UIColor { return UIColor(red: 253/255.0, green: 253/255.0, blue: 253/255.0, alpha: 1.0) }
-    
-        static var background: UIColor { return UIColor(red: 218/255.0, green: 214/255.0, blue: 222/255.0, alpha: 1.0) }
-}
-
-protocol FirstPageAssignable where Self: UIViewController {
+protocol MainMenuCompliant where Self: UIViewController {
     var topMenuBarStackView: UIStackView! { get }
     var subMenuBarStackView: UIStackView! { get }
+    var passDataInputController: PassDataInputController? { get }
 }
 
-class FirstPageViewController: UIViewController, FirstPageAssignable {
+protocol PassDataInputCompliant where Self: UIViewController {
+    var birthDateLabel: UILabel! { get }
+    var ssnLabel: UILabel! { get }
+    var projectNumberLabel: UILabel! { get }
+    var firstNameLabel: UILabel! { get }
+    var lastNameLabel: UILabel! { get }
+    var companyLabel: UILabel! { get }
+    var streetAddressLabel: UILabel! { get }
+    var cityLabel: UILabel! { get }
+    var stateLabel: UILabel! { get }
+    var zipCodeLabel: UILabel! { get }
+    
+    var birthDateField: UITextField! { get }
+    var ssnField: UITextField! { get }
+    var projectNumberField: UITextField! { get }
+    var firstNameField: UITextField! { get }
+    var lastNameField: UITextField! { get }
+    var companyField: UITextField! { get }
+    var streetAddressField: UITextField! { get }
+    var cityField: UITextField! { get }
+    var stateField: UITextField! { get }
+    var zipCodeField: UITextField! { get }
+    var generateButton: UIButton! { get }
+    var populateButton: UIButton! { get }
+}
+
+
+class FirstPageViewController: UIViewController, MainMenuCompliant, PassDataInputCompliant {
 
     @IBOutlet weak var topMenuBarStackView: UIStackView!
     @IBOutlet weak var subMenuBarStackView: UIStackView!
     
+    @IBOutlet weak var birthDateLabel: UILabel!
+    @IBOutlet weak var ssnLabel: UILabel!
+    @IBOutlet weak var projectNumberLabel: UILabel!
+    @IBOutlet weak var firstNameLabel: UILabel!
+    @IBOutlet weak var lastNameLabel: UILabel!
+    @IBOutlet weak var companyLabel: UILabel!
+    @IBOutlet weak var streetAddressLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var stateLabel: UILabel!
+    @IBOutlet weak var zipCodeLabel: UILabel!
+    
+    @IBOutlet weak var birthDateField: UITextField!
+    @IBOutlet weak var ssnField: UITextField!
+    @IBOutlet weak var projectNumberField: UITextField!
+    @IBOutlet weak var firstNameField: UITextField!
+    @IBOutlet weak var lastNameField: UITextField!
+    @IBOutlet weak var companyField: UITextField!
+    @IBOutlet weak var streetAddressField: UITextField!
+    @IBOutlet weak var cityField: UITextField!
+    @IBOutlet weak var stateField: UITextField!
+    @IBOutlet weak var zipCodeField: UITextField!
+    @IBOutlet weak var generateButton: UIButton!
+    @IBOutlet weak var populateButton: UIButton!
+    
     var mainMenuHandler: MainMenuHandler?
+    var passDataInputController: PassDataInputController?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        passDataInputController = PassDataInputController(for: self)
         
         do {
             mainMenuHandler = try MainMenuHandler(viewController: self,
@@ -99,5 +92,6 @@ class FirstPageViewController: UIViewController, FirstPageAssignable {
             AlertController.showFatalError(for: error)
         }
         mainMenuHandler?.setMainMenu()
+        passDataInputController?.setDisabledScreen()
     }
 }

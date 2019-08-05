@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZFc-50-3dv" userLabel="Screen Layout Stack">
-                                <rect key="frame" x="0.0" y="20" width="768" height="834.5"/>
+                                <rect key="frame" x="0.0" y="20" width="768" height="897"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="f56-47-XVT" userLabel="Menu Bar Stack">
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="125"/>
@@ -57,13 +57,13 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6uu-Fh-Nwd" userLabel="Input Area Stack">
-                                        <rect key="frame" x="23" y="125" width="722" height="709.5"/>
+                                        <rect key="frame" x="23" y="125" width="722" height="772"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="nZJ-Ep-6T1" userLabel="firstRowStackView">
-                                                <rect key="frame" x="0.0" y="0.0" width="722" height="111.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="722" height="122"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JvZ-57-WTp" userLabel="birthDayStack">
-                                                        <rect key="frame" x="0.0" y="5.5" width="220.5" height="100"/>
+                                                        <rect key="frame" x="0.0" y="11" width="220.5" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Date of Birth" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clx-ve-J5n" userLabel="birthDateLabel">
                                                                 <rect key="frame" x="0.0" y="0.0" width="220.5" height="38"/>
@@ -71,7 +71,7 @@
                                                                 <color key="textColor" red="0.60409158470000002" green="0.59169191119999998" blue="0.61568981410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="MM / DD / YYYY" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BhI-AA-SSu" userLabel="birthDateField">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MM / DD / YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BhI-AA-SSu" userLabel="birthDateField">
                                                                 <rect key="frame" x="0.0" y="43" width="220.5" height="57"/>
                                                                 <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
@@ -79,7 +79,7 @@
                                                                 </constraints>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="yes" smartInsertDeleteType="yes"/>
                                                             </textField>
                                                         </subviews>
                                                         <constraints>
@@ -88,7 +88,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qaR-tk-0xz" userLabel="ssnStack">
-                                                        <rect key="frame" x="250.5" y="5.5" width="221" height="100"/>
+                                                        <rect key="frame" x="250.5" y="11" width="221" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="SSN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Yz-rC-b3j" userLabel="ssnLabel">
                                                                 <rect key="frame" x="0.0" y="0.0" width="221" height="38"/>
@@ -96,7 +96,7 @@
                                                                 <color key="textColor" red="0.60409158470000002" green="0.59169191119999998" blue="0.61568981410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="###-##-####" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9tR-o7-wAv" userLabel="ssnField">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="### - ## - ####" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9tR-o7-wAv" userLabel="ssnField">
                                                                 <rect key="frame" x="0.0" y="43" width="221" height="57"/>
                                                                 <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
@@ -113,7 +113,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hSy-Tc-wJ8" userLabel="projectNumberStack">
-                                                        <rect key="frame" x="501.5" y="5.5" width="220.5" height="100"/>
+                                                        <rect key="frame" x="501.5" y="11" width="220.5" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Project #" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3Z-Ef-lKu" userLabel="projectNumberLabel">
                                                                 <rect key="frame" x="0.0" y="0.0" width="220.5" height="38"/>
@@ -121,7 +121,7 @@
                                                                 <color key="textColor" red="0.60409158470000002" green="0.59169191119999998" blue="0.61568981410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="####" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wlg-30-n0w" userLabel="projectNumberField">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="#######" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wlg-30-n0w" userLabel="projectNumberField">
                                                                 <rect key="frame" x="0.0" y="43" width="220.5" height="57"/>
                                                                 <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
@@ -140,19 +140,19 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="MOe-6X-mVa" userLabel="secondRowStackView">
-                                                <rect key="frame" x="0.0" y="119.5" width="722" height="111.5"/>
+                                                <rect key="frame" x="0.0" y="130" width="722" height="122"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QhN-Nd-SY4" userLabel="firstNameStack">
-                                                        <rect key="frame" x="0.0" y="0.0" width="346" height="111.5"/>
+                                                        <rect key="frame" x="0.0" y="5" width="346" height="112"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZ8-uL-pwL" userLabel="firstNameLabel">
-                                                                <rect key="frame" x="0.0" y="0.0" width="346" height="46.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="346" height="47"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                                 <color key="textColor" red="0.60409158470000002" green="0.59169191119999998" blue="0.61568981410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="First Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VYo-AL-WQL" userLabel="firstNameField">
-                                                                <rect key="frame" x="0.0" y="54.5" width="346" height="57"/>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VYo-AL-WQL" userLabel="firstNameField">
+                                                                <rect key="frame" x="0.0" y="55" width="346" height="57"/>
                                                                 <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="57" id="fKe-Cw-Yf5"/>
@@ -168,16 +168,16 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="I8Z-MK-jui" userLabel="lastNameStack">
-                                                        <rect key="frame" x="376" y="0.0" width="346" height="111.5"/>
+                                                        <rect key="frame" x="376" y="5" width="346" height="112"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AmR-kS-hVj" userLabel="lastNameLabel">
-                                                                <rect key="frame" x="0.0" y="0.0" width="346" height="46.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="346" height="47"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                                 <color key="textColor" red="0.60409158470000002" green="0.59169191119999998" blue="0.61568981410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="Last Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kMh-td-gbX" userLabel="lastNameField">
-                                                                <rect key="frame" x="0.0" y="54.5" width="346" height="57"/>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kMh-td-gbX" userLabel="lastNameField">
+                                                                <rect key="frame" x="0.0" y="55" width="346" height="57"/>
                                                                 <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="57" id="heV-Mr-u9A"/>
@@ -194,17 +194,17 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Azd-5c-QQg" userLabel="thirdRowStackView">
-                                                <rect key="frame" x="0.0" y="239" width="722" height="111.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Azd-5c-QQg" userLabel="thirdRowStackView">
+                                                <rect key="frame" x="0.0" y="260" width="722" height="122"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Tc-8w-ypc" userLabel="companyLabel">
-                                                        <rect key="frame" x="0.0" y="0.0" width="82.5" height="46.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="82.5" height="57"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                         <color key="textColor" red="0.60409158470000002" green="0.59169191119999998" blue="0.61568981410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="Company" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b7K-lh-ZkY" userLabel="companyField">
-                                                        <rect key="frame" x="0.0" y="54.5" width="722" height="57"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b7K-lh-ZkY" userLabel="companyField">
+                                                        <rect key="frame" x="0.0" y="65" width="722" height="57"/>
                                                         <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="57" id="fyI-Db-CLP"/>
@@ -220,17 +220,17 @@
                                                     <constraint firstItem="b7K-lh-ZkY" firstAttribute="leading" secondItem="Azd-5c-QQg" secondAttribute="leading" id="plQ-jg-qUg"/>
                                                 </constraints>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="D1o-BY-gSu" userLabel="fourthRowStackView">
-                                                <rect key="frame" x="0.0" y="358.5" width="722" height="111.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="D1o-BY-gSu" userLabel="fourthRowStackView">
+                                                <rect key="frame" x="0.0" y="390" width="722" height="122"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asl-ME-a5w" userLabel="streetAddressLabel">
-                                                        <rect key="frame" x="0.0" y="0.0" width="130" height="46.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="130" height="57"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                         <color key="textColor" red="0.60409158470000002" green="0.59169191119999998" blue="0.61568981410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="Street Address" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eMa-fH-xKr" userLabel="streetAddressField">
-                                                        <rect key="frame" x="0.0" y="54.5" width="722" height="57"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eMa-fH-xKr" userLabel="streetAddressField">
+                                                        <rect key="frame" x="0.0" y="65" width="722" height="57"/>
                                                         <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="57" id="HMq-vM-fsp"/>
@@ -246,20 +246,20 @@
                                                     <constraint firstItem="asl-ME-a5w" firstAttribute="leading" secondItem="D1o-BY-gSu" secondAttribute="leading" id="uIl-nB-JXR"/>
                                                 </constraints>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FAB-DC-YAw" userLabel="fifthRowStackView">
-                                                <rect key="frame" x="0.0" y="478" width="722" height="111.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="FAB-DC-YAw" userLabel="fifthRowStackView">
+                                                <rect key="frame" x="0.0" y="520" width="722" height="122"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="njS-4s-9aZ" userLabel="cityStack">
-                                                        <rect key="frame" x="0.0" y="12.5" width="235.5" height="86.5"/>
+                                                        <rect key="frame" x="0.0" y="18" width="220.5" height="86.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdd-ig-6Lq" userLabel="cityLabel">
-                                                                <rect key="frame" x="0.0" y="0.0" width="235.5" height="21.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="220.5" height="21.5"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                                 <color key="textColor" red="0.60409158470000002" green="0.59169191119999998" blue="0.61568981410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8ca-3Z-FqT" userLabel="cityField">
-                                                                <rect key="frame" x="0.0" y="29.5" width="235.5" height="57"/>
+                                                                <rect key="frame" x="0.0" y="29.5" width="220.5" height="57"/>
                                                                 <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="57" id="H2n-7s-Kct"/>
@@ -275,16 +275,16 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dwD-oA-O6n" userLabel="stateStack">
-                                                        <rect key="frame" x="243.5" y="12.5" width="235" height="86.5"/>
+                                                        <rect key="frame" x="250.5" y="18" width="221" height="86.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Df9-tE-c1e" userLabel="stateLabel">
-                                                                <rect key="frame" x="0.0" y="0.0" width="235" height="21.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="221" height="21.5"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                                 <color key="textColor" red="0.60409158470000002" green="0.59169191119999998" blue="0.61568981410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AaL-Ch-05E" userLabel="stateField">
-                                                                <rect key="frame" x="0.0" y="29.5" width="235" height="57"/>
+                                                                <rect key="frame" x="0.0" y="29.5" width="221" height="57"/>
                                                                 <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="57" id="TWD-p4-Mgw"/>
@@ -300,16 +300,16 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fYD-MD-3QT" userLabel="zipCodeStack">
-                                                        <rect key="frame" x="486.5" y="12.5" width="235.5" height="86.5"/>
+                                                        <rect key="frame" x="501.5" y="18" width="220.5" height="86.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Zip Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gq7-uJ-nbl" userLabel="zipCodeLabel">
-                                                                <rect key="frame" x="0.0" y="0.0" width="235.5" height="21.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="220.5" height="21.5"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                                 <color key="textColor" red="0.60409158470000002" green="0.59169191119999998" blue="0.61568981410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="ZIP" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Amg-5w-GCe" userLabel="zipCodeField">
-                                                                <rect key="frame" x="0.0" y="29.5" width="235.5" height="57"/>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Amg-5w-GCe" userLabel="zipCodeField">
+                                                                <rect key="frame" x="0.0" y="29.5" width="220.5" height="57"/>
                                                                 <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="57" id="B37-U5-uoq"/>
@@ -326,11 +326,11 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kuT-Ez-M8U" userLabel="buttonRowStackView">
-                                                <rect key="frame" x="0.0" y="597.5" width="722" height="112"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="kuT-Ez-M8U" userLabel="buttonRowStackView">
+                                                <rect key="frame" x="0.0" y="650" width="722" height="122"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaP-RO-0R4" userLabel="actionButton1">
-                                                        <rect key="frame" x="0.0" y="27.5" width="357" height="57"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaP-RO-0R4" userLabel="generateButton">
+                                                        <rect key="frame" x="0.0" y="32.5" width="346" height="57"/>
                                                         <color key="backgroundColor" red="0.40283507108688354" green="0.57668381929397583" blue="0.56078636646270752" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="57" id="Zya-zp-Qu8"/>
@@ -340,8 +340,8 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMh-JM-JRI" userLabel="actionButton2">
-                                                        <rect key="frame" x="365" y="27.5" width="357" height="57"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMh-JM-JRI" userLabel="populateButton">
+                                                        <rect key="frame" x="376" y="32.5" width="346" height="57"/>
                                                         <color key="backgroundColor" red="0.93344932794570923" green="0.92517834901809692" blue="0.94117921590805054" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="57" id="dKD-2J-C30"/>
@@ -367,7 +367,6 @@
                                 <constraints>
                                     <constraint firstItem="f56-47-XVT" firstAttribute="width" secondItem="ZFc-50-3dv" secondAttribute="width" id="876-gh-mGt"/>
                                     <constraint firstItem="6uu-Fh-Nwd" firstAttribute="width" secondItem="ZFc-50-3dv" secondAttribute="width" multiplier="0.94" id="LoL-M9-Qdn"/>
-                                    <constraint firstAttribute="height" constant="999" id="VtZ-rN-Gdc"/>
                                     <constraint firstItem="6uu-Fh-Nwd" firstAttribute="centerX" secondItem="ZFc-50-3dv" secondAttribute="centerX" id="wvL-K4-Obe"/>
                                 </constraints>
                             </stackView>
@@ -382,8 +381,30 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="birthDateField" destination="BhI-AA-SSu" id="7Eo-ia-RAw"/>
+                        <outlet property="birthDateLabel" destination="clx-ve-J5n" id="G2d-p2-geP"/>
+                        <outlet property="cityField" destination="8ca-3Z-FqT" id="feO-C3-mKA"/>
+                        <outlet property="cityLabel" destination="Cdd-ig-6Lq" id="3dR-cj-Mdb"/>
+                        <outlet property="companyField" destination="b7K-lh-ZkY" id="tsw-Wr-cba"/>
+                        <outlet property="companyLabel" destination="7Tc-8w-ypc" id="DFo-dQ-oY9"/>
+                        <outlet property="firstNameField" destination="VYo-AL-WQL" id="WD5-pn-LST"/>
+                        <outlet property="firstNameLabel" destination="PZ8-uL-pwL" id="Fci-gG-Adf"/>
+                        <outlet property="generateButton" destination="YaP-RO-0R4" id="3V0-mK-uHG"/>
+                        <outlet property="lastNameField" destination="kMh-td-gbX" id="63B-zk-WcD"/>
+                        <outlet property="lastNameLabel" destination="AmR-kS-hVj" id="sk9-hI-FuH"/>
+                        <outlet property="populateButton" destination="OMh-JM-JRI" id="HsH-mb-V8Y"/>
+                        <outlet property="projectNumberField" destination="wlg-30-n0w" id="LKh-uM-32h"/>
+                        <outlet property="projectNumberLabel" destination="k3Z-Ef-lKu" id="qpB-dt-9q6"/>
+                        <outlet property="ssnField" destination="9tR-o7-wAv" id="L4y-ZK-gY7"/>
+                        <outlet property="ssnLabel" destination="7Yz-rC-b3j" id="oIG-Hm-OGf"/>
+                        <outlet property="stateField" destination="AaL-Ch-05E" id="kFk-xp-TbB"/>
+                        <outlet property="stateLabel" destination="Df9-tE-c1e" id="0L0-Cu-CrO"/>
+                        <outlet property="streetAddressField" destination="eMa-fH-xKr" id="qth-N8-GSD"/>
+                        <outlet property="streetAddressLabel" destination="asl-ME-a5w" id="Wek-E7-tb4"/>
                         <outlet property="subMenuBarStackView" destination="5oK-n2-z0j" id="OF0-fs-8bP"/>
                         <outlet property="topMenuBarStackView" destination="iG9-QR-naZ" id="Amh-j4-Af0"/>
+                        <outlet property="zipCodeField" destination="Amg-5w-GCe" id="x4s-IC-yPO"/>
+                        <outlet property="zipCodeLabel" destination="gq7-uJ-nbl" id="fOj-JX-YLC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
