@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-extension Dictionary where Dictionary.Key == UIButton {
-    func sortByButtonName () {
-        
-    }
+enum MainMenuHandlerError: Error {
+    case noSubmenuMatchingTheTopMenuButton
+    case noButtonCaption
+    case buttonCaptionDoesNotMatchModelDataType
 }
 
 class MainMenuHandler {
@@ -28,7 +28,7 @@ class MainMenuHandler {
             topMenuButton.setTitleColor(.topMenuButtonInactive, for: .normal)
             topMenuButton.setTitle(key, for: .normal)
             topMenuButton.titleLabel?.font = UIFont.topMenuButtonInactive
-            topMenuButton.addTarget(self, action: #selector(topMenuButtonClicked), for: .touchUpInside)
+            topMenuButton.addTarget(self, action: #selector(topMenuButtonPressed), for: .touchUpInside)
             if value.isEmpty {
                 menuButtons.updateValue([], forKey: topMenuButton)
             } else {
@@ -37,8 +37,10 @@ class MainMenuHandler {
                 sortedSubMenu.sort()
                 for buttonName in sortedSubMenu {
                     let subMenuButton = UIButton(type: .system)
-                    subMenuButton.tintColor = .white
+                    subMenuButton.setTitleColor(.subMenuButtonInactive, for: .normal)
                     subMenuButton.setTitle(buttonName, for: .normal)
+                    subMenuButton.titleLabel?.font = UIFont.subMenuButtonInactive
+                    subMenuButton.addTarget(self, action: #selector(subMenuButtonPressed), for: .touchUpInside)
                     subMenuButtons.append(subMenuButton)
                 }
                 menuButtons.updateValue(subMenuButtons, forKey: topMenuButton)
@@ -58,41 +60,63 @@ class MainMenuHandler {
             viewController.topMenuBarStackView.insertArrangedSubview(topMenuButton.key, at: stackViewIndex)
             stackViewIndex += 1
         }
-        viewController.topMenuBarStackView.showAnimated(in: viewController.topMenuBarStackView)
+        viewController.topMenuBarStackView.isHidden = false
     }
     
-    #warning("Make it a class extension!!!")
-    func resetButtons (in stackView: UIStackView) {
-        guard let buttonArray = stackView.arrangedSubviews as? [UIButton] else {
-            return
-        }
-        for button in buttonArray { button.titleLabel?.font = .topMenuButtonInactive }
-    }
-    
-    @objc func topMenuButtonClicked(sender : UIButton){
+    @objc func topMenuButtonPressed(sender : UIButton) throws {
         viewController.topMenuBarStackView.isHidden = true
         viewController.subMenuBarStackView.isHidden = true
-        resetButtons(in: viewController.topMenuBarStackView)
+        viewController.topMenuBarStackView.setButtonsStyleTo(.topMenuButtonInactive, .topMenuButtonInactive)
         
         sender.setTitleColor(.menuButtonActive, for: .normal)
         sender.titleLabel?.font = .topMenuButtonActive
         viewController.subMenuBarStackView.removeAllArrangedSubviews()
         guard let subMenuIndex = menuButtons.index(forKey: sender) else {
-            #warning("Got to throw from here!")
-            return
+            throw MainMenuHandlerError.noSubmenuMatchingTheTopMenuButton
         }
-
-        //AlertController.showAlertWith(title: "Test Pop-Up!", message: "Submenu is \(String(describing: menuButtons[subMenuIndex].value))", style: .alert)
         
         if !menuButtons[subMenuIndex].value.isEmpty {
             var stackViewIndex = 0
-            for subMenuButton in menuButtons[subMenuIndex].value {
-                viewController.subMenuBarStackView.insertArrangedSubview(subMenuButton, at: stackViewIndex)
+            menuButtons[subMenuIndex].value.forEach {
+                viewController.subMenuBarStackView.insertArrangedSubview($0, at: stackViewIndex);
                 stackViewIndex += 1
             }
+            
             viewController.subMenuBarStackView.isHidden = false
+        } else {
+            guard let senderTitle = sender.titleLabel?.text?.lowercased() else {
+                throw MainMenuHandlerError.noButtonCaption
+            }
+            switch senderTitle {
+                #warning("fix the plug functions")
+            case "vendor" : do { print("pressed vendor!") }
+            case "manager" : do { print("pressed manager!") }
+            default: throw MainMenuHandlerError.buttonCaptionDoesNotMatchModelDataType
+            }
         }
         viewController.topMenuBarStackView.isHidden = false
+    }
+    
+    @objc func subMenuButtonPressed(sender : UIButton) throws {
+        viewController.subMenuBarStackView.setButtonsStyleTo(.subMenuButtonInactive, .subMenuButtonInactive)
+        sender.setTitleColor(.menuButtonActive, for: .normal)
+        sender.titleLabel?.font = .subMenuButtonActive
+        guard let senderTitle = sender.titleLabel?.text?.lowercased() else {
+            throw MainMenuHandlerError.noButtonCaption
+        }
+        switch senderTitle {
+            #warning("fix the plug functions")
+        case "contract" : do { print("pressed contract!") }
+        case "food services" : do { print("pressed food!") }
+        case "ride services" : do { print("pressed serv!") }
+        case "maintenance" : do { print("pressed main!") }
+        case "season pass" : do { print("pressed pass!") }
+        case "vip" : do { print("pressed vip!") }
+        case "adult" : do { print("pressed adult!") }
+        case "child" : do { print("pressed child!") }
+        case "senior" : do { print("pressed senior!") }
+        default: throw MainMenuHandlerError.buttonCaptionDoesNotMatchModelDataType
+        }
     }
     
 }

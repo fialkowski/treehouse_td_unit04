@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 
-
-#warning("Think how you can possibly organize errors for this file in a better way")
-
 enum MainMenuRetriverError: String, Error {
     case invalidMainMenuFileNameOrType
     case corruptMainMenuFileOrWrongFormat

@@ -8,44 +8,8 @@
 
 import UIKit
 
-extension UIView {
-    func hideAnimated(in stackView: UIStackView) {
-        if !self.isHidden {
-            UIView.animate(
-                withDuration: 0.35,
-                delay: 0,
-                usingSpringWithDamping: 0.9,
-                initialSpringVelocity: 1,
-                options: [],
-                animations: {
-                    self.isHidden = true
-                    stackView.layoutIfNeeded()
-            },
-                completion: nil
-            )
-        }
-    }
-    
-    func showAnimated(in stackView: UIStackView) {
-        if self.isHidden {
-            UIView.animate(
-                withDuration: 0.5,
-                delay: 0,
-                usingSpringWithDamping: 1,
-                initialSpringVelocity: 1,
-                options: [],
-                animations: {
-                    self.isHidden = false
-                    stackView.layoutIfNeeded()
-            },
-                completion: nil
-            )
-        }
-    }
-}
-
 extension UIStackView {
-    func setBackground(to color: UIColor) {
+    func setBackground (to color: UIColor) {
         let backgroundView: UIView = {
             let view = UIView()
             view.backgroundColor = color
@@ -63,29 +27,32 @@ extension UIStackView {
             ])
     }
     
-    func removeAllArrangedSubviews() {
+    func removeAllArrangedSubviews () {
         
         let removedSubviews = arrangedSubviews.reduce([]) { (allSubviews, subview) -> [UIView] in
             self.removeArrangedSubview(subview)
             return allSubviews + [subview]
         }
         
-        // Deactivate all constraints
-        //NSLayoutConstraint.deactivate(removedSubviews.flatMap({ $0.constraints }))
-        
-        // Remove the views from self
         removedSubviews.forEach({ $0.removeFromSuperview() })
     }
+    
+    func setButtonsStyleTo (_ color: UIColor, _ font: UIFont) {
+        guard let buttonArray = self.arrangedSubviews as? [UIButton] else {
+            return
+        }
+        for button in buttonArray { button.titleLabel?.font = font; button.setTitleColor(color, for: .normal) }
+    }
+    
 }
 
 extension UIFont {
-        static var labelDefault: UIFont { return UIFont(name:"HelveticaNeue-Bold", size: 17.0)! }
-        static var labelBold: UIFont { return UIFont(name:"HelveticaNeue-Bold", size: 19.0)! }
-        static var buttonDefault: UIFont { return UIFont(name:"HelveticaNeue", size: 16.0)! }
-        static var buttonBold: UIFont { return UIFont(name:"HelveticaNeue-Bold", size: 17.0)! }
-    
         static var topMenuButtonInactive: UIFont { return UIFont.systemFont(ofSize: 19.0) }
         static var topMenuButtonActive: UIFont { return UIFont.systemFont(ofSize: 19.0, weight: .bold) }
+        static var subMenuButtonInactive: UIFont { return UIFont.systemFont(ofSize: 17.0) }
+        static var subMenuButtonActive: UIFont { return UIFont.systemFont(ofSize: 17.0, weight: .bold) }
+    
+        static var label: UIFont { return UIFont.systemFont(ofSize: 18.0, weight: .bold) }
 }
 
 extension UIColor {
@@ -94,15 +61,13 @@ extension UIColor {
         static var menuButtonActive: UIColor { return UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0) }
         static var topMenuButtonInactive: UIColor { return UIColor(red: 206/255.0, green: 193/255.0, blue: 222/255.0, alpha: 1.0) }
         static var subMenuButtonInactive: UIColor { return UIColor(red: 131/255.0, green: 124/255.0, blue: 141/255.0, alpha: 1.0) }
-}
-
-extension UIButton {
-    func enable () {
-        self.isEnabled = true
-    }
-    func disable () {
-        self.isEnabled = false
-    }
+    
+        static var labelActive: UIColor { return UIColor(red: 71/255.0, green: 70/255.0, blue: 73/255.0, alpha: 1.0) }
+        static var labelInactive: UIColor { return UIColor(red: 154/255.0, green: 151/255.0, blue: 157/255.0, alpha: 1.0) }
+    
+        static var textFieldActive: UIColor { return UIColor(red: 253/255.0, green: 253/255.0, blue: 253/255.0, alpha: 1.0) }
+    
+        static var background: UIColor { return UIColor(red: 218/255.0, green: 214/255.0, blue: 222/255.0, alpha: 1.0) }
 }
 
 protocol FirstPageAssignable where Self: UIViewController {
@@ -133,7 +98,6 @@ class FirstPageViewController: UIViewController, FirstPageAssignable {
         } catch let error {
             AlertController.showFatalError(for: error)
         }
-        print(mainMenuHandler?.menuButtons ?? "GFU")
         mainMenuHandler?.setMainMenu()
     }
 }
