@@ -20,6 +20,7 @@ protocol PassDataInputCompliant where Self: UIViewController {
     var projectNumberLabel: UILabel! { get }
     var firstNameLabel: UILabel! { get }
     var lastNameLabel: UILabel! { get }
+    var dateOfVisitLabel: UILabel! { get }
     var companyLabel: UILabel! { get }
     var streetAddressLabel: UILabel! { get }
     var cityLabel: UILabel! { get }
@@ -32,10 +33,12 @@ protocol PassDataInputCompliant where Self: UIViewController {
     var firstNameField: UITextField! { get }
     var lastNameField: UITextField! { get }
     var companyField: UITextField! { get }
+    var dateOfVisitField: UITextField! { get }
     var streetAddressField: UITextField! { get }
     var cityField: UITextField! { get }
     var stateField: UITextField! { get }
     var zipCodeField: UITextField! { get }
+    
     var generateButton: UIButton! { get }
     var populateButton: UIButton! { get }
 }
@@ -52,6 +55,7 @@ class FirstPageViewController: UIViewController, MainMenuCompliant, PassDataInpu
     @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var lastNameLabel: UILabel!
     @IBOutlet weak var companyLabel: UILabel!
+    @IBOutlet weak var dateOfVisitLabel: UILabel!
     @IBOutlet weak var streetAddressLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var stateLabel: UILabel!
@@ -63,6 +67,7 @@ class FirstPageViewController: UIViewController, MainMenuCompliant, PassDataInpu
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var companyField: UITextField!
+    @IBOutlet weak var dateOfVisitField: UITextField!
     @IBOutlet weak var streetAddressField: UITextField!
     @IBOutlet weak var cityField: UITextField!
     @IBOutlet weak var stateField: UITextField!

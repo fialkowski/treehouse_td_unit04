@@ -197,31 +197,62 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Azd-5c-QQg" userLabel="thirdRowStackView">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="oNB-HM-HAM" userLabel="thirdRowStackVIew">
                                                 <rect key="frame" x="0.0" y="290.5" width="722" height="145"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Tc-8w-ypc" userLabel="companyLabel">
-                                                        <rect key="frame" x="0.0" y="0.0" width="82.5" height="88"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                        <color key="textColor" red="0.60409158470000002" green="0.59169191119999998" blue="0.61568981410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b7K-lh-ZkY" userLabel="companyField">
-                                                        <rect key="frame" x="0.0" y="88" width="722" height="57"/>
-                                                        <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Azd-5c-QQg" userLabel="company">
+                                                        <rect key="frame" x="0.0" y="23.5" width="346" height="98"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Tc-8w-ypc" userLabel="companyLabel">
+                                                                <rect key="frame" x="0.0" y="0.0" width="346" height="41"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                <color key="textColor" red="0.60409158470000002" green="0.59169191119999998" blue="0.61568981410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b7K-lh-ZkY" userLabel="companyField">
+                                                                <rect key="frame" x="0.0" y="41" width="346" height="57"/>
+                                                                <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="57" id="fyI-Db-CLP"/>
+                                                                </constraints>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="57" id="fyI-Db-CLP"/>
+                                                            <constraint firstItem="7Tc-8w-ypc" firstAttribute="leading" secondItem="Azd-5c-QQg" secondAttribute="leading" id="UfJ-7S-f9w"/>
+                                                            <constraint firstItem="b7K-lh-ZkY" firstAttribute="width" secondItem="Azd-5c-QQg" secondAttribute="width" id="fgn-I7-O4K"/>
+                                                            <constraint firstItem="b7K-lh-ZkY" firstAttribute="leading" secondItem="Azd-5c-QQg" secondAttribute="leading" id="plQ-jg-qUg"/>
                                                         </constraints>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="15C-sN-9JR" userLabel="dateOfVisit">
+                                                        <rect key="frame" x="376" y="23.5" width="346" height="98"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Date of Visit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvC-G0-QEF" userLabel="dateOfVisitLabel">
+                                                                <rect key="frame" x="0.0" y="0.0" width="346" height="41"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                <color key="textColor" red="0.60409158470000002" green="0.59169191119999998" blue="0.61568981410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aVu-ip-f0j" userLabel="dateOfVisitField">
+                                                                <rect key="frame" x="0.0" y="41" width="346" height="57"/>
+                                                                <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="57" id="wPy-Am-D7r"/>
+                                                                </constraints>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="aVu-ip-f0j" firstAttribute="width" secondItem="15C-sN-9JR" secondAttribute="width" id="5ZT-Wh-RfI"/>
+                                                            <constraint firstItem="cvC-G0-QEF" firstAttribute="leading" secondItem="15C-sN-9JR" secondAttribute="leading" id="8QA-Bd-Bhy"/>
+                                                            <constraint firstItem="aVu-ip-f0j" firstAttribute="leading" secondItem="15C-sN-9JR" secondAttribute="leading" id="qOd-oi-7Dg"/>
+                                                        </constraints>
+                                                    </stackView>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="7Tc-8w-ypc" firstAttribute="leading" secondItem="Azd-5c-QQg" secondAttribute="leading" id="UfJ-7S-f9w"/>
-                                                    <constraint firstItem="b7K-lh-ZkY" firstAttribute="width" secondItem="Azd-5c-QQg" secondAttribute="width" id="fgn-I7-O4K"/>
-                                                    <constraint firstItem="b7K-lh-ZkY" firstAttribute="leading" secondItem="Azd-5c-QQg" secondAttribute="leading" id="plQ-jg-qUg"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="D1o-BY-gSu" userLabel="fourthRowStackView">
                                                 <rect key="frame" x="0.0" y="435.5" width="722" height="145"/>
@@ -361,8 +392,8 @@
                                             <constraint firstItem="D1o-BY-gSu" firstAttribute="width" secondItem="6uu-Fh-Nwd" secondAttribute="width" id="FWX-RB-YJE"/>
                                             <constraint firstItem="kuT-Ez-M8U" firstAttribute="width" secondItem="6uu-Fh-Nwd" secondAttribute="width" id="QEC-hy-chF"/>
                                             <constraint firstItem="nZJ-Ep-6T1" firstAttribute="width" secondItem="6uu-Fh-Nwd" secondAttribute="width" id="WBh-fL-Eyt"/>
-                                            <constraint firstItem="Azd-5c-QQg" firstAttribute="width" secondItem="6uu-Fh-Nwd" secondAttribute="width" id="WQ2-iH-X0H"/>
                                             <constraint firstItem="MOe-6X-mVa" firstAttribute="width" secondItem="6uu-Fh-Nwd" secondAttribute="width" id="cIT-Vq-Lkg"/>
+                                            <constraint firstItem="oNB-HM-HAM" firstAttribute="width" secondItem="MOe-6X-mVa" secondAttribute="width" id="izf-Pq-1Y8"/>
                                             <constraint firstItem="FAB-DC-YAw" firstAttribute="width" secondItem="6uu-Fh-Nwd" secondAttribute="width" id="jCZ-Gv-n4z"/>
                                         </constraints>
                                     </stackView>
@@ -390,6 +421,8 @@
                         <outlet property="cityLabel" destination="Cdd-ig-6Lq" id="3dR-cj-Mdb"/>
                         <outlet property="companyField" destination="b7K-lh-ZkY" id="tsw-Wr-cba"/>
                         <outlet property="companyLabel" destination="7Tc-8w-ypc" id="DFo-dQ-oY9"/>
+                        <outlet property="dateOfVisitField" destination="aVu-ip-f0j" id="tya-sQ-YE8"/>
+                        <outlet property="dateOfVisitLabel" destination="cvC-G0-QEF" id="2jF-Ii-7tN"/>
                         <outlet property="firstNameField" destination="VYo-AL-WQL" id="WD5-pn-LST"/>
                         <outlet property="firstNameLabel" destination="PZ8-uL-pwL" id="Fci-gG-Adf"/>
                         <outlet property="generateButton" destination="YaP-RO-0R4" id="3V0-mK-uHG"/>
