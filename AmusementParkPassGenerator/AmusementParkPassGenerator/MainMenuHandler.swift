@@ -69,6 +69,8 @@ class MainMenuHandler {
     @objc private func topMenuButtonPressed(sender : UIButton) throws {
         viewController.topMenuBarStackView.isHidden = true
         viewController.subMenuBarStackView.isHidden = true
+        viewController.passDataInputController?.setDisabledScreen()
+        try allSubMenuButtonsDisable()
         guard let topMenuButtons = viewController.topMenuBarStackView.arrangedSubviews as? [UIButton] else {
             throw MainMenuHandlerError.noTopMenuButtonsFound
         }
@@ -102,10 +104,7 @@ class MainMenuHandler {
     }
     
     @objc private func subMenuButtonPressed(sender : UIButton) throws {
-        guard let subMenuButtons = viewController.subMenuBarStackView.arrangedSubviews as? [UIButton] else {
-            throw MainMenuHandlerError.noSubMenuButtonsFound
-        }
-        subMenuButtons.forEach { $0.setStyle(to: .subMenuInactive) }
+        try allSubMenuButtonsDisable()
         sender.setStyle(to: .subMenuActive)
         
         guard let senderTitle = sender.titleLabel?.text?.lowercased() else {
@@ -125,4 +124,10 @@ class MainMenuHandler {
         }
     }
     
+    private func allSubMenuButtonsDisable () throws {
+        guard let subMenuButtons = viewController.subMenuBarStackView.arrangedSubviews as? [UIButton] else {
+            throw MainMenuHandlerError.noSubMenuButtonsFound
+        }
+        subMenuButtons.forEach { $0.setStyle(to: .subMenuInactive) }
+    }
 }

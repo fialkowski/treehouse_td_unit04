@@ -41,9 +41,9 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.85512870549999997" green="0.83859592679999995" blue="0.87059301140000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="Fcz-yg-cAh"/>
                                                     <constraint firstItem="5oK-n2-z0j" firstAttribute="width" secondItem="ANw-eo-2tv" secondAttribute="width" id="RKZ-fd-lRQ"/>
                                                     <constraint firstItem="5oK-n2-z0j" firstAttribute="leading" secondItem="ANw-eo-2tv" secondAttribute="leading" id="es0-46-jES"/>
-                                                    <constraint firstAttribute="height" constant="60" id="iIV-sK-a9l"/>
                                                     <constraint firstAttribute="bottom" secondItem="5oK-n2-z0j" secondAttribute="bottom" id="nat-gC-hiM"/>
                                                     <constraint firstItem="5oK-n2-z0j" firstAttribute="top" secondItem="ANw-eo-2tv" secondAttribute="top" id="tpQ-0F-D41"/>
                                                 </constraints>
