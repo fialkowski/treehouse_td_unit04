@@ -361,7 +361,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nikko444.AmusementParkPassGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -379,7 +379,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nikko444.AmusementParkPassGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
