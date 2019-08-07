@@ -44,7 +44,8 @@ protocol PassDataInputCompliant where Self: UIViewController {
 }
 
 
-class FirstPageViewController: UIViewController, MainMenuCompliant, PassDataInputCompliant {
+class FirstPageViewController: UIViewController, MainMenuCompliant, PassDataInputCompliant  {
+    
 
     @IBOutlet weak var topMenuBarStackView: UIStackView!
     @IBOutlet weak var subMenuBarStackView: UIStackView!
@@ -77,7 +78,6 @@ class FirstPageViewController: UIViewController, MainMenuCompliant, PassDataInpu
     
     var mainMenuHandler: MainMenuHandler?
     var passDataInputController: PassDataInputController?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
