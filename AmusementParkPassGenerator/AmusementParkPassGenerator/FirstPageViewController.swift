@@ -78,6 +78,7 @@ class FirstPageViewController: UIViewController, MainMenuCompliant, PassDataInpu
     
     var mainMenuHandler: MainMenuHandler?
     var passDataInputController: PassDataInputController?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

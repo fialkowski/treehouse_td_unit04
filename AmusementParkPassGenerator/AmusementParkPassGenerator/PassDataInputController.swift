@@ -9,41 +9,20 @@
 import Foundation
 import UIKit
 
-extension UIToolbar {
-
-    func toolbarPicker(mySelect: Selector) -> UIToolbar {
-
-        let toolBar = UIToolbar()
-
-        toolBar.barStyle = UIBarStyle.default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor.black
-        toolBar.sizeToFit()
-
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: mySelect)
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-
-        toolBar.setItems([ spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-
-        return toolBar
-    }
-
-}
-
 
 class PassDataInputController {
     
     let viewController: PassDataInputCompliant
+    let inputAccessoryViewHandler: InputAccessoryViewHandler
     let datePicker = UIDatePicker()
-    var toolBar = UIToolbar()
+    lazy var accessoryView = UIView()
     
     
     init (for viewController: PassDataInputCompliant) {
         self.viewController = viewController
         self.datePicker.datePickerMode = .date
         self.datePicker.maximumDate = Date()
-        self.datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+        self.inputAccessoryViewHandler = InputAccessoryViewHandler(forViewController: viewController)
     }
     
     func setGuestAdultInputScreen () {
@@ -136,9 +115,10 @@ class PassDataInputController {
     private func birthDateFieldsEnable () {
         viewController.birthDateField.enable()
         viewController.birthDateLabel.enable()
-        self.toolBar = UIToolbar().toolbarPicker(mySelect: #selector(dismissInput))
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
         viewController.birthDateField.inputView = self.datePicker
-        viewController.birthDateField.inputAccessoryView = self.toolBar
+        accessoryView = inputAccessoryViewHandler.setAccessoryViewTargetTo(viewController.birthDateField, withLabel: viewController.birthDateLabel)
+        viewController.birthDateField.inputAccessoryView = accessoryView
     }
     
     private func firstNameFieldsEnable () {
@@ -179,30 +159,11 @@ class PassDataInputController {
         viewController.birthDateField.text = dateFormatter.string(from: sender.date)
     }
     
-    @objc func dismissInput() {
-        print("wooot-woot-woot!")
-        //viewController.birthDateField.inputView.
-       //viewController.view.endEditing(true)
-        // view.endEditing(true)
-        
-    }
-    
-    func ToolbarPiker(mySelect : Selector) -> UIToolbar {
-        
-        let toolBar = UIToolbar()
-        
-        toolBar.barStyle = UIBarStyle.default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor.black
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: mySelect)
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        
-        toolBar.setItems([ spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        
-        return toolBar
-    }
-    
+//    @objc func dismissInput() {
+//        print("wooot-woot-woot!")
+//        //viewController.birthDateField.inputView.
+//       //viewController.view.endEditing(true)
+//        // view.endEditing(true)
+//
+//    }
 }

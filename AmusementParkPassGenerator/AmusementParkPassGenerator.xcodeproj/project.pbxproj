@@ -25,6 +25,7 @@
 		8A8C6C4B22F1143300FD4FD1 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C6C4A22F1143300FD4FD1 /* DataProvider.swift */; };
 		8A8C6C4D22F1397F00FD4FD1 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C6C4C22F1397F00FD4FD1 /* AlertController.swift */; };
 		8A8C6C4F22F396FF00FD4FD1 /* MainMenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C6C4E22F396FF00FD4FD1 /* MainMenuHandler.swift */; };
+		8A98FBC422FD0AA200EC4794 /* InputAccessoryViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A98FBC322FD0AA200EC4794 /* InputAccessoryViewHandler.swift */; };
 		8A9CBC6422F8B22600CE9F7C /* PassDataInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9CBC6322F8B22600CE9F7C /* PassDataInputController.swift */; };
 		8A9CBC6622F8E27600CE9F7C /* InterfaceRelatedExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9CBC6522F8E27600CE9F7C /* InterfaceRelatedExtensions.swift */; };
 		8AA52865225ED5460033A09C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA52864225ED5460033A09C /* Protocols.swift */; };
@@ -52,6 +53,7 @@
 		8A8C6C4A22F1143300FD4FD1 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		8A8C6C4C22F1397F00FD4FD1 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		8A8C6C4E22F396FF00FD4FD1 /* MainMenuHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuHandler.swift; sourceTree = "<group>"; };
+		8A98FBC322FD0AA200EC4794 /* InputAccessoryViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAccessoryViewHandler.swift; sourceTree = "<group>"; };
 		8A9CBC6322F8B22600CE9F7C /* PassDataInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassDataInputController.swift; sourceTree = "<group>"; };
 		8A9CBC6522F8E27600CE9F7C /* InterfaceRelatedExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceRelatedExtensions.swift; sourceTree = "<group>"; };
 		8AA52864225ED5460033A09C /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				8A8C6C4A22F1143300FD4FD1 /* DataProvider.swift */,
 				8A8C6C4E22F396FF00FD4FD1 /* MainMenuHandler.swift */,
 				8A9CBC6322F8B22600CE9F7C /* PassDataInputController.swift */,
+				8A98FBC322FD0AA200EC4794 /* InputAccessoryViewHandler.swift */,
 				8A2325AD222E30240055F1B6 /* FirstPageViewController.swift */,
 				8A8C6C4C22F1397F00FD4FD1 /* AlertController.swift */,
 				8A2325AF222E30240055F1B6 /* Main.storyboard */,
@@ -203,6 +206,7 @@
 				8AA5286F225EDDCE0033A09C /* PassReaders.swift in Sources */,
 				8AA52865225ED5460033A09C /* Protocols.swift in Sources */,
 				8A8C18F3226429AE00735FAE /* ConsolePrinter.swift in Sources */,
+				8A98FBC422FD0AA200EC4794 /* InputAccessoryViewHandler.swift in Sources */,
 				8A9CBC6422F8B22600CE9F7C /* PassDataInputController.swift in Sources */,
 				8A8C6C4F22F396FF00FD4FD1 /* MainMenuHandler.swift in Sources */,
 				8A1CDDF22245D58800FAE4B6 /* RandomGenerator.swift in Sources */,
