@@ -15,7 +15,6 @@ class PassDataInputController {
     let viewController: PassDataInputCompliant
     let inputAccessoryViewHandler: InputAccessoryViewHandler
     let datePicker = UIDatePicker()
-    //lazy var accessoryView = UIView()
     
     
     init (for viewController: PassDataInputCompliant) {
@@ -90,25 +89,57 @@ class PassDataInputController {
     }
     
     func setDisabledScreen () {
+        setTags()
         allInputFieldsDisable()
         controlButtonsDisable()
         allLabelsDisable()
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+    }
+    
+    private func setTags () {
+        viewController.birthDateField.tag = 0
+        viewController.birthDateLabel.tag = 0
+        
+        viewController.ssnField.tag = 1
+        viewController.ssnLabel.tag = 1
+        
+        viewController.projectNumberField.tag = 2
+        viewController.projectNumberLabel.tag = 2
+        
+        viewController.firstNameField.tag = 3
+        viewController.firstNameLabel.tag = 3
+        
+        viewController.lastNameField.tag = 4
+        viewController.lastNameLabel.tag = 4
+        
+        viewController.companyField.tag = 5
+        viewController.companyLabel.tag = 5
+        
+        viewController.dateOfVisitField.tag = 6
+        viewController.dateOfVisitLabel.tag = 6
+        
+        viewController.streetAddressField.tag = 7
+        viewController.streetAddressLabel.tag = 7
+        
+        viewController.cityField.tag = 8
+        viewController.cityLabel.tag = 8
+        
+        viewController.stateField.tag = 9
+        viewController.stateLabel.tag = 9
+        
+        viewController.zipCodeField.tag = 10
+        viewController.zipCodeLabel.tag = 10
     }
     
     private func allInputFieldsDisable () {
         let allTextFields = Mirror(reflecting: viewController).children.compactMap { $0.value as? UITextField }
         allTextFields.forEach { $0.disable() }
-        viewController.birthDateField.tag = 0
-        viewController.ssnField.tag = 1
-        viewController.projectNumberField.tag = 2
-        viewController.firstNameField.tag = 3
-        viewController.lastNameField.tag = 4
-        viewController.companyField.tag = 5
-        viewController.dateOfVisitField.tag = 6
-        viewController.streetAddressField.tag = 7
-        viewController.cityField.tag = 8
-        viewController.stateField.tag = 9
-        viewController.zipCodeField.tag = 10
+        allTextFields.forEach { $0.text = "" }
+    }
+    
+    private func allLabelsDisable () {
+        let allLabels = Mirror(reflecting: viewController).children.compactMap { $0.value as? UILabel }
+        allLabels.forEach { $0.disable() }
     }
     
     private func controlButtonsDisable () {
@@ -118,58 +149,53 @@ class PassDataInputController {
         viewController.populateButton.disable()
     }
     
-    private func allLabelsDisable () {
-        let allLabels = Mirror(reflecting: viewController).children.compactMap { $0.value as? UILabel }
-        allLabels.forEach { $0.disable() }
-    }
-    
     private func birthDateFieldsEnable () {
         viewController.birthDateField.enable()
         viewController.birthDateLabel.enable()
-        datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
-        viewController.birthDateField.inputView = self.datePicker
-        viewController.birthDateField.inputAccessoryView = inputAccessoryViewHandler.setAccessoryViewTargetTo(viewController.birthDateField, withLabel: viewController.birthDateLabel)
+        viewController.birthDateField.addTarget(self, action: #selector(setDateInput), for: .editingDidBegin)
     }
     
     private func firstNameFieldsEnable () {
         viewController.firstNameLabel.enable()
         viewController.firstNameField.enable()
-        viewController.firstNameField.inputAccessoryView = inputAccessoryViewHandler.setAccessoryViewTargetTo(viewController.firstNameField, withLabel: viewController.firstNameLabel)
+        viewController.firstNameField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
     }
     
     private func lastNameFieldsEnable () {
         viewController.lastNameLabel.enable()
         viewController.lastNameField.enable()
-        viewController.lastNameField.inputAccessoryView = inputAccessoryViewHandler.setAccessoryViewTargetTo(viewController.lastNameField, withLabel: viewController.lastNameLabel)
+        viewController.lastNameField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
     }
     
     private func companyFieldsEnable () {
         viewController.companyLabel.enable()
         viewController.companyField.enable()
-        viewController.companyField.inputAccessoryView = inputAccessoryViewHandler.setAccessoryViewTargetTo(viewController.companyField, withLabel: viewController.companyLabel)
+        viewController.companyField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
     }
     
     private func dateOfVisitEnable () {
         viewController.dateOfVisitLabel.enable()
         viewController.dateOfVisitField.enable()
-        datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
         viewController.dateOfVisitField.inputView = datePicker
-        viewController.dateOfVisitField.inputAccessoryView = inputAccessoryViewHandler.setAccessoryViewTargetTo(viewController.dateOfVisitField, withLabel: viewController.dateOfVisitLabel)
+        viewController.dateOfVisitField.addTarget(self, action: #selector(setDateInput), for: .editingDidBegin)
     }
     
     private func addressFieldsEnable () {
         viewController.streetAddressLabel.enable()
         viewController.streetAddressField.enable()
-        viewController.streetAddressField.inputView = inputAccessoryViewHandler.setAccessoryViewTargetTo(viewController.streetAddressField, withLabel: viewController.streetAddressLabel)
+        viewController.streetAddressField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
+        
         viewController.cityLabel.enable()
         viewController.cityField.enable()
-        viewController.cityField.inputView = inputAccessoryViewHandler.setAccessoryViewTargetTo(viewController.cityField, withLabel: viewController.cityLabel)
+        viewController.cityField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
+  
         viewController.stateLabel.enable()
         viewController.stateField.enable()
-        viewController.stateField.inputView = inputAccessoryViewHandler.setAccessoryViewTargetTo(viewController.stateField, withLabel: viewController.stateLabel)
+        viewController.stateField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
+
         viewController.zipCodeLabel.enable()
         viewController.zipCodeField.enable()
-        viewController.zipCodeField.inputView = inputAccessoryViewHandler.setAccessoryViewTargetTo(viewController.zipCodeField, withLabel: viewController.zipCodeLabel)
+        viewController.zipCodeField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
     }
     
     @objc func datePickerValueChanged (sender:UIDatePicker) {
@@ -178,5 +204,36 @@ class PassDataInputController {
         dateFormatter.timeStyle = DateFormatter.Style.none
         dateFormatter.dateFormat = "MM / dd / yyyy"
         viewController.birthDateField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    @objc func setTextInput (sender: UITextField) {
+        let allLabels = Mirror(reflecting: viewController).children.compactMap { $0.value as? UILabel }
+        let accessoryViewLabels = allLabels.filter { $0.tag == sender.tag }
+        if accessoryViewLabels.isEmpty {
+            inputAccessoryViewHandler.setAccessoryViewTargetTo(sender)
+        } else {
+            if let accessoryViewLabel = accessoryViewLabels.first {
+                inputAccessoryViewHandler.setAccessoryViewTargetTo(sender, withLabel: accessoryViewLabel)
+            } else {
+                inputAccessoryViewHandler.setAccessoryViewTargetTo(sender)
+            }
+        }
+        sender.inputAccessoryView = inputAccessoryViewHandler.accessoryView
+    }
+    
+    @objc func setDateInput (sender: UITextField) {
+        let allLabels = Mirror(reflecting: viewController).children.compactMap { $0.value as? UILabel }
+        let accessoryViewLabels = allLabels.filter { $0.tag == sender.tag }
+        if accessoryViewLabels.isEmpty {
+            inputAccessoryViewHandler.setAccessoryViewTargetTo(sender)
+        } else {
+            if let accessoryViewLabel = accessoryViewLabels.first {
+                inputAccessoryViewHandler.setAccessoryViewTargetTo(sender, withLabel: accessoryViewLabel)
+            } else {
+                inputAccessoryViewHandler.setAccessoryViewTargetTo(sender)
+            }
+        }
+        sender.inputView = datePicker
+        sender.inputAccessoryView = inputAccessoryViewHandler.accessoryView
     }
 }
