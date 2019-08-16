@@ -70,6 +70,9 @@ class InputAccessoryViewHandler {
     
     func setAccessoryViewTargetTo (_ target: UIView, withLabel label: UILabel = UILabel()) {
         
+        previousButton.isHidden = true
+        nextButton.isHidden = true
+        
         if let textLabel = label.text {
             titleLabel.text = textLabel
         }
@@ -77,12 +80,14 @@ class InputAccessoryViewHandler {
         inputProperty = target
         doneButton.addTarget(self, action: #selector(finishInput), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(dismissInput), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(moveToNext), for: .touchUpInside)
+        previousButton.addTarget(self, action: #selector(moveToPrevious), for: .touchUpInside)
 
         accessoryView.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.width, height: 45)
         accessoryView.addSubview(cancelButton)
-        
+        accessoryView.addSubview(previousButton)
         accessoryView.addSubview(titleLabel)
-        
+        accessoryView.addSubview(nextButton)
         accessoryView.addSubview(doneButton)
         
         let allChildViews = Mirror(reflecting: self).children.compactMap { $0.value as? UIView}
@@ -94,20 +99,16 @@ class InputAccessoryViewHandler {
             titleLabel.centerXAnchor.constraint(equalTo: accessoryView.centerXAnchor),
             titleLabel.centerYAnchor.constraint(equalTo: accessoryView.centerYAnchor),
             doneButton.trailingAnchor.constraint(equalTo: accessoryView.trailingAnchor, constant: -20),
-            doneButton.centerYAnchor.constraint(equalTo: accessoryView.centerYAnchor)
+            doneButton.centerYAnchor.constraint(equalTo: accessoryView.centerYAnchor),
+            previousButton.leadingAnchor.constraint(equalTo: cancelButton.trailingAnchor, constant: 30),
+            previousButton.centerYAnchor.constraint(equalTo: accessoryView.centerYAnchor),
+            nextButton.trailingAnchor.constraint(equalTo: doneButton.leadingAnchor, constant: -30),
+            nextButton.centerYAnchor.constraint(equalTo: accessoryView.centerYAnchor)
             ])
         
         if getActiveInputFields().count != 1 {
-            nextButton.addTarget(self, action: #selector(moveTo), for: .touchUpInside)
-            previousButton.addTarget(self, action: #selector(moveTo), for: .touchUpInside)
-            accessoryView.addSubview(previousButton)
-            accessoryView.addSubview(nextButton)
-            NSLayoutConstraint.activate([
-                previousButton.leadingAnchor.constraint(equalTo: cancelButton.trailingAnchor, constant: 30),
-                previousButton.centerYAnchor.constraint(equalTo: accessoryView.centerYAnchor),
-                nextButton.trailingAnchor.constraint(equalTo: doneButton.leadingAnchor, constant: -30),
-                nextButton.centerYAnchor.constraint(equalTo: accessoryView.centerYAnchor)
-            ])
+            previousButton.isHidden = false
+            nextButton.isHidden = false
         }
     }
     
@@ -126,19 +127,19 @@ class InputAccessoryViewHandler {
         inputProperty?.endEditing(true)
     }
     
-    #warning("This block doesn't work because of the parameter")
-    @objc private enum Iterate: Int { case previousField, nextField }
+    private enum Iterate { case previousField, nextField }
     
-    @objc private func moveTo(_ direction: Iterate) {
+    private func moveTo(_ direction: Iterate) {
         let activeInputFields = getActiveInputFields()
         let enabledInputTextFieldsTags = activeInputFields.map { $0.tag }
         var sortedEnabledTags: [Int]
+        var nextFieldTag: Int = 0
+        
         switch direction {
         case .previousField: sortedEnabledTags = enabledInputTextFieldsTags.sorted { $0 > $1 }
         case .nextField: sortedEnabledTags = enabledInputTextFieldsTags.sorted { $0 < $1 }
         }
-        //let sortedEnabledTags = enabledInputTextFieldsTags.sorted { $0 < $1 }
-        var nextFieldTag: Int = 0
+        
         guard let currentTag = inputProperty?.tag else { return }
         if sortedEnabledTags.last == currentTag {
             nextFieldTag = sortedEnabledTags.first!
@@ -151,21 +152,12 @@ class InputAccessoryViewHandler {
         nextTextField.first?.becomeFirstResponder()
     }
     
-//    @objc private func previousField() {
-//        let activeInputFields = getActiveInputFields()
-//        let enabledInputTextFieldsTags = activeInputFields.map { $0.tag }
-//        let sortedEnabledTags = enabledInputTextFieldsTags.sorted { $0 > $1 }
-//        var nextFieldTag: Int = 0
-//        guard let currentTag = inputProperty?.tag else { return }
-//        if sortedEnabledTags.last == currentTag {
-//            nextFieldTag = sortedEnabledTags.first!
-//        } else {
-//            guard let index = sortedEnabledTags.firstIndex(of: currentTag) else { return }
-//            nextFieldTag = sortedEnabledTags[index + 1]
-//        }
-//
-//        let nextTextField = activeInputFields.filter { $0.tag == nextFieldTag }
-//        nextTextField.first?.becomeFirstResponder()
-//    }
+    @objc private func moveToNext() {
+        moveTo(.nextField)
+    }
+    
+    @objc private func moveToPrevious() {
+        moveTo(.previousField)
+    }
 
 }

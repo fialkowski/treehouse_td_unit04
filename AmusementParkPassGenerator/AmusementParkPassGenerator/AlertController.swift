@@ -11,22 +11,31 @@ import UIKit
 
 public extension UIAlertController {
     func show() {
-        let win = UIWindow(frame: UIScreen.main.bounds)
-        let vc = UIViewController()
-        vc.view.backgroundColor = .clear
-        win.rootViewController = vc
-        win.windowLevel = UIWindow.Level.alert + 1
-        win.makeKeyAndVisible()
-        vc.present(self, animated: true, completion: nil)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        let viewController = UIViewController()
+        viewController.view.backgroundColor = .clear
+        window.rootViewController = viewController
+        window.windowLevel = UIWindow.Level.alert + 1
+        window.makeKeyAndVisible()
+        viewController.present(self, animated: true, completion: nil)
     }
 }
 
  class AlertController {
     
-    static func showAlertWith(title: String, message: String, style: UIAlertController.Style = .alert) {
+    static func showSingleActionAlertWith (title: String, message: String, style: UIAlertController.Style = .alert) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
         let okAction = UIAlertAction(title: "OK", style: .default)
         alertController.addAction(okAction)
+        alertController.show()
+    }
+    
+    static func showWarningWith (title: String, message: String, style: UIAlertController.Style = .alert, cancelAction: @escaping (UIAlertAction) ->()) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: cancelAction)
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
         alertController.show()
     }
     
