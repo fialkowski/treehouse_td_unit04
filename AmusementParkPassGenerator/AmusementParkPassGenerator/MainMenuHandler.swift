@@ -67,6 +67,15 @@ class MainMenuHandler {
     }
     
     @objc private func topMenuButtonPressed(sender : UIButton) throws {
+        let allTextFields = Mirror(reflecting: viewController).children.compactMap { $0.value as? UITextField }
+        if !allTextFields.isEmpty {
+            let notEmptyTextFiels = allTextFields.filter { !$0.text!.isEmpty }
+            if !notEmptyTextFiels.isEmpty {
+                AlertController.showSingleActionAlertWith(title: "Test", message: "Test", style: .alert)
+            }
+        }
+        
+        
         viewController.topMenuBarStackView.isHidden = true
         viewController.subMenuBarStackView.isHidden = true
         viewController.passDataInputController?.setDisabledScreen()
