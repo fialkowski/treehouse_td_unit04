@@ -12,9 +12,9 @@ import UIKit
 
 class PassDataInputController {
     
-    let viewController: PassDataInputCompliant
-    let inputAccessoryViewHandler: InputAccessoryViewHandler
-    let datePicker = UIDatePicker()
+    private let viewController: PassDataInputCompliant
+    private let inputAccessoryViewHandler: InputAccessoryViewHandler
+    private let datePicker = UIDatePicker()
     
     
     init (for viewController: PassDataInputCompliant) {
@@ -159,6 +159,7 @@ class PassDataInputController {
         viewController.firstNameLabel.enable()
         viewController.firstNameField.enable()
         viewController.firstNameField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
+        viewController.firstNameField.addTarget(self, action: #selector(defaultTextFieldValidation), for: .editingDidEnd)
     }
     
     private func lastNameFieldsEnable () {
@@ -198,7 +199,17 @@ class PassDataInputController {
         viewController.zipCodeField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
     }
     
-    @objc func datePickerValueChanged (sender:UIDatePicker) {
+    
+    #warning("Fininish this one and the rest of the input validation off!")
+    @objc private func defaultTextFieldValidation (sender: UITextField) {
+        if let originalString = sender.text {
+            let trimmedString = originalString.trimmingCharacters(in: .whitespacesAndNewlines) // removes the blankspace before and after the gist of the field
+            sender.text = trimmedString
+            print(trimmedString)
+        }
+    }
+    
+    @objc private func datePickerValueChanged (sender:UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.short
         dateFormatter.timeStyle = DateFormatter.Style.none
@@ -206,7 +217,7 @@ class PassDataInputController {
         viewController.birthDateField.text = dateFormatter.string(from: sender.date)
     }
     
-    @objc func setTextInput (sender: UITextField) {
+    @objc private func setTextInput (sender: UITextField) {
         let allLabels = Mirror(reflecting: viewController).children.compactMap { $0.value as? UILabel }
         let accessoryViewLabels = allLabels.filter { $0.tag == sender.tag }
         if accessoryViewLabels.isEmpty {
@@ -221,7 +232,7 @@ class PassDataInputController {
         sender.inputAccessoryView = inputAccessoryViewHandler.accessoryView
     }
     
-    @objc func setDateInput (sender: UITextField) {
+    @objc private func setDateInput (sender: UITextField) {
         let allLabels = Mirror(reflecting: viewController).children.compactMap { $0.value as? UILabel }
         let accessoryViewLabels = allLabels.filter { $0.tag == sender.tag }
         if accessoryViewLabels.isEmpty {
