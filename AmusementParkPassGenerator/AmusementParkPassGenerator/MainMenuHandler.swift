@@ -18,11 +18,8 @@ enum MainMenuHandlerError: Error {
 }
 
 class MainMenuHandler {
-
     let viewController: MainMenuCompliant
     var menuButtons = [UIButton:[UIButton]]()
-    
-    
 
     init (viewController: MainMenuCompliant, source: [String:[String]]) {
         
@@ -32,7 +29,7 @@ class MainMenuHandler {
             let topMenuButton = UIButton(type: .system)
             topMenuButton.setStyle(to: .topMenuInactive)
             topMenuButton.setTitle(key, for: .normal)
-            topMenuButton.addTarget(self, action: #selector(topMenuButtonPressed), for: .touchUpInside)
+            topMenuButton.addTarget(self, action: #selector(topMenuButtonPress), for: .touchUpInside)
             if value.isEmpty {
                 menuButtons.updateValue([], forKey: topMenuButton)
             } else {
@@ -43,7 +40,7 @@ class MainMenuHandler {
                     let subMenuButton = UIButton(type: .system)
                     subMenuButton.setStyle(to: .subMenuInactive)
                     subMenuButton.setTitle(buttonName, for: .normal)
-                    subMenuButton.addTarget(self, action: #selector(subMenuButtonPressed), for: .touchUpInside)
+                    subMenuButton.addTarget(self, action: #selector(subMenuButtonPress), for: .touchUpInside)
                     subMenuButtons.append(subMenuButton)
                 }
                 menuButtons.updateValue(subMenuButtons, forKey: topMenuButton)
@@ -66,38 +63,54 @@ class MainMenuHandler {
         viewController.topMenuBarStackView.isHidden = false
     }
     
-    @objc private func topMenuButtonPressed(sender : UIButton) throws {
+    @objc private func topMenuButtonPress (sender : UIButton) throws {
         let allTextFields = Mirror(reflecting: viewController).children.compactMap { $0.value as? UITextField }
         if !allTextFields.isEmpty {
             let notEmptyTextFiels = allTextFields.filter { !$0.text!.isEmpty }
             if !notEmptyTextFiels.isEmpty {
-                AlertController.showSingleActionAlertWith(title: "Test", message: "Test", style: .alert)
+                AlertController.showInputScreenClearWarningWith(title: String.WarningCaptions.engUsChangeScreenWaringTitle, message: String.WarningCaptions.engUsChangeScreenWaringMessage, style: .alert, okAction: { (alert: UIAlertAction) in self.unwrappedSetScreenForTopMenuButtonPress(sender)})
+            } else {
+                try setScreenForTopMenuButtonPress(sender)
             }
         }
-        
-        
+    }
+    
+    private func unwrappedSetScreenForTopMenuButtonPress (_ sender: UIButton) {
+        do {
+            try setScreenForTopMenuButtonPress(sender)
+        } catch MainMenuHandlerError.noTopMenuButtonsFound {
+            AlertController.showFatalError(for: MainMenuHandlerError.noSubmenuMatchingTheTopMenuButton)
+        } catch MainMenuHandlerError.noSubmenuMatchingTheTopMenuButton {
+            AlertController.showFatalError(for: MainMenuHandlerError.noSubmenuMatchingTheTopMenuButton)
+        } catch MainMenuHandlerError.noButtonCaption {
+            AlertController.showFatalError(for: MainMenuHandlerError.noButtonCaption)
+        } catch MainMenuHandlerError.buttonCaptionDoesNotMatchModelDataType {
+            AlertController.showFatalError(for: MainMenuHandlerError.buttonCaptionDoesNotMatchModelDataType)
+        } catch let error {
+            AlertController.showFatalError(for: error)
+        }
+    }
+    
+    private func setScreenForTopMenuButtonPress (_ sender: UIButton) throws { // Testing something here!
         viewController.topMenuBarStackView.isHidden = true
         viewController.subMenuBarStackView.isHidden = true
         viewController.passDataInputController?.setDisabledScreen()
         try allSubMenuButtonsDisable()
+        
         guard let topMenuButtons = viewController.topMenuBarStackView.arrangedSubviews as? [UIButton] else {
             throw MainMenuHandlerError.noTopMenuButtonsFound
         }
         topMenuButtons.forEach { $0.setStyle(to: .topMenuInactive)}
-        
         sender.setStyle(to: .topMenuActive)
         viewController.subMenuBarStackView.removeAllArrangedSubviews()
         guard let subMenuIndex = menuButtons.index(forKey: sender) else {
             throw MainMenuHandlerError.noSubmenuMatchingTheTopMenuButton
         }
-        
         if !menuButtons[subMenuIndex].value.isEmpty {
             var stackViewIndex = 0
             menuButtons[subMenuIndex].value.forEach {
                 viewController.subMenuBarStackView.insertArrangedSubview($0, at: stackViewIndex);
-                stackViewIndex += 1
-            }
-            
+                stackViewIndex += 1 }
             viewController.subMenuBarStackView.isHidden = false
         } else {
             guard let senderTitle = sender.titleLabel?.text?.lowercased() else {
@@ -112,7 +125,31 @@ class MainMenuHandler {
         viewController.topMenuBarStackView.isHidden = false
     }
     
-    @objc private func subMenuButtonPressed(sender : UIButton) throws {
+    @objc private func subMenuButtonPress (sender : UIButton) throws {
+        let allTextFields = Mirror(reflecting: viewController).children.compactMap { $0.value as? UITextField }
+        if !allTextFields.isEmpty {
+            let notEmptyTextFiels = allTextFields.filter { !$0.text!.isEmpty }
+            if !notEmptyTextFiels.isEmpty {
+                AlertController.showInputScreenClearWarningWith(title: String.WarningCaptions.engUsChangeScreenWaringTitle, message: String.WarningCaptions.engUsChangeScreenWaringMessage, style: .alert, okAction: { (alert: UIAlertAction) in self.unwrappedSetScreenForSubMenuButtonPress(sender)})
+            } else {
+                try setScreenForSubMenuButtonPress(sender)
+            }
+        }
+    }
+    
+    private func unwrappedSetScreenForSubMenuButtonPress (_ sender: UIButton) {
+        do {
+           try setScreenForSubMenuButtonPress(sender)
+        } catch MainMenuHandlerError.noButtonCaption {
+            AlertController.showFatalError(for: MainMenuHandlerError.noButtonCaption)
+        } catch MainMenuHandlerError.buttonCaptionDoesNotMatchModelDataType {
+            AlertController.showFatalError(for: MainMenuHandlerError.buttonCaptionDoesNotMatchModelDataType)
+        } catch let error {
+            AlertController.showFatalError(for: error)
+        }
+    }
+    
+    private func setScreenForSubMenuButtonPress (_ sender: UIButton) throws {
         try allSubMenuButtonsDisable()
         sender.setStyle(to: .subMenuActive)
         

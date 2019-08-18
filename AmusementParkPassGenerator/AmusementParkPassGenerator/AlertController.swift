@@ -9,6 +9,13 @@
 import Foundation
 import UIKit
 
+extension String {
+    struct WarningCaptions {
+        static var engUsChangeScreenWaringTitle: String { return "Do you still want to proceed?" }
+        static var engUsChangeScreenWaringMessage: String { return "You are about to leave the current screen, but you got something filled out already!" }
+    }
+}
+
 public extension UIAlertController {
     func show() {
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -30,10 +37,10 @@ public extension UIAlertController {
         alertController.show()
     }
     
-    static func showWarningWith (title: String, message: String, style: UIAlertController.Style = .alert, cancelAction: @escaping (UIAlertAction) ->()) {
+    static func showInputScreenClearWarningWith (title: String, message: String, style: UIAlertController.Style = .alert, okAction: @escaping (UIAlertAction) ->()) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
-        let okAction = UIAlertAction(title: "OK", style: .default)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: cancelAction)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: okAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         alertController.show()
