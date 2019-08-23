@@ -9,6 +9,39 @@
 import Foundation
 import UIKit
 
+extension String {
+    var nameValidated: String {
+        let charSet = CharacterSet(charactersIn: " .\'’abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").inverted
+        let cleanedString = self.components(separatedBy: charSet).joined(separator: "")
+        let components = cleanedString.components(separatedBy: .whitespacesAndNewlines)
+        let trimmedString = components.filter { !$0.isEmpty }.joined(separator: " ")
+        let trimmedCapitalizedOutput = trimmedString.capitalized
+        return trimmedCapitalizedOutput
+    }
+    
+    var ssnValidated: String {
+        let charSet = CharacterSet(charactersIn: " -1234567890").inverted
+        let strippedString = self.components(separatedBy: charSet).joined(separator: "")
+        return String(strippedString.prefix(15))
+        
+    }
+    
+    var strippedNumbers: String {
+        return self.filter("01234567890".contains)
+    }
+    
+    func index(at position: Int, from start: Index? = nil) -> Index? {
+        let startingIndex = start ?? startIndex
+        return index(startingIndex, offsetBy: position, limitedBy: endIndex)
+    }
+    
+    func character(at position: Int) -> Character? {
+        guard position >= 0, let indexPosition = index(at: position) else {
+            return nil
+        }
+        return self[indexPosition]
+    }
+}
 
 class PassDataInputController {
     
@@ -44,6 +77,7 @@ class PassDataInputController {
     func setGuestSeniorInputScreen () {
         setDisabledScreen()
         birthDateFieldsEnable()
+        ssnFieldsEnable()
         firstNameFieldsEnable()
         lastNameFieldsEnable()
         viewController.generateButton.enable()
@@ -142,6 +176,8 @@ class PassDataInputController {
         allLabels.forEach { $0.disable() }
     }
     
+    #warning("rename methods to something like ssnInputEnable")
+    
     private func controlButtonsDisable () {
         viewController.generateButton.setStyle(to: .generate)
         viewController.generateButton.disable()
@@ -153,6 +189,15 @@ class PassDataInputController {
         viewController.birthDateField.enable()
         viewController.birthDateLabel.enable()
         viewController.birthDateField.addTarget(self, action: #selector(setDateInput), for: .editingDidBegin)
+    }
+    
+    
+    private func ssnFieldsEnable () {
+        viewController.ssnLabel.enable()
+        viewController.ssnField.enable()
+        viewController.ssnField.keyboardType = .numberPad
+        viewController.ssnField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
+        viewController.ssnField.addTarget(self, action: #selector(ssnFormat), for: .editingChanged)
     }
     
     private func firstNameFieldsEnable () {
@@ -200,13 +245,8 @@ class PassDataInputController {
     }
     
     
-    #warning("Fininish this one and the rest of the input validation off!")
     @objc private func defaultTextFieldValidation (sender: UITextField) {
-        if let originalString = sender.text {
-            let trimmedString = originalString.trimmingCharacters(in: .whitespacesAndNewlines) // removes the blankspace before and after the gist of the field
-            sender.text = trimmedString
-            print(trimmedString)
-        }
+        sender.text = sender.text?.nameValidated
     }
     
     @objc private func datePickerValueChanged (sender:UIDatePicker) {
@@ -215,6 +255,49 @@ class PassDataInputController {
         dateFormatter.timeStyle = DateFormatter.Style.none
         dateFormatter.dateFormat = "MM / dd / yyyy"
         viewController.birthDateField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    #warning("Finish this one and the rest of the input validation off!")
+    @objc private func ssnFormat (sender: UITextField) {
+        if let input = sender.text {
+            var validatedInput = input.ssnValidated
+            
+            if validatedInput.strippedNumbers.count == 4 &&
+                validatedInput.firstIndex(of: "-") == nil {
+                
+                validatedInput.insert(" ", at: validatedInput.index(validatedInput.startIndex, offsetBy: 3))
+                validatedInput.insert("-", at: validatedInput.index(validatedInput.startIndex, offsetBy: 4))
+                validatedInput.insert(" ", at: validatedInput.index(validatedInput.startIndex, offsetBy: 5))
+                
+            } else if validatedInput.strippedNumbers.count == 7 &&
+                validatedInput.firstIndex(of: "-") == validatedInput.lastIndex(of: "-") {
+                
+                validatedInput.insert(" ", at: validatedInput.index(validatedInput.startIndex, offsetBy: 8))
+                validatedInput.insert("-", at: validatedInput.index(validatedInput.startIndex, offsetBy: 9))
+                validatedInput.insert(" ", at: validatedInput.index(validatedInput.startIndex, offsetBy: 10))
+                
+            } else if validatedInput.strippedNumbers.count > 3 &&
+                validatedInput.strippedNumbers.count < 7 &&
+                validatedInput.firstIndex(of: "-") == nil {
+                
+                validatedInput.insert(" ", at: validatedInput.index(validatedInput.startIndex, offsetBy: 3))
+                validatedInput.insert("-", at: validatedInput.index(validatedInput.startIndex, offsetBy: 4))
+                validatedInput.insert(" ", at: validatedInput.index(validatedInput.startIndex, offsetBy: 5))
+                
+            } else if validatedInput.strippedNumbers.count > 3 &&
+                validatedInput.strippedNumbers.count < 7 &&
+                validatedInput.firstIndex(of: "-") == nil {
+                
+                validatedInput.insert(" ", at: validatedInput.index(validatedInput.startIndex, offsetBy: 3))
+                validatedInput.insert("-", at: validatedInput.index(validatedInput.startIndex, offsetBy: 4))
+                validatedInput.insert(" ", at: validatedInput.index(validatedInput.startIndex, offsetBy: 5))
+                
+            }
+//            else if input.count > 3 && input.character(at: 4) != "-" {
+//                input.insert("-", at: input.index(input.startIndex, offsetBy: 3))
+//            }
+            sender.text = validatedInput
+        }
     }
     
     @objc private func setTextInput (sender: UITextField) {
