@@ -53,11 +53,11 @@ extension ParkAdmissable { // This extention contains computed array, that alway
     var admissionAreas: [Area] {
         var admissionAreas = [Area]()
         admissionAreas.append(.amusement)
-        if self is Employee {
-            let employee = self as! Employee
-            if employee.employeeCard.paymetTerms == .payroll {
+        if self is EmployeePass {
+            let employee = self as! EmployeePass
+            if employee.employeeCard.paymentTerms == .payroll {
                 admissionAreas += [.kitchen, .rideControl, .maintenance, .office]
-            } else if employee.employeeCard.paymetTerms == .hourly {
+            } else if employee.employeeCard.paymentTerms == .hourly {
                 switch employee.employeeCard.department {
                 case .foodServices : admissionAreas.append(.kitchen)
                 case .rideServices: admissionAreas.append(.rideControl)
@@ -114,7 +114,7 @@ protocol RideAdmissable {
 
 extension RideAdmissable {
     var rideAdmissionType: RideAdmission {
-        if self is Vip {
+        if self is VipGuestPass {
             return .vip
         } else {
             return .general
@@ -140,11 +140,11 @@ protocol Discountable {
 extension Discountable {
     var discounts: [Discount] {
         var discounts = [Discount]()
-        if self is Vip {
+        if self is VipGuestPass {
             discounts.append((value: 10, goodsGroup: .food))
             discounts.append((value: 20, goodsGroup: .mercandise))
-        } else if self is Employee {
-            let employee = self as? Employee
+        } else if self is EmployeePass {
+            let employee = self as? EmployeePass
             if employee?.employeeCard.0 == .hourly {
                 discounts.append((value: 15, goodsGroup: .food))
                 discounts.append((value: 25, goodsGroup: .mercandise))
@@ -176,7 +176,7 @@ enum Department: String, CaseIterable {
 }
 
 protocol Worker {
-    typealias EmployeeCard = (paymetTerms: PaymentTerms, department: Department)
+    typealias EmployeeCard = (paymentTerms: PaymentTerms, department: Department)
     var employeeCard: EmployeeCard { get }
     var firstName: String { get }
     var lastName: String { get }

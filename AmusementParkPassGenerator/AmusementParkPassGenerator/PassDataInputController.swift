@@ -26,6 +26,19 @@ extension String {
         
     }
     
+    var projectNumberValidated: String {
+        let charSet = CharacterSet(charactersIn: "1234567890").inverted
+        let strippedString = self.components(separatedBy: charSet).joined(separator: "")
+        return String(strippedString.prefix(7))
+        
+    }
+    
+    var zipValidated: String {
+        let charSet = CharacterSet(charactersIn: "1234567890").inverted
+        let strippedString = self.components(separatedBy: charSet).joined(separator: "")
+        return String(strippedString.prefix(5))
+    }
+    
     var strippedNumbers: String {
         return self.filter("01234567890".contains)
     }
@@ -204,7 +217,7 @@ class PassDataInputController {
         viewController.firstNameLabel.enable()
         viewController.firstNameField.enable()
         viewController.firstNameField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
-        viewController.firstNameField.addTarget(self, action: #selector(defaultTextFieldValidation), for: .editingDidEnd)
+        viewController.firstNameField.addTarget(self, action: #selector(defaultTextFieldValidation), for: .editingChanged)
     }
     
     private func lastNameFieldsEnable () {
@@ -269,7 +282,7 @@ class PassDataInputController {
                 validatedInput.insert("-", at: validatedInput.index(validatedInput.startIndex, offsetBy: 4))
                 validatedInput.insert(" ", at: validatedInput.index(validatedInput.startIndex, offsetBy: 5))
                 
-            } else if validatedInput.strippedNumbers.count == 7 &&
+            } else if validatedInput.strippedNumbers.count == 6 &&
                 validatedInput.firstIndex(of: "-") == validatedInput.lastIndex(of: "-") {
                 
                 validatedInput.insert(" ", at: validatedInput.index(validatedInput.startIndex, offsetBy: 8))
@@ -293,9 +306,6 @@ class PassDataInputController {
                 validatedInput.insert(" ", at: validatedInput.index(validatedInput.startIndex, offsetBy: 5))
                 
             }
-//            else if input.count > 3 && input.character(at: 4) != "-" {
-//                input.insert("-", at: input.index(input.startIndex, offsetBy: 3))
-//            }
             sender.text = validatedInput
         }
     }
@@ -330,4 +340,34 @@ class PassDataInputController {
         sender.inputView = datePicker
         sender.inputAccessoryView = inputAccessoryViewHandler.accessoryView
     }
+    
+    
+    
+    //Checking the data Integrity of the input Screen before creating the instances
+    
+    @objc private func createAdultGuestPass (sender: UIButton) {}
+    
+    private func checkAdultGuestPassDataIntegrity () throws -> Void {
+        
+    }
+    
+    @objc private func createChildGuestPass (sender: UIButton) {}
+    
+    @objc private func createVipGuestPass (sender: UIButton) {}
+    
+    @objc private func createSeasonGuestPass (sender: UIButton) {}
+    
+    @objc private func createSeniorGuestPass (sender: UIButton) {}
+    
+    @objc private func contractEmployeePass (sender: UIButton) {}
+    
+    @objc private func foodServicesEmployeePass (sender: UIButton) {}
+    
+    @objc private func rideServicesEmployeePass (sender: UIButton) {}
+    
+    @objc private func maintenanceEmployeePass (sender: UIButton) {}
+    
+    @objc private func vendorPass (sender: UIButton) {}
+    
+    @objc private func managerPass (sender: UIButton) {}
 }

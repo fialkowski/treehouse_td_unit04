@@ -11,17 +11,31 @@ import Foundation
 enum PassInitError: Error {
     case invalidKey(throwingInstance: String)
     case invalidBirthDate(throwingInstance: String)
+    case emptyBirthDate
+    case invalidSsn(throwingInstance: String)
+    case wrongLengthSsn
     case invalidFirstName(throwingInstance: String)
+    case emptyFirstName
     case invalidLastName(throwingInstance: String)
+    case emptyLastName
     case invalidStreetNumber(throwingInstance: String)
+    case emptySreetNumber
     case invalidStreetName(throwingInstance: String)
+    case emptyStreetName
+    case invalidStreetType(throwingInstance: String)
+    case emptyStreetType
     case invalidCity(throwingInstance: String)
+    case emptyCity
     case invalidState(throwingInstance: String)
+    case emptyState
     case invalidZip(throwingInstance: String)
+    case emptyZip
     case invalidEmployeeCard(throwingInstance: String)
+    case invalidPaymentTerms(throwingInstance: String)
+    case invalidDepartment(throwingInstance: String)
 }
 
-struct Classic: ParkAdmissable, RideAdmissable {
+struct AdultGuestPass: ParkAdmissable, RideAdmissable {
     let key: String
     var lastSwipeTimestamp: Date
     func printSelfToConsole() {
@@ -30,7 +44,7 @@ struct Classic: ParkAdmissable, RideAdmissable {
     
     init() throws {
         guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else { // Generates a random key for the instance
-            throw PassInitError.invalidKey(throwingInstance: String(describing: Classic.self))
+            throw PassInitError.invalidKey(throwingInstance: String(describing: AdultGuestPass.self))
         }
         self.key = unwrappedKey
         self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
@@ -38,7 +52,7 @@ struct Classic: ParkAdmissable, RideAdmissable {
     
 }
 
-struct Vip: ParkAdmissable, RideAdmissable, Discountable {
+struct VipGuestPass: ParkAdmissable, RideAdmissable, Discountable {
     let key: String
     var lastSwipeTimestamp: Date
     func printSelfToConsole() {
@@ -47,7 +61,7 @@ struct Vip: ParkAdmissable, RideAdmissable, Discountable {
     
     init() throws {
         guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else { // Generates a random key for the instance
-            throw PassInitError.invalidKey(throwingInstance: String(describing: Vip.self))
+            throw PassInitError.invalidKey(throwingInstance: String(describing: VipGuestPass.self))
         }
         self.key = unwrappedKey
         self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
@@ -55,7 +69,7 @@ struct Vip: ParkAdmissable, RideAdmissable, Discountable {
     
 }
 
-struct FreeChild: ParkAdmissable, Child, RideAdmissable {
+struct ChildGuestPass: ParkAdmissable, Child, RideAdmissable {
     let key: String
     var lastSwipeTimestamp: Date
     let birthDate: Date
@@ -65,11 +79,11 @@ struct FreeChild: ParkAdmissable, Child, RideAdmissable {
     }
     init() throws {
         guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else { // Generates a random key for the instance
-            throw PassInitError.invalidKey(throwingInstance: String(describing: FreeChild.self))
+            throw PassInitError.invalidKey(throwingInstance: String(describing: ChildGuestPass.self))
         }
         self.key = unwrappedKey
         guard let unwrappedBirthDate = RandomGenerator.randomDate(daysBack: 5200) else {
-            throw PassInitError.invalidBirthDate(throwingInstance: String(describing: FreeChild.self))
+            throw PassInitError.invalidBirthDate(throwingInstance: String(describing: ChildGuestPass.self))
         }
         self.birthDate = unwrappedBirthDate
         self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
@@ -81,61 +95,154 @@ struct FreeChild: ParkAdmissable, Child, RideAdmissable {
     }
 }
 
-struct Employee: ParkAdmissable, Worker, RideAdmissable, Discountable {
+struct EmployeePass: ParkAdmissable, Worker, RideAdmissable, Discountable {
     let key: String
-    var lastSwipeTimestamp: Date
+    let ssn: String
     let firstName: String
     let lastName: String
     let streetNumber: Int
     let streetName: String
+    let streetType: String
     let city: String
     let state: String
     let zip: String
     var employeeCard: EmployeeCard
+    var lastSwipeTimestamp: Date
     
     func printSelfToConsole() {
         ConsolePrinter.printPass(self)
     }
     
+    init(key: String?,
+         ssn: String?,
+         firstName: String?,
+         lastName: String?,
+         streetNumber: Int?,
+         streetName: String?,
+         streetType: String?,
+         city: String?,
+         state: String?,
+         zip: String?,
+         paymentTerms: PaymentTerms?,
+         department: Department?) throws {
+        
+        guard let unwrappedKey = key else { throw PassInitError.invalidKey(throwingInstance: String(describing: EmployeePass.self)) }
+        if unwrappedKey.count != 32 {
+            throw PassInitError.invalidKey(throwingInstance: String(describing: EmployeePass.self))
+        } else {
+            self.key = unwrappedKey
+        }
+        
+        guard let unwrappedSsn = ssn else { throw PassInitError.invalidSsn(throwingInstance: String(describing: EmployeePass.self))}
+        if unwrappedSsn.count != 9 {
+            throw PassInitError.wrongLengthSsn
+        } else {
+            self.ssn = unwrappedSsn
+        }
+        
+        guard let unwrappedFirstName = firstName else { throw PassInitError.invalidFirstName(throwingInstance: String(describing: EmployeePass.self)) }
+        if unwrappedFirstName.count == 0 {
+            throw PassInitError.emptyFirstName
+        } else {
+            self.firstName = unwrappedFirstName
+        }
+        
+        guard let unwrappedLastName = lastName else { throw PassInitError.invalidLastName(throwingInstance: String(describing: EmployeePass.self)) }
+        if unwrappedLastName.count == 0 {
+            throw PassInitError.emptyLastName
+        } else {
+            self.lastName = unwrappedLastName
+        }
+        
+        guard let unwrappedStreetNumber = streetNumber else { throw PassInitError.invalidStreetNumber(throwingInstance: String(describing: EmployeePass.self)) }
+        self.streetNumber = unwrappedStreetNumber
+        
+        guard let unwrappedStreetName = streetName else { throw PassInitError.invalidStreetName(throwingInstance: String(describing: EmployeePass.self))}
+        if unwrappedStreetName.count == 0 {
+            throw PassInitError.emptyStreetName
+        } else {
+            self.streetName = unwrappedStreetName
+        }
+        
+        guard let unwrappedStreetType = streetType else {throw PassInitError.invalidStreetType(throwingInstance: String(describing: EmployeePass.self))}
+        if unwrappedStreetType.count == 0 {
+            throw PassInitError.emptyStreetType
+        } else {
+            self.streetType = unwrappedStreetType
+        }
+        
+        guard let unwrappedCity = city else { throw PassInitError.invalidCity(throwingInstance: String(describing: EmployeePass.self))}
+        if unwrappedCity.count == 0 {
+            throw PassInitError.emptyCity
+        } else {
+            self.city = unwrappedCity
+        }
+        
+        guard let unwrappedState = state else { throw PassInitError.invalidState(throwingInstance: String(describing: EmployeePass.self))}
+        if unwrappedState.count == 0 {
+            throw PassInitError.emptyState
+        } else {
+            self.state = unwrappedState
+        }
+        
+        guard let unwrappedZip = zip else { throw PassInitError.invalidZip(throwingInstance: String(describing: EmployeePass.self))}
+        if unwrappedZip.count == 0 {
+            throw PassInitError.emptyZip
+        } else {
+            self.zip = unwrappedZip
+        }
+        
+        guard let unwrappedPaymentTerms = paymentTerms else { throw PassInitError.invalidPaymentTerms(throwingInstance: String(describing: EmployeePass.self))}
+        guard let unwrappedDepartment = department else { throw PassInitError.invalidPaymentTerms(throwingInstance: String(describing: EmployeePass.self))}
+        self.employeeCard = (paymentTerms: unwrappedPaymentTerms, department: unwrappedDepartment)
+        
+        self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
+    }
+    
     init() throws { // THIS INIT GENERATES RANDOM DATA FOR THE STRUCT
         guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else { // Generates a random key for the instance
-            throw PassInitError.invalidKey(throwingInstance: String(describing: Employee.self))
+            throw PassInitError.invalidKey(throwingInstance: String(describing: EmployeePass.self))
         }
         self.key = unwrappedKey
         
+        guard let unwrappedSsn = RandomGenerator.randomSsn() else { throw PassInitError.invalidSsn(throwingInstance: String(describing: EmployeePass.self))}
+        self.ssn = unwrappedSsn
+        
         guard let unwrappedFirstName = RandomGenerator.randomElementFrom(file: "firstNames", ofType: "plist") else { //Grabs a random string from the plist as a first name
-            throw PassInitError.invalidFirstName(throwingInstance: String(describing: Employee.self))
+            throw PassInitError.invalidFirstName(throwingInstance: String(describing: EmployeePass.self))
         }
         self.firstName = unwrappedFirstName
         
         guard let unwrappedLastName = RandomGenerator.randomElementFrom(file: "lastNames", ofType: "plist") else { //Grabs a random string from the plist as a last name
-            throw PassInitError.invalidLastName(throwingInstance: String(describing: Employee.self))
+            throw PassInitError.invalidLastName(throwingInstance: String(describing: EmployeePass.self))
         }
         self.lastName = unwrappedLastName
         
         guard let unwrappedStreetNumber = RandomGenerator.randomStreetNumber() else {
-            throw PassInitError.invalidStreetNumber(throwingInstance: String(describing: Employee.self))
+            throw PassInitError.invalidStreetNumber(throwingInstance: String(describing: EmployeePass.self))
         }
         self.streetNumber = unwrappedStreetNumber
         
-        guard let unwrappedStreetName = RandomGenerator.randomElementFrom(file: "streetNames", ofType: "plist"),         //Grabs a random string from the plist as a street name
-              let unwrappedStreetType = RandomGenerator.randomElementFrom(file: "streetTypes", ofType: "plist") else {   //Grabs a random string from the plist as a street name
-                    throw PassInitError.invalidStreetName(throwingInstance: String(describing: Employee.self))
+        guard let unwrappedStreetName = RandomGenerator.randomElementFrom(file: "streetNames", ofType: "plist") else {
+                    throw PassInitError.invalidStreetName(throwingInstance: String(describing: EmployeePass.self))
         }
-        self.streetName = "\(unwrappedStreetName) " + "\(unwrappedStreetType)"
+        
+        guard let unwrappedStreetType = RandomGenerator.randomElementFrom(file: "streetTypes", ofType: "plist") else { throw PassInitError.invalidStreetType(throwingInstance: String(describing: EmployeePass.self))}
+        self.streetName = unwrappedStreetName
+        self.streetType = unwrappedStreetType
         
         guard let unwrappedCity = RandomGenerator.randomElementFrom(file: "cities", ofType: "plist") else { //Grabs a random string from the plist as a city
-            throw PassInitError.invalidCity(throwingInstance: String(describing: Employee.self))
+            throw PassInitError.invalidCity(throwingInstance: String(describing: EmployeePass.self))
         }
         self.city = unwrappedCity
         
         guard let unwrappedState = RandomGenerator.randomElementFrom(file: "states", ofType: "plist") else { //Grabs a random string from the plist as a state
-            throw PassInitError.invalidState(throwingInstance: String(describing: Employee.self))
+            throw PassInitError.invalidState(throwingInstance: String(describing: EmployeePass.self))
         }
         self.state = unwrappedState
         
         guard let unwrappedZip = RandomGenerator.randomZipCode() else {
-            throw PassInitError.invalidZip(throwingInstance: String(describing: Employee.self))
+            throw PassInitError.invalidZip(throwingInstance: String(describing: EmployeePass.self))
         }
         self.zip = unwrappedZip
         
@@ -143,3 +250,4 @@ struct Employee: ParkAdmissable, Worker, RideAdmissable, Discountable {
         self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
     }
 }
+

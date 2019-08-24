@@ -15,7 +15,7 @@ enum FileReadError: Error {
 }
 
 class RandomGenerator {
-    static func randomDate(daysBack: Int)-> Date?{
+    static func randomDate(daysBack: Int) -> Date? {
         let day = Int(arc4random_uniform(UInt32(daysBack) + 1)) * -1
         let hour = arc4random_uniform(23)
         let minute = arc4random_uniform(59)
@@ -33,10 +33,11 @@ class RandomGenerator {
     
     static func randomKey(length: Int) -> String? {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        switch Int.random(in: 0...30) { // One of 30 will generate nil value for testing purpose
-        case 0: return nil
-        default: return String((0..<length).map{ _ in letters.randomElement()!})
-        }
+        return String((0..<length).map{ _ in letters.randomElement()!})
+    }
+    
+    static func randomSsn() -> String? {
+        return String(Int.random(in: 101000000...999999999))
     }
     
     static func randomStreetNumber() -> Int? {

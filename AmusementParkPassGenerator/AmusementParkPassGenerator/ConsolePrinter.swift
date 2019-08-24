@@ -17,8 +17,8 @@ class ConsolePrinter {
         var loopCounter: Int = 0
         
         switch pass {
-        case is Vip: do {
-            let vip = pass as! Vip //Forceunwrapped since checked with switch statement condition
+        case is VipGuestPass: do {
+            let vip = pass as! VipGuestPass //Forceunwrapped since checked with switch statement condition
             for admissionArea in vip.admissionAreas {
                 loopCounter += 1
                 admissionAreasString += "\(admissionArea.rawValue)"
@@ -40,9 +40,9 @@ class ConsolePrinter {
             outputString += "Admission areas: \(admissionAreasString)\n"
             outputString += "Eligible for discounts: \(discountsString)"
             }
-        case is FreeChild: do {
+        case is ChildGuestPass: do {
             var birthDateString = String()
-            let freeChild = pass as! FreeChild
+            let freeChild = pass as! ChildGuestPass
             for admissionArea in freeChild.admissionAreas {
                 loopCounter += 1
                 admissionAreasString += "\(admissionArea.rawValue)"
@@ -63,8 +63,8 @@ class ConsolePrinter {
             outputString += "Ride admission: \(freeChild.rideAdmissionType.rawValue)\n"
             outputString += "Admission areas: \(admissionAreasString)"
             }
-        case is Employee: do {
-            let employee = pass as! Employee //Forceunwrapped since checked with switch statement condition
+        case is EmployeePass: do {
+            let employee = pass as! EmployeePass //Forceunwrapped since checked with switch statement condition
             var emojiString = String()
             var headerString = String()
             for admissionArea in employee.admissionAreas {
@@ -75,7 +75,7 @@ class ConsolePrinter {
                 }
             }
             
-            switch employee.employeeCard.paymetTerms {
+            switch employee.employeeCard.paymentTerms {
             case .hourly:
                 headerString += "Hourly"
                 emojiString += "⏱"
@@ -105,8 +105,8 @@ class ConsolePrinter {
             outputString += "Ride admission: \(employee.rideAdmissionType.rawValue)\n"
             outputString += "Admission areas: \(admissionAreasString)"
             }
-        case is Classic: do {
-            let classic = pass as! Classic //Forceunwrapped since checked with switch statement condition
+        case is AdultGuestPass: do {
+            let classic = pass as! AdultGuestPass //Forceunwrapped since checked with switch statement condition
             for admissionArea in classic.admissionAreas {
                 loopCounter += 1
                 admissionAreasString += "\(admissionArea.rawValue)"
@@ -138,7 +138,7 @@ class ConsolePrinter {
     static func printAreaSwipeResult (_ pass: ParkAdmissable, printOut: SwipeFeedback) {
         switch printOut {
         case .granted: do {
-            if let child = pass as? FreeChild {
+            if let child = pass as? ChildGuestPass {
                 let calendar = Calendar.current
                 if (calendar.component(.month, from: child.birthDate) == calendar.component(.month, from: Date(timeIntervalSinceNow: 0))) &&
                     (calendar.component(.day, from: child.birthDate) == calendar.component(.day, from: Date(timeIntervalSinceNow: 0))) {
