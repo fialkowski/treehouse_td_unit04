@@ -117,8 +117,8 @@ class MainMenuHandler {
                 throw MainMenuHandlerError.noButtonCaption
             }
             switch senderTitle {
-            case "vendor" : do { viewController.passDataInputController?.setVendorInputScreen() }
-            case "manager" : do { viewController.passDataInputController?.setManagerInputScreen() }
+            case "vendor" : do { viewController.passDataInputController?.vendorPassInputEnable() }
+            case "manager" : do { viewController.passDataInputController?.managerPassInputEnable() }
             default: throw MainMenuHandlerError.buttonCaptionDoesNotMatchModelDataType
             }
         }
@@ -157,15 +157,15 @@ class MainMenuHandler {
             throw MainMenuHandlerError.noButtonCaption
         }
         switch senderTitle {
-        case "contract" : do { viewController.passDataInputController?.setEmployeeInputScreen() }
-        case "food services" : do { viewController.passDataInputController?.setEmployeeInputScreen() }
-        case "ride services" : do { viewController.passDataInputController?.setEmployeeInputScreen() }
-        case "maintenance" : do { viewController.passDataInputController?.setEmployeeInputScreen() }
-        case "season pass" : do { viewController.passDataInputController?.setGuestSeasonPassInputScreen() }
-        case "vip" : do { viewController.passDataInputController?.setGuestVipInputScreen() }
-        case "adult" : do { viewController.passDataInputController?.setGuestAdultInputScreen() }
-        case "child" : do { viewController.passDataInputController?.setGuestChildInputScreen() }
-        case "senior" : do { viewController.passDataInputController?.setGuestSeniorInputScreen() }
+        case "contract" : do { viewController.passDataInputController?.hourlyEmployeePassInputEnable() }
+        case "food services" : do { viewController.passDataInputController?.hourlyEmployeePassInputEnable() }
+        case "ride services" : do { viewController.passDataInputController?.hourlyEmployeePassInputEnable() }
+        case "maintenance" : do { viewController.passDataInputController?.hourlyEmployeePassInputEnable() }
+        case "season pass" : do { viewController.passDataInputController?.seasonGuestPassInputEnable() }
+        case "vip" : do { viewController.passDataInputController?.vipGuestPassInputEnable() }
+        case "adult" : do { viewController.passDataInputController?.adultGuestPassInputEnable() }
+        case "child" : do { viewController.passDataInputController?.childGuestPassInputEnable() }
+        case "senior" : do { viewController.passDataInputController?.seniorGuestPassInputEnable() }
         default: throw MainMenuHandlerError.buttonCaptionDoesNotMatchModelDataType
         }
     }

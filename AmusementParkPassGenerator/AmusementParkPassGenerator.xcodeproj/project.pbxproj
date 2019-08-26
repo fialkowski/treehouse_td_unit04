@@ -30,6 +30,7 @@
 		8A9CBC6622F8E27600CE9F7C /* InterfaceRelatedExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9CBC6522F8E27600CE9F7C /* InterfaceRelatedExtensions.swift */; };
 		8AA52865225ED5460033A09C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA52864225ED5460033A09C /* Protocols.swift */; };
 		8AA5286F225EDDCE0033A09C /* PassReaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5286E225EDDCE0033A09C /* PassReaders.swift */; };
+		8AAEC7502313777D00D6AC6F /* InputDataValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAEC74F2313777D00D6AC6F /* InputDataValidator.swift */; };
 		8ADC5AFB2311B86E009160C0 /* PassDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADC5AFA2311B86E009160C0 /* PassDataTypes.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		8A9CBC6522F8E27600CE9F7C /* InterfaceRelatedExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceRelatedExtensions.swift; sourceTree = "<group>"; };
 		8AA52864225ED5460033A09C /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		8AA5286E225EDDCE0033A09C /* PassReaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassReaders.swift; sourceTree = "<group>"; };
+		8AAEC74F2313777D00D6AC6F /* InputDataValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataValidator.swift; sourceTree = "<group>"; };
 		8ADC5AFA2311B86E009160C0 /* PassDataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassDataTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +105,7 @@
 				8ADC5AFA2311B86E009160C0 /* PassDataTypes.swift */,
 				8A8C6C4E22F396FF00FD4FD1 /* MainMenuHandler.swift */,
 				8A9CBC6322F8B22600CE9F7C /* PassDataInputController.swift */,
+				8AAEC74F2313777D00D6AC6F /* InputDataValidator.swift */,
 				8A98FBC322FD0AA200EC4794 /* InputAccessoryViewHandler.swift */,
 				8A2325AD222E30240055F1B6 /* FirstPageViewController.swift */,
 				8A8C6C4C22F1397F00FD4FD1 /* AlertController.swift */,
@@ -209,6 +212,7 @@
 				8AA5286F225EDDCE0033A09C /* PassReaders.swift in Sources */,
 				8AA52865225ED5460033A09C /* Protocols.swift in Sources */,
 				8A8C18F3226429AE00735FAE /* ConsolePrinter.swift in Sources */,
+				8AAEC7502313777D00D6AC6F /* InputDataValidator.swift in Sources */,
 				8A98FBC422FD0AA200EC4794 /* InputAccessoryViewHandler.swift in Sources */,
 				8ADC5AFB2311B86E009160C0 /* PassDataTypes.swift in Sources */,
 				8A9CBC6422F8B22600CE9F7C /* PassDataInputController.swift in Sources */,
