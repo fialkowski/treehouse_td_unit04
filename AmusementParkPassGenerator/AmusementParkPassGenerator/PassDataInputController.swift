@@ -30,7 +30,7 @@ class PassDataInputController {
     
     func childGuestPassInputEnable () {
         setDisabledScreen()
-        birthDateFieldsEnable()
+        birthDateInputEnable()
         viewController.generateButton.enable()
         viewController.populateButton.enable()
     }
@@ -42,48 +42,48 @@ class PassDataInputController {
     
     func seniorGuestPassInputEnable () {
         setDisabledScreen()
-        birthDateFieldsEnable()
-        ssnFieldsEnable()
-        firstNameFieldsEnable()
-        lastNameFieldsEnable()
+        birthDateInputEnable()
+        ssnInputEnable()
+        firstNameInputEnable()
+        lastNameInputEnable()
         viewController.generateButton.enable()
         viewController.populateButton.enable()
     }
     
     func seasonGuestPassInputEnable () {
         setDisabledScreen()
-        firstNameFieldsEnable()
-        lastNameFieldsEnable()
-        addressFieldsEnable()
+        firstNameInputEnable()
+        lastNameInputEnable()
+        addressInputEnable()
         viewController.generateButton.enable()
         viewController.populateButton.enable()
     }
     
     func hourlyEmployeePassInputEnable () {
         setDisabledScreen()
-        firstNameFieldsEnable()
-        lastNameFieldsEnable()
-        addressFieldsEnable()
+        firstNameInputEnable()
+        lastNameInputEnable()
+        addressInputEnable()
         viewController.generateButton.enable()
         viewController.populateButton.enable()
     }
     
     func managerPassInputEnable () {
         setDisabledScreen()
-        firstNameFieldsEnable()
-        lastNameFieldsEnable()
-        addressFieldsEnable()
+        firstNameInputEnable()
+        lastNameInputEnable()
+        addressInputEnable()
         viewController.generateButton.enable()
         viewController.populateButton.enable()
     }
     
     func vendorPassInputEnable () {
         setDisabledScreen()
-        firstNameFieldsEnable()
-        lastNameFieldsEnable()
-        birthDateFieldsEnable()
-        companyFieldsEnable()
-        dateOfVisitEnable()
+        firstNameInputEnable()
+        lastNameInputEnable()
+        birthDateInputEnable()
+        companyInputEnable()
+        dateOfVisitInputEnable()
         viewController.generateButton.enable()
         viewController.populateButton.enable()
     }
@@ -142,8 +142,6 @@ class PassDataInputController {
         allLabels.forEach { $0.disable() }
     }
     
-    #warning("rename methods to something like ssnInputEnable")
-    
     private func controlButtonsDisable () {
         viewController.generateButton.setStyle(to: .generate)
         viewController.generateButton.disable()
@@ -151,14 +149,14 @@ class PassDataInputController {
         viewController.populateButton.disable()
     }
     
-    private func birthDateFieldsEnable () {
+    private func birthDateInputEnable () {
         viewController.birthDateField.enable()
         viewController.birthDateLabel.enable()
         viewController.birthDateField.addTarget(self, action: #selector(setDateInput), for: .editingDidBegin)
     }
     
     
-    private func ssnFieldsEnable () {
+    private func ssnInputEnable () {
         viewController.ssnLabel.enable()
         viewController.ssnField.enable()
         viewController.ssnField.keyboardType = .numberPad
@@ -166,33 +164,33 @@ class PassDataInputController {
         viewController.ssnField.addTarget(self, action: #selector(ssnFormat), for: .editingChanged)
     }
     
-    private func firstNameFieldsEnable () {
+    private func firstNameInputEnable () {
         viewController.firstNameLabel.enable()
         viewController.firstNameField.enable()
         viewController.firstNameField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
         viewController.firstNameField.addTarget(self, action: #selector(defaultTextFieldValidation), for: .editingChanged)
     }
     
-    private func lastNameFieldsEnable () {
+    private func lastNameInputEnable () {
         viewController.lastNameLabel.enable()
         viewController.lastNameField.enable()
         viewController.lastNameField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
     }
     
-    private func companyFieldsEnable () {
+    private func companyInputEnable () {
         viewController.companyLabel.enable()
         viewController.companyField.enable()
         viewController.companyField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
     }
     
-    private func dateOfVisitEnable () {
+    private func dateOfVisitInputEnable () {
         viewController.dateOfVisitLabel.enable()
         viewController.dateOfVisitField.enable()
         viewController.dateOfVisitField.inputView = datePicker
         viewController.dateOfVisitField.addTarget(self, action: #selector(setDateInput), for: .editingDidBegin)
     }
     
-    private func addressFieldsEnable () {
+    private func addressInputEnable () {
         viewController.streetAddressLabel.enable()
         viewController.streetAddressField.enable()
         viewController.streetAddressField.addTarget(self, action: #selector(setTextInput), for: .editingDidBegin)
@@ -259,6 +257,7 @@ class PassDataInputController {
     }
     
     
+    //TODO: Finish the Input process validation and make sure you activate the right things for the correspondind pass input properties, you should look for the passInput screen activation methods above!
     
     //Checking the data Integrity of the input Screen before creating the instances
     
