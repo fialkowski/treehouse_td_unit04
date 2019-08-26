@@ -31,12 +31,19 @@ class RandomGenerator {
         return randomDate
     }
     
-    static func randomKey(length: Int) -> String? {
+    
+    //TODO: Remove this method
+    static func randomKey(length: Int = 128) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()!})
     }
     
-    static func randomSsn() -> String? {
+    static var randomPassKey: String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0..<128).map{ _ in letters.randomElement()!})
+    }
+    
+    static var randomSsn:String {
         return String(Int.random(in: 101000000...999999999))
     }
     

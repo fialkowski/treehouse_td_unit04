@@ -114,7 +114,7 @@ protocol RideAdmissable {
 
 extension RideAdmissable {
     var rideAdmissionType: RideAdmission {
-        if self is VipGuestPass {
+        if self is VipGuestPassObsolete {
             return .vip
         } else {
             return .general
@@ -140,7 +140,7 @@ protocol Discountable {
 extension Discountable {
     var discounts: [Discount] {
         var discounts = [Discount]()
-        if self is VipGuestPass {
+        if self is VipGuestPassObsolete {
             discounts.append((value: 10, goodsGroup: .food))
             discounts.append((value: 20, goodsGroup: .mercandise))
         } else if self is EmployeePass {

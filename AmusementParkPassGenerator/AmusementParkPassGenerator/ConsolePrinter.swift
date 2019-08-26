@@ -17,8 +17,8 @@ class ConsolePrinter {
         var loopCounter: Int = 0
         
         switch pass {
-        case is VipGuestPass: do {
-            let vip = pass as! VipGuestPass //Forceunwrapped since checked with switch statement condition
+        case is VipGuestPassObsolete: do {
+            let vip = pass as! VipGuestPassObsolete //Forceunwrapped since checked with switch statement condition
             for admissionArea in vip.admissionAreas {
                 loopCounter += 1
                 admissionAreasString += "\(admissionArea.rawValue)"
@@ -40,9 +40,9 @@ class ConsolePrinter {
             outputString += "Admission areas: \(admissionAreasString)\n"
             outputString += "Eligible for discounts: \(discountsString)"
             }
-        case is ChildGuestPass: do {
+        case is ChildGuestPassObsolete: do {
             var birthDateString = String()
-            let freeChild = pass as! ChildGuestPass
+            let freeChild = pass as! ChildGuestPassObsolete
             for admissionArea in freeChild.admissionAreas {
                 loopCounter += 1
                 admissionAreasString += "\(admissionArea.rawValue)"
@@ -105,8 +105,8 @@ class ConsolePrinter {
             outputString += "Ride admission: \(employee.rideAdmissionType.rawValue)\n"
             outputString += "Admission areas: \(admissionAreasString)"
             }
-        case is AdultGuestPass: do {
-            let classic = pass as! AdultGuestPass //Forceunwrapped since checked with switch statement condition
+        case is AdultGuestPassObsolete: do {
+            let classic = pass as! AdultGuestPassObsolete //Forceunwrapped since checked with switch statement condition
             for admissionArea in classic.admissionAreas {
                 loopCounter += 1
                 admissionAreasString += "\(admissionArea.rawValue)"
@@ -138,7 +138,7 @@ class ConsolePrinter {
     static func printAreaSwipeResult (_ pass: ParkAdmissable, printOut: SwipeFeedback) {
         switch printOut {
         case .granted: do {
-            if let child = pass as? ChildGuestPass {
+            if let child = pass as? ChildGuestPassObsolete {
                 let calendar = Calendar.current
                 if (calendar.component(.month, from: child.birthDate) == calendar.component(.month, from: Date(timeIntervalSinceNow: 0))) &&
                     (calendar.component(.day, from: child.birthDate) == calendar.component(.day, from: Date(timeIntervalSinceNow: 0))) {

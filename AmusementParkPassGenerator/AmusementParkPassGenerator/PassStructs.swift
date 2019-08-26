@@ -35,7 +35,7 @@ enum PassInitError: Error {
     case invalidDepartment(throwingInstance: String)
 }
 
-struct AdultGuestPass: ParkAdmissable, RideAdmissable {
+struct AdultGuestPassObsolete: ParkAdmissable, RideAdmissable {
     let key: String
     var lastSwipeTimestamp: Date
     func printSelfToConsole() {
@@ -43,16 +43,13 @@ struct AdultGuestPass: ParkAdmissable, RideAdmissable {
     }
     
     init() throws {
-        guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else { // Generates a random key for the instance
-            throw PassInitError.invalidKey(throwingInstance: String(describing: AdultGuestPass.self))
-        }
-        self.key = unwrappedKey
+        self.key = RandomGenerator.randomPassKey
         self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
     }
     
 }
 
-struct VipGuestPass: ParkAdmissable, RideAdmissable, Discountable {
+struct VipGuestPassObsolete: ParkAdmissable, RideAdmissable, Discountable {
     let key: String
     var lastSwipeTimestamp: Date
     func printSelfToConsole() {
@@ -60,16 +57,13 @@ struct VipGuestPass: ParkAdmissable, RideAdmissable, Discountable {
     }
     
     init() throws {
-        guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else { // Generates a random key for the instance
-            throw PassInitError.invalidKey(throwingInstance: String(describing: VipGuestPass.self))
-        }
-        self.key = unwrappedKey
+        self.key = RandomGenerator.randomPassKey
         self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
     }
     
 }
 
-struct ChildGuestPass: ParkAdmissable, Child, RideAdmissable {
+struct ChildGuestPassObsolete: ParkAdmissable, Child, RideAdmissable {
     let key: String
     var lastSwipeTimestamp: Date
     let birthDate: Date
@@ -78,12 +72,9 @@ struct ChildGuestPass: ParkAdmissable, Child, RideAdmissable {
         ConsolePrinter.printPass(self)
     }
     init() throws {
-        guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else { // Generates a random key for the instance
-            throw PassInitError.invalidKey(throwingInstance: String(describing: ChildGuestPass.self))
-        }
-        self.key = unwrappedKey
+        self.key = RandomGenerator.randomPassKey
         guard let unwrappedBirthDate = RandomGenerator.randomDate(daysBack: 5200) else {
-            throw PassInitError.invalidBirthDate(throwingInstance: String(describing: ChildGuestPass.self))
+            throw PassInitError.invalidBirthDate(throwingInstance: String(describing: ChildGuestPassObsolete.self))
         }
         self.birthDate = unwrappedBirthDate
         self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
@@ -125,13 +116,7 @@ struct EmployeePass: ParkAdmissable, Worker, RideAdmissable, Discountable {
          zip: String?,
          paymentTerms: PaymentTerms?,
          department: Department?) throws {
-        
-        guard let unwrappedKey = key else { throw PassInitError.invalidKey(throwingInstance: String(describing: EmployeePass.self)) }
-        if unwrappedKey.count != 32 {
-            throw PassInitError.invalidKey(throwingInstance: String(describing: EmployeePass.self))
-        } else {
-            self.key = unwrappedKey
-        }
+        self.key = RandomGenerator.randomPassKey
         
         guard let unwrappedSsn = ssn else { throw PassInitError.invalidSsn(throwingInstance: String(describing: EmployeePass.self))}
         if unwrappedSsn.count != 9 {
@@ -200,13 +185,8 @@ struct EmployeePass: ParkAdmissable, Worker, RideAdmissable, Discountable {
     }
     
     init() throws { // THIS INIT GENERATES RANDOM DATA FOR THE STRUCT
-        guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else { // Generates a random key for the instance
-            throw PassInitError.invalidKey(throwingInstance: String(describing: EmployeePass.self))
-        }
-        self.key = unwrappedKey
-        
-        guard let unwrappedSsn = RandomGenerator.randomSsn() else { throw PassInitError.invalidSsn(throwingInstance: String(describing: EmployeePass.self))}
-        self.ssn = unwrappedSsn
+        self.key = RandomGenerator.randomPassKey
+        self.ssn = RandomGenerator.randomSsn
         
         guard let unwrappedFirstName = RandomGenerator.randomElementFrom(file: "firstNames", ofType: "plist") else { //Grabs a random string from the plist as a first name
             throw PassInitError.invalidFirstName(throwingInstance: String(describing: EmployeePass.self))

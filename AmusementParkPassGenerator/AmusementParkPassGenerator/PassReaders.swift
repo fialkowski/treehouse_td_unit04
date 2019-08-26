@@ -18,7 +18,7 @@ struct AreaEntryPassReader: PassReader, AreaAssignable {
     init(ofArea area: Area = Area.allCases.randomElement()!) throws {
         //TODO: FIX THE FORCE UNWRAPPING WITH ERROR HANDLING
         guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else {
-            throw PassReaderInitError.invalidKey(throwingInstance: String(describing: AdultGuestPass.self))
+            throw PassReaderInitError.invalidKey(throwingInstance: String(describing: AdultGuestPassObsolete.self))
         }
         self.key = unwrappedKey
         self.areaType = area
@@ -37,7 +37,7 @@ struct CashRegisterPassReader: PassReader, CashRegisterAssignable {
     
     init(ofStoreType storeType: Good = Good.allCases.randomElement()!) throws {
         guard let unwrappedKey = RandomGenerator.randomKey(length: 32) else {
-            throw PassReaderInitError.invalidKey(throwingInstance: String(describing: AdultGuestPass.self))
+            throw PassReaderInitError.invalidKey(throwingInstance: String(describing: AdultGuestPassObsolete.self))
         }
         self.key = unwrappedKey
         self.storeType = storeType
