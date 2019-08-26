@@ -144,7 +144,7 @@ protocol HourlyEmployeePassData: PassSsnDetailsData, DiscountData, RideAccessOrd
           birthDate: Date, rideAccessOrder: RideAccessOrder)
 }
 
-enum ProjectNumber {
+enum ProjectNumber: CaseIterable {
     case num1001, num1002, num1003, num2001, num2002
     
     var engUsCaptions: String {
@@ -168,7 +168,7 @@ protocol ContractEmployeePassData: PassSsnDetailsData {
           state: String, zip: String)
 }
 
-enum ManagementTier {
+enum ManagementTier: CaseIterable {
     case shift, general, senior
     
     var engUsCaptions: String {
@@ -191,7 +191,7 @@ protocol ManagerPassData: PassSsnDetailsData, DiscountData, RideAccessOrderData 
           birthDate: Date, rideAccessOrder: RideAccessOrder)
 }
 
-enum VendorCompany {
+enum VendorCompany: CaseIterable {
     case acme, orkin, fedex, nwElectrical
     
     var engUsCaptions: String {
@@ -205,7 +205,12 @@ enum VendorCompany {
 }
 
 protocol VendorPassData: PassNameDetailsData {
+    var company: VendorCompany { get }
+    var visitDate: Date { get }
     
+    init (admissionAreas: [Area], company: VendorCompany,
+          firstName: String, lastName: String,
+          birthDate: Date, visitDate: Date)
 }
 
 struct AdultGuestPass: AdultGuestPassData {
@@ -214,10 +219,8 @@ struct AdultGuestPass: AdultGuestPassData {
     
     init(admissionAreas: [Area], rideAccessOrder: RideAccessOrder) {
         
-        self.key = RandomGenerator.randomPassKey
-        self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
-        self.admissionAreas = admissionAreas
-        self.rideAccessOrder = rideAccessOrder
+        self.key = RandomGenerator.randomPassKey;   self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
+        self.admissionAreas = admissionAreas;       self.rideAccessOrder = rideAccessOrder
     }
 }
 
@@ -228,10 +231,8 @@ struct ChildGuestPass: ChildGuestPassData {
     
     init(admissionAreas: [Area], birthDate: Date, rideAccessOrder: RideAccessOrder) {
         
-        self.key = RandomGenerator.randomPassKey
-        self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
-        self.admissionAreas = admissionAreas
-        self.birthDate = birthDate
+        self.key = RandomGenerator.randomPassKey;   self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
+        self.admissionAreas = admissionAreas;       self.birthDate = birthDate
         self.rideAccessOrder = rideAccessOrder
     }
 } 
@@ -243,10 +244,8 @@ struct VipGuestPass: VipGuestPassData {
     
     init(admissionAreas: [Area], discounts: [Discount], rideAccessOrder: RideAccessOrder) {
         
-        self.key = RandomGenerator.randomPassKey
-        self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
-        self.admissionAreas = admissionAreas
-        self.rideAccessOrder = rideAccessOrder
+        self.key = RandomGenerator.randomPassKey;   self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
+        self.admissionAreas = admissionAreas;       self.rideAccessOrder = rideAccessOrder
         self.discounts = discounts
     }
 }
@@ -261,14 +260,10 @@ struct SeniorGuestPass: SeniorGuestPassData {
          firstName: String,      lastName: String,
          birthDate: Date,        rideAccessOrder: RideAccessOrder) {
         
-        self.key = RandomGenerator.randomPassKey
-        self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
-        self.admissionAreas = admissionAreas
-        self.discounts = discounts
-        self.firstName = firstName
-        self.lastName = lastName
-        self.birthDate = birthDate
-        self.rideAccessOrder = rideAccessOrder
+        self.key = RandomGenerator.randomPassKey;   self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
+        self.admissionAreas = admissionAreas;       self.discounts = discounts
+        self.firstName = firstName;                 self.lastName = lastName
+        self.birthDate = birthDate;                 self.rideAccessOrder = rideAccessOrder
     }
 }
 
@@ -379,5 +374,22 @@ struct ManagerPass: ManagerPassData {
         self.state = state;                         self.zip = zip
         self.firstName = firstName;                 self.lastName = lastName
         self.birthDate = birthDate;                 self.managementTier = managementTier
+    }
+}
+
+struct VendorPass: VendorPassData {
+    let key: String;                let admissionAreas: [Area]
+    let company: VendorCompany;     let visitDate: Date
+    let firstName: String;          let lastName: String
+    let birthDate: Date;            var lastSwipeTimestamp: Date
+ 
+    init(admissionAreas: [Area],    company: VendorCompany,
+         firstName: String,         lastName: String,
+         birthDate: Date,           visitDate: Date) {
+        
+        self.key = RandomGenerator.randomPassKey;   self.admissionAreas = admissionAreas
+        self.company = company;                     self.visitDate = visitDate
+        self.firstName = firstName;                 self.lastName = lastName
+        self.birthDate = birthDate;                 self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
     }
 }
