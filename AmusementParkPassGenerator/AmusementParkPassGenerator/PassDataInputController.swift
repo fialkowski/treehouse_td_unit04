@@ -267,6 +267,8 @@ class PassDataInputController {
     
     @objc private func createAdultGuestPass (sender: UIButton) { // No validation is required here
         passes.append(AdultGuestPass(admissionAreas: [.amusement], rideAccessOrder: .general))
+        setDisabledScreen()
+        viewController.mainMenuHandler?.setMainMenu()
     }
 
     
@@ -302,6 +304,8 @@ class PassDataInputController {
             throw ChildGuestPassError.invalidDateFormat
         }
         passes.append(ChildGuestPass(admissionAreas: [.amusement], birthDate: birthDate, rideAccessOrder: .general))
+        setDisabledScreen()
+        viewController.mainMenuHandler?.setMainMenu()
     }
     
     @objc private func createVipGuestPass (sender: UIButton) { // No validation is required here
@@ -312,7 +316,8 @@ class PassDataInputController {
                                                               ],
                                    rideAccessOrder: .skipsLine)
                      )
-        print(passes)
+        setDisabledScreen()
+        viewController.mainMenuHandler?.setMainMenu()
     }
     
     @objc private func createSeasonGuestPass (sender: UIButton) {}

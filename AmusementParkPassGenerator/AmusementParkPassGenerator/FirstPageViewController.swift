@@ -41,6 +41,8 @@ protocol PassDataInputCompliant where Self: UIViewController {
     
     var generateButton: UIButton! { get }
     var populateButton: UIButton! { get }
+    
+    var mainMenuHandler: MainMenuHandler? { get }
 }
 
 
