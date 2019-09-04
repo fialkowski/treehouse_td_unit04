@@ -14,6 +14,7 @@ class PassDataInputController {
     private let viewController: PassDataInputCompliant
     private let inputAccessoryViewHandler: InputAccessoryViewHandler
     private let datePicker = UIDatePicker()
+    lazy var passes = [PassCoreData]()
     
     
     init (for viewController: PassDataInputCompliant) {
@@ -26,6 +27,7 @@ class PassDataInputController {
     func adultGuestPassInputEnable () {
         setDisabledScreen()
         viewController.generateButton.enable()
+        viewController.generateButton.addTarget(self, action: #selector(createAdultGuestPass), for: .touchUpInside)
     }
     
     func childGuestPassInputEnable () {
@@ -33,11 +35,13 @@ class PassDataInputController {
         birthDateInputEnable()
         viewController.generateButton.enable()
         viewController.populateButton.enable()
+        viewController.generateButton.addTarget(self, action: #selector(createChildGuestPass), for: .touchUpInside)
     }
     
     func vipGuestPassInputEnable () {
         setDisabledScreen()
         viewController.generateButton.enable()
+        viewController.generateButton.addTarget(self, action: #selector(createVipGuestPass), for: .touchUpInside)
     }
     
     func seniorGuestPassInputEnable () {
@@ -257,19 +261,59 @@ class PassDataInputController {
     }
     
     
-    //TODO: Finish the Input process validation and make sure you activate the right things for the correspondind pass input properties, you should look for the passInput screen activation methods above!
+    //TODO: Finish the Input process validation and make sure you activate the right things for the correspondind pass input properties, you should look for the passInput screen activation methods above!/
     
     //Checking the data Integrity of the input Screen before creating the instances
     
-    @objc private func createAdultGuestPass (sender: UIButton) {}
+    @objc private func createAdultGuestPass (sender: UIButton) { // No validation is required here
+        passes.append(AdultGuestPass(admissionAreas: [.amusement], rideAccessOrder: .general))
+    }
+
     
-    private func checkAdultGuestPassDataIntegrity () throws -> Void {
-        
+    //MARK: Child Guest Pass validation & initializing
+    @objc private func createChildGuestPass (sender: UIButton) {
+        do {
+            try checkChildGuestPassDataIntegrity()
+        } catch ChildGuestPassError.emptyDateField {
+            AlertController.showSingleActionAlertWith(title: "Oops, something went wrong here", message: "The \"Date Of Birth\" field in empty")
+        } catch ChildGuestPassError.invalidDateFormat {
+            AlertController.showSingleActionAlertWith(title: "Oops, something went wrong here", message: "The \"Date Of Birth\" has a wrong format!")
+        } catch let error {
+            fatalError("Holy Molly! That's an unhanled exception \(error)")
+        }
     }
     
-    @objc private func createChildGuestPass (sender: UIButton) {}
+    enum ChildGuestPassError: Error {
+        case emptyDateField, invalidDateFormat
+    }
     
-    @objc private func createVipGuestPass (sender: UIButton) {}
+    private func checkChildGuestPassDataIntegrity () throws -> Void {
+        guard let birthDateText = viewController.birthDateField.text else {
+            throw ChildGuestPassError.emptyDateField
+        }
+        if birthDateText == "" {
+            throw ChildGuestPassError.emptyDateField
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM / dd / yyyy"
+        
+        guard let birthDate = dateFormatter.date(from: birthDateText) else {
+            throw ChildGuestPassError.invalidDateFormat
+        }
+        passes.append(ChildGuestPass(admissionAreas: [.amusement], birthDate: birthDate, rideAccessOrder: .general))
+    }
+    
+    @objc private func createVipGuestPass (sender: UIButton) { // No validation is required here
+        passes.append(VipGuestPass(admissionAreas: [.amusement],
+                                   discounts: [
+                                            VipGuestPass.Discount(discout: 0.1, itemGroup: ItemGroup.food),
+                                            VipGuestPass.Discount(discout: 0.2, itemGroup: ItemGroup.merchandise)
+                                                              ],
+                                   rideAccessOrder: .skipsLine)
+                     )
+        print(passes)
+    }
     
     @objc private func createSeasonGuestPass (sender: UIButton) {}
     

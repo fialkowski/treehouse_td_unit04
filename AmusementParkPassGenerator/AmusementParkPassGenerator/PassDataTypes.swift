@@ -91,7 +91,7 @@ protocol DiscountData {
 
 protocol AdultGuestPassData: PassCoreData, RideAccessOrderData {
     init (admissionAreas: [Area],
-          rideAccessOrder: RideAccessOrder)
+          rideAccessOrder: RideAccessOrder) throws
 }
 
 protocol VipGuestPassData: PassCoreData, DiscountData, RideAccessOrderData {
@@ -213,14 +213,17 @@ protocol VendorPassData: PassNameDetailsData {
           birthDate: Date, visitDate: Date)
 }
 
+enum AdultGuestPassError: Error {
+    case invalidArea, invalidRideAccessOrder
+}
+
 struct AdultGuestPass: AdultGuestPassData {
     let key: String;                       let admissionAreas: [Area]
     let rideAccessOrder: RideAccessOrder;  var lastSwipeTimestamp: Date
     
     init(admissionAreas: [Area], rideAccessOrder: RideAccessOrder) {
-        
-        self.key = RandomGenerator.randomPassKey;   self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
-        self.admissionAreas = admissionAreas;       self.rideAccessOrder = rideAccessOrder
+        self.key = RandomGenerator.randomPassKey; self.lastSwipeTimestamp = Date(timeIntervalSinceNow: -9)
+        self.admissionAreas = admissionAreas;     self.rideAccessOrder = rideAccessOrder
     }
 }
 
